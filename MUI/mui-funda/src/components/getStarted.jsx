@@ -50,4 +50,4 @@ demos you must first install the @mui/icons-material package:
 
 // with npm
 npm install @mui/icons-material
-*?
+*/
