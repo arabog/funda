@@ -150,3 +150,42 @@ ReactDOM.render(
 
           document.getElementById('root')
 );
+
+It accepts author (an object), text (a string), and date (a date) as props, 
+and describes a comment on a social media website.
+This component can be tricky to change because of all the nesting, 
+and it is also hard to reuse individual parts of it. Let’s extract a few 
+components from it.
+
+First, we will extract Avatar:
+function Avatar(props) {
+          return (
+                    <img className="Avatar"
+                              src={props.user.avatarUrl}
+                              alt={props.user.name}
+                    />
+          );
+}
+
+We can now simplify Comment a tiny bit:
+function Comment(props) {
+          return (
+                    <div className="Comment">
+                              <div className="UserInfo">
+                                        <Avatar user={props.author} />
+
+                                        <div className="UserInfo-name">
+                                                  {props.author.name}
+                                        </div>
+                              </div>
+
+                              <div className="Comment-text">
+                                        {props.text}
+                              </div>
+
+                              <div className="Comment-date">
+                                        {formatDate(props.date)}
+                              </div>
+                    </div>
+          );
+}
