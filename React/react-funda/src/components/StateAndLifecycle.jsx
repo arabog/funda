@@ -340,3 +340,24 @@ componentDidMount() {
 The merging is shallow, so this.setState({comments}) leaves 
 this.state.posts intact, but completely replaces this.state.comments.
 
+
+The Data Flows Down
+Neither parent nor child components can know if a certain component 
+is stateful or stateless, and they shouldn’t care whether it is defined as 
+a function or a class.
+
+This is why state is often called local or encapsulated. It is not accessible 
+to any component other than the one that owns and sets it.
+
+A component may choose to pass its state down as props to its child 
+components:
+
+<FormattedDate date={this.state.date} />
+
+The FormattedDate component would receive the date in its props and 
+wouldn't know whether it came from the Clock's state, from the Clock's 
+props, or was typed by hand:
+
+function FormattedDate(props) {
+          return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
+}
