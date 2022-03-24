@@ -30,8 +30,6 @@ class Welcome extends React.Component {
 
 The above two components are equivalent from React’s point of view.
 
-*/
-
 
 Rendering a Component
 Previously, we only encountered React elements that represent DOM tags:
@@ -189,3 +187,66 @@ function Comment(props) {
                     </div>
           );
 }
+
+Next, we will extract a UserInfo component that renders an Avatar 
+next to the user’s name:
+
+function UserInfo(props) {
+          return (
+                    <div className="UserInfo">
+                              <Avatar user={props.user} />
+
+                              <div className="UserInfo-name">
+                                        {props.user.name}
+                              </div>
+                    </div>
+          );
+}
+
+This lets us simplify Comment even further:
+
+function Comment(props) {
+          return (
+                    <div className="Comment">
+                              <UserInfo user={props.author} />
+
+                              <div className="Comment-text">
+                                        {props.text}
+                              </div>
+
+                              <div className="Comment-date">
+                                        {formatDate(props.date)}
+                              </div>
+                    </div>
+          );
+}
+
+Extracting components might seem like grunt work at first, but 
+having a palette of reusable components pays off in larger apps. 
+A good rule of thumb is that if a part of your UI is used several 
+times (Button, Panel, Avatar), or is complex enough on its own 
+(App, FeedStory, Comment), it is a good candidate to be extracted 
+to a separate component.
+
+
+Props are Read-Only
+Whether you declare a component as a function or a class, it must 
+never modify its own props. Consider this sum function:
+
+function sum(a, b) {
+          return a + b;
+}
+Such functions are called “pure” because they do not attempt to 
+change their inputs, and always return the same result for the same 
+inputs.
+
+In contrast, this function is impure because it changes its own input:
+
+function withdraw(account, amount) {
+          account.total -= amount;
+}
+
+React is pretty flexible but it has a single strict rule:
+All React components must act like pure functions with respect
+to their props.
+*/
