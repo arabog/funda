@@ -141,9 +141,6 @@ is removed. This is called “unmounting” in React.
 We can declare special methods on the component class to run some code 
 when a component mounts and unmounts:
 
-
-*/
-
 class Clock extends React.Component {
           constructor(props) {
                     super(props);
@@ -361,3 +358,38 @@ props, or was typed by hand:
 function FormattedDate(props) {
           return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
 }
+
+This is commonly called a “top-down” or “unidirectional” data flow. 
+Any state is always owned by some specific component, and any 
+data or UI derived from that state can only affect components “below” 
+them in the tree.
+
+If you imagine a component tree as a waterfall of props, each component's 
+state is like an additional water source that joins it at an arbitrary point but 
+also flows down.
+
+To show that all components are truly isolated, we can create an App 
+component that renders three <Clock>s:
+
+function App() {
+          return (
+                    <div>
+                              <Clock />
+                              <Clock />
+                              <Clock />
+                    </div>
+          );
+}
+
+ReactDOM.render(
+          <App />,
+          document.getElementById('root')
+);
+
+Each Clock sets up its own timer and updates independently.
+
+In React apps, whether a component is stateful or stateless is 
+considered an implementation detail of the component that may 
+change over time. You can use stateless components inside stateful 
+components, and vice versa.
+*/
