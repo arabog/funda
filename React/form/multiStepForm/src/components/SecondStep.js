@@ -12,6 +12,12 @@ const SecondStep = (props) => {
                     props.history.push('/third');
           };
 
+          const handleClick = (inp) => {
+                    if (inp === "prev") {
+                              props.history.push('/');
+                    }
+          }
+
 
           return (
           <Form className="input-form" onSubmit={handleSubmit(onSubmit)}>
@@ -65,7 +71,7 @@ const SecondStep = (props) => {
                                         )}
                               </Form.Group>
 
-                              <Button style={{marginRight: '90px'}} variant="primary" type="submit">
+                              <Button style={{marginRight: '239px'}} variant="primary" type="submit" onClick= {() => handleClick('prev')}>
                                         Previous
                               </Button>
 
