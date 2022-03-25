@@ -8,6 +8,8 @@ const SecondStep = (props) => {
 
           const onSubmit = (data) => {
                     console.log(data);
+
+                    props.history.push('/third');
           };
 
 
@@ -62,6 +64,10 @@ const SecondStep = (props) => {
                                                   <p className="errorMsg">{errors.user_password.message}</p>
                                         )}
                               </Form.Group>
+
+                              <Button style={{marginRight: '90px'}} variant="primary" type="submit">
+                                        Previous
+                              </Button>
 
                               <Button variant="primary" type="submit">
                                         Next

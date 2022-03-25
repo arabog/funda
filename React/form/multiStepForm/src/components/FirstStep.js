@@ -3,12 +3,15 @@ import { useForm } from 'react-hook-form';
 import { Form, Button } from 'react-bootstrap';
 
 
-const FirstStep = () => {
+const FirstStep = (props) => {
           const { register, handleSubmit, errors } = useForm();
 
-          const onSubmit = data => {
+
+          const onSubmit = (data) => {
                     console.log(data);
-          }
+
+                    props.history.push('/second');
+          };
 
 
           return (
