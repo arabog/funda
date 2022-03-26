@@ -110,15 +110,29 @@ const ThirdStep = (props) => {
           const handleSubmit = async (event) => {
                     event.preventDefault();
 
+                    try {
+                              const {user} = props;
+
+                              const updatedData = {
+                                        country: countries.find((country) => country.isoCode === selectedCountry)?.name,
+
+                                        state: states.find((state) => state.isoCode === selectedState)?.name || '',
+
+                                        city: selectedCity,
+                              }
+
+                              await axios.post(`${BASE_API_URL}/register`, {
+                                        ...user,
+                                        ...updatedData,
+                              })
+                              
+                    } catch(err) {
+                              if(err.response) {
+                                        console.log('error', err.response.data);
+                              }
+                    }
           }
           
-
-          // const handleClick = (inp) => {
-          //           if (inp === "prev") {
-          //                     props.history.push('/second');
-          //           }
-          // }
-
 
           return (
                     <Form className="input-form" onSubmit={handleSubmit}>
@@ -199,10 +213,6 @@ const ThirdStep = (props) => {
                                                             )}
                                                   </Form.Control>
                                         </Form.Group>
-
-                                        {/* <Button style={{marginRight: '239px'}} variant="primary" type="submit" onClick= {() => handleClick('prev')}>
-                                                   Previous
-                                         </Button> */}
 
                                         <Button variant="primary" type="submit">
                                                   Register
