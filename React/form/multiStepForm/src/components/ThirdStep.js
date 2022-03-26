@@ -113,11 +113,11 @@ const ThirdStep = (props) => {
           }
           
 
-          const handleClick = (inp) => {
-                    if (inp === "prev") {
-                              props.history.push('/second');
-                    }
-          }
+          // const handleClick = (inp) => {
+          //           if (inp === "prev") {
+          //                     props.history.push('/second');
+          //           }
+          // }
 
 
           return (
@@ -200,11 +200,11 @@ const ThirdStep = (props) => {
                                                   </Form.Control>
                                         </Form.Group>
 
-                                        <Button style={{marginRight: '239px'}} variant="primary" type="submit" onClick= {() => handleClick('prev')}>
-                                                  Previous
-                                        </Button>
+                                        {/* <Button style={{marginRight: '239px'}} variant="primary" type="submit" onClick= {() => handleClick('prev')}>
+                                                   Previous
+                                         </Button> */}
 
-                                        <Button variant="primary" type="submit" onClick= {() => handleClick('register')}>
+                                        <Button variant="primary" type="submit">
                                                   Register
                                         </Button>
                               </motion.div>
