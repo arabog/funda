@@ -6,6 +6,8 @@ import { BASE_API_URL } from '../utils/constants';
 
 import {motion} from 'framer-motion';
 
+import Swal from 'sweetalert2';
+
 
 const ThirdStep = (props) => {
           const [countries, setCountries] = useState([]);
@@ -62,7 +64,6 @@ const ThirdStep = (props) => {
                                                   name,
                                         }));
 
-                                        console.log({ allStates });
                                         const [{ isoCode: firstState = '' } = {}] = allStates;
                                         setStates(allStates);
                                         setSelectedState(firstState);
@@ -124,18 +125,33 @@ const ThirdStep = (props) => {
                               await axios.post(`${BASE_API_URL}/register`, {
                                         ...user,
                                         ...updatedData,
-                              })
-                              
+                              });
+
+                              Swal.fire('Awesome!', "You're successfully registered!", 'success').then(
+                                        (result) => {
+                                                  if (result.isConfirmed || result.isDismissed) {
+                                                            props.history.push('/');
+                                                  }
+                                        }
+                              );
+
                     } catch(err) {
                               if(err.response) {
-                                        console.log('error', err.response.data);
+                                        
+                                        Swal.fire({
+                                                  icon: 'error',
+                                                  title: 'Oops...',
+                                                  text: err.response.data
+                                        });
                               }
+                              
+                              console.log('error', err.response.data);
                     }
           }
           
 
           return (
-                    <Form className="input-form" onSubmit={handleSubmit}>
+                    <Form className="input-form" onSubmit={() => handleSubmit()}>
                               <motion.div className='col-md-6 offset-md-3'
                                         initial={{ x: '-100vw' }}
                                         animate={{ x: 0 }}

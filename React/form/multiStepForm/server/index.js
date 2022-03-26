@@ -12,10 +12,9 @@ const PORT = process.env.PORT || 3030;
 
 dotenv.config();
 
-const cors = require('cors');
-
-
 app.use(express.json());
+
+const cors = require('cors');
 
 
 mongoose
@@ -32,6 +31,11 @@ app.use(cors);
 
 
 app.use(userRouter);
+
+
+app.get('/', (req, res) => {
+          res.send('<h2>This is from index.js file</h2>');
+});
 
 
 app.listen(PORT, () => {

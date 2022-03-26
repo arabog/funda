@@ -13,9 +13,9 @@ const AppRouter = () => {
                     setUser(prevUser => ({...prevUser, ...data}));
           }
 
-          // const resetUser = () => {
-          //           setUser('');
-          // }
+          const resetUser = () => {
+                    setUser('');
+          }
 
 
           return (
@@ -53,7 +53,9 @@ const AppRouter = () => {
                                                             render={(props) => (
                                                                       <ThirdStep 
                                                                                 {...props} 
-                                                                                user={user}  />
+                                                                                user={user}  
+                                                                                resetUser = {resetUser}          
+                                                                      />
                                                             )}
 
                                                             path="/third"
