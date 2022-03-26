@@ -131,7 +131,7 @@ const ThirdStep = (props) => {
                                         (result) => {
                                                   if (result.isConfirmed || result.isDismissed) {
                                                             props.resetUser();
-                                                            
+
                                                             props.history.push('/');
                                                   }
                                         }
@@ -149,11 +149,14 @@ const ThirdStep = (props) => {
                               
                               console.log('error', err.response.data);
                     }
+
+                    console.log(props);
+
           }
           
 
           return (
-                    <Form className="input-form" onSubmit={() => handleSubmit()}>
+                    <Form className="input-form" onSubmit={handleSubmit}>
                               <motion.div className='col-md-6 offset-md-3'
                                         initial={{ x: '-100vw' }}
                                         animate={{ x: 0 }}

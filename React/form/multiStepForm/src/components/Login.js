@@ -25,6 +25,7 @@ const Login = () => {
                     } catch (error) {
                               if (error.response) {
                                         console.log('error', error.response.data);
+
                                         setErrorMessage(error.response.data);
                               }
                     }
@@ -99,11 +100,12 @@ const Login = () => {
 
                                                             ref={register({
                                                                       required: 'Password is required.',
+                                                                      
                                                                       minLength: {
-                                                                      value: 6,
-                                                                      message: 'Password should have at-least 6 characters.'
-                                                            }
-                                                  })}
+                                                                                value: 6,
+                                                                                message: 'Password should have at-least 6 characters.'
+                                                                      }
+                                                            })}
 
                                                             className={`${errors.user_password ? 'input-error' : ''}`}
                                                   />
