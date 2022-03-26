@@ -67,7 +67,7 @@ const FirstStep = (props) => {
                                                   )}
                                         </Form.Group>  
 
-                                        <Button style={{marginLeft: '239px'}} variant="primary" type="submit">
+                                        <Button style={{marginLeft: '365px'}} variant="primary" type="submit">
                                                   Next
                                         </Button>      
                               </div> 

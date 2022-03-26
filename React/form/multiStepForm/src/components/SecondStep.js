@@ -71,7 +71,7 @@ const SecondStep = (props) => {
                                         )}
                               </Form.Group>
 
-                              <Button style={{marginRight: '239px'}} variant="primary" type="submit" onClick= {() => handleClick('prev')}>
+                              <Button style={{marginRight: '269px'}} variant="primary" type="submit" onClick= {() => handleClick('prev')}>
                                         Previous
                               </Button>
 
