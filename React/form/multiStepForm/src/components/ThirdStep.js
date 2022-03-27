@@ -110,6 +110,7 @@ const ThirdStep = (props) => {
 
           const handleSubmit = async (event) => {
                     event.preventDefault();
+                    alert("clicked");
 
                     try {
                               const {user} = props;
@@ -124,8 +125,11 @@ const ThirdStep = (props) => {
 
                               await axios.post(`${BASE_API_URL}/register`, {
                                         ...user,
+                                        
                                         ...updatedData,
                               });
+
+                              console.log(user);
 
                               Swal.fire('Awesome!', "You're successfully registered!", 'success').then(
                                         (result) => {
@@ -149,8 +153,6 @@ const ThirdStep = (props) => {
                               
                               console.log('error', err.response.data);
                     }
-
-                    console.log(props);
 
           }
           
