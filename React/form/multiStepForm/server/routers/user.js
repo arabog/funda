@@ -15,6 +15,7 @@ router.post('/register', async (req, res) => {
 
           try {
                     user = new User(req.body);
+                    console.log(user);
                     
                     user.user_password = await bcrypt.hash(user_password, 8);
 
@@ -22,7 +23,9 @@ router.post('/register', async (req, res) => {
 
                     res.status(201).send();
           } catch (err) {
-                    res.status(500).send('Something went wrong. Try again later.')
+                    res.status(500).send('Something went wrong. Try again later.');
+
+                    console.log(err);
           }
 });
 

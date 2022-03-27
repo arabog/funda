@@ -1,6 +1,6 @@
 const express = require('express');
+const cors = require('cors');
 const userRouter = require('./routers/user');
-
 require('./db');
 
 
@@ -9,13 +9,17 @@ const app = express();
 const PORT = process.env.PORT || 3060;
 
 
+
 // const path = require('path'); 
 // app.use(express.static(path.join(__dirname, '..', 'build')));
 
 
 
 app.use(express.json());
+app.use(cors());
 app.use(userRouter);
+
+
 
 
 
