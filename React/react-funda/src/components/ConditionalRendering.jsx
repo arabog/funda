@@ -170,7 +170,42 @@ render() {
           );
 }
 
+Inline If-Else with Conditional Operator
+Another method for conditionally rendering elements inline 
+is to use the JavaScript conditional operator 
+condition ? true : false.
 
+In the example below, we use it to conditionally render a 
+small block of text.
+
+render() {
+          const isLoggedIn = this.state.isLoggedIn;
+
+          return (
+                    <div>
+                              The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+                    </div>
+          );
+}
+
+It can also be used for larger expressions although it is 
+less obvious what’s going on:
+
+render() {
+          const isLoggedIn = this.state.isLoggedIn;
+
+          return (
+                    <div>
+                              {
+                                        isLoggedIn
+                                                  ? <LogoutButton onClick={this.handleLogoutClick} />
+                                                  : <LoginButton onClick={this.handleLoginClick} />
+                              }
+                    </div>
+          );
+}
+
+Also remember that whenever conditions become too complex, it might be a good time to extract a component.
 
 
 
