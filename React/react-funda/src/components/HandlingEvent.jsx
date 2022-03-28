@@ -101,8 +101,19 @@ an extra re-rendering. We generally recommend binding
 in the constructor 
 
 
+Passing Arguments to Event Handlers
+Inside a loop, it is common to want to pass an extra parameter 
+to an event handler. For example, if id is the row ID, either of 
+the following would work:
 
+<button onClick={(e) => this.deleteRow(id, e)}>
+          Delete Row
+</button>
 
+<button onClick={this.deleteRow.bind(this, id)}>
+          Delete Row
+</button>
 
+The above two lines are equivalent.
 
 */ 
