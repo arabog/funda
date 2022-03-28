@@ -31,9 +31,160 @@ function Greeting(props) {
 ReactDOM.render(
           // Try changing to isLoggedIn={true}:
           <Greeting isLoggedIn={false} />,
-          
+
           document.getElementById('root')
 );
+
+This example renders a different greeting depending on 
+the value of isLoggedIn prop.
+
+Element Variables
+You can use variables to store elements. This can help you 
+conditionally render a part of the component while the rest 
+of the output doesn’t change.
+
+Consider these two new components representing Logout 
+and Login buttons:
+
+function LoginButton(props) {
+          return (
+                    <button onClick={props.onClick}>
+                              Login
+                    </button>
+          );
+}
+
+function LogoutButton(props) {
+          return (
+                    <button onClick={props.onClick}>
+                              Logout
+                    </button>
+          );
+}
+
+In the example below, we will create a stateful component 
+called LoginControl.
+
+It will render either <LoginButton /> or <LogoutButton /> 
+depending on its current state. It will also render a 
+<Greeting /> from the previous example:
+
+class LoginControl extends React.Component {
+          constructor(props) {
+                    super(props);
+
+                    this.handleLoginClick = this.handleLoginClick.bind(this);
+                    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+
+                    this.state = {isLoggedIn: false};
+          }
+
+          handleLoginClick() {
+                    this.setState({isLoggedIn: true});
+          }
+
+          handleLogoutClick() {
+                    this.setState({isLoggedIn: false});
+          }
+
+          render() {
+                    const isLoggedIn = this.state.isLoggedIn;
+
+                    let button;
+
+                    if (isLoggedIn) {
+                              button = <LogoutButton onClick={this.handleLogoutClick} />;
+                    } else {
+                              button = <LoginButton onClick={this.handleLoginClick} />;
+                    }
+
+                    return (
+                              <div>
+                                        <Greeting isLoggedIn={isLoggedIn} />
+
+                                        {button}
+                              </div>
+                    );
+          }
+}
+
+ReactDOM.render(
+          <LoginControl />,
+          document.getElementById('root')
+);
+
+There are a few ways to inline conditions in JSX, explained below.
+
+
+Inline If with Logical && Operator
+You may embed expressions in JSX by wrapping them in 
+curly braces. This includes the JavaScript logical && 
+operator. It can be handy for conditionally including 
+an element:
+
+function Mailbox(props) {
+                    const unreadMessages = props.unreadMessages;
+
+                    return (
+                              <div>
+                                        <h1>Hello!</h1>
+
+                                        {
+                                                  unreadMessages.length > 0 &&
+                                                  <h2>
+                                                            You have {unreadMessages.length} unread messages.
+                                                  </h2>
+                                        }
+                              </div>
+                    );
+}
+
+const messages = ['React', 'Re: React', 'Re:Re: React'];
+
+ReactDOM.render(
+          <Mailbox unreadMessages={messages} />,
+          document.getElementById('root')
+);
+
+
+It works because in JavaScript, true && expression always 
+evaluates to expression, and false && expression always 
+evaluates to false.
+
+Therefore, if the condition is true, the element right after 
+&& will appear in the output. If it is false, React will 
+ignore and skip it.
+
+Note that returning a falsy expression will still cause 
+the element after && to be skipped but will return the 
+falsy expression. In the example below, <div>0</div> 
+will be returned by the render method.
+
+render() {
+          const count = 0;
+
+          return (
+                    <div>
+                              {count && <h1>Messages: {count}</h1>}
+                    </div>
+          );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
