@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 
 const BoilingWater = (props) => {
@@ -11,4 +11,4 @@ const BoilingWater = (props) => {
 }
 
 
-export default BoilingWater
+export default BoilingWater;

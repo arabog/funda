@@ -9,20 +9,16 @@ function toFahrenheit(temp) {
 
 
 function tryConvert(temp, convert) {
-          const tempe = parseFloat(temp);
+          temp = parseFloat(temp);
 
-          if(Number.isNaN(tempe)) {
+          if(Number.isNaN(temp)) {
                     return '';
           }
 
-          const newTemp = convert(tempe);
+          const newTemp = convert(temp);
 
           return Math.round(newTemp * 1000) / 1000;
 }
 
 
-export  {
-          toCelsius,
-          toFahrenheit,
-          tryConvert
-}
+export  { toCelsius, toFahrenheit, tryConvert }

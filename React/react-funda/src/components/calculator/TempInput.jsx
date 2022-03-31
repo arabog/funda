@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 
 const scaleNames = {
@@ -12,7 +12,9 @@ const TempInput = (props) => {
 
 
           const handleChange = (e) => { 
-                    props.onTempChange(e.target.value);
+                    const value = e.target.value;
+                    
+                    props.onTempChange(value);
           }
 
 
@@ -23,6 +25,7 @@ const TempInput = (props) => {
 
                                         <input
                                                   value={temp}
+
                                                   onChange={(e) => handleChange(e)}
                                         />
                               </fieldset>

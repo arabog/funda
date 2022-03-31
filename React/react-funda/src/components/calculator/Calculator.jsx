@@ -11,11 +11,13 @@ const Calculator = () => {
 
           const onCelsChange = (inp) => {
                     setTemp(inp);
+
                     setScale('c')
           }
 
           const onFahChange = (inp) => {
                     setTemp(inp);
+
                     setScale('f')
           }
 
@@ -31,15 +33,23 @@ const Calculator = () => {
                     <div>
                               <h1>Calculator</h1>
 
-                              <TempInput 
+                              <TempInput
+                                        // values sent to TempInput 
                                         scale= 'c'
+                                        // values sent to TempInput wc get updated based  
+                                        // on value brought in by onTempChange 
                                         temp= {celsius} 
+                                        // values brought from TempInput 
                                         onTempChange= {onCelsChange}
                               />
 
-                              <TempInput 
+                              <TempInput
+                                        // values sent to TempInput 
                                         scale= 'f' 
+                                        // values sent to TempInput wc get updated based  
+                                        // on value brought in by onTempChange 
                                         temp= {fahren} 
+                                        // values brought from TempInput 
                                         onTempChange= {onFahChange}
                               />
 
