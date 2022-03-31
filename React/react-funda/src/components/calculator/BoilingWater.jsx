@@ -3,7 +3,7 @@ import React from 'react'
 
 const BoilingWater = (props) => {
 
-          if(props.celsius > 100) {
+          if(props.celsius >= 100) {
                     return <p>The water would boil.</p>
           }
           
