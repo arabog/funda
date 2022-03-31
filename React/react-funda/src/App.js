@@ -1,15 +1,12 @@
 import './App.css';
-import WelcomeDialog from './mainConcept/CompositnVsInheritance';
-// import Calculator from './components/calculator/Calculator';
+import Calculator from './components/calculator/Calculator';
 
 
 function App() {
 
 	return (
 		<div>
-			{/* <Calculator /> */}
-
-			<WelcomeDialog />
+			<Calculator />
 		</div>
 	);
 }
