@@ -1,9 +1,16 @@
 import React from 'react'
 
 
-const ProductCategoryRow = () => {
+const ProductCategoryRow = (props) => {
+          const category = props.category;
+
+
           return (
-                    <div>ProductCategoryRow</div>
+                    <tr>
+                              <th colSpan='2' >
+                                        {category}
+                              </th>
+                    </tr>
           )
 }
 
