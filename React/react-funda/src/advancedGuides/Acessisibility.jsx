@@ -178,15 +178,10 @@ application.
 This is the outside click pattern, where a user can disable 
 an opened popover by clicking outside the element.
 
-This is typically implemented by attaching a click event to t
-he window object that closes the popover:
-
-
-
-*/
+This is typically implemented by attaching a click event to 
+the window object that closes the popover:
 
 import React, { useEffect, useRef, useState } from 'react'
-
 
 const OuterClickExample = () => {
           const [isOpen, setIsOpen] = useState(false);
@@ -198,11 +193,11 @@ const OuterClickExample = () => {
           }
 
           const onClickOutsideHandler = (event) => {
-                    // alert('Clicked')
 
                     if(isOpen && !toggleContainer.current.contains(event.target)) {
                               setIsOpen(false)
                     }
+
           }
           
           useEffect(() => {
@@ -233,3 +228,75 @@ const OuterClickExample = () => {
 
 
 export default OuterClickExample;
+
+This may work fine for users with pointer devices, such as a mouse, 
+but operating this with the keyboard alone leads to broken functionality 
+when tabbing to the next element as the window object never receives 
+a click event. This can lead to obscured functionality which blocks users 
+from using your application.
+
+The same functionality can be achieved by using appropriate event 
+handlers instead, such as onBlur and onFocus:
+
+
+*/
+
+import React, { useState } from 'react'
+
+
+const BlurExample = () => {
+          const [isOpen, setIsOpen] = useState(false);
+          const [timeOutId, setTimeOutId] = useState(null);
+
+          const onClickHandler = () => {
+                    setIsOpen(!isOpen);
+          }
+
+          // We close the popover on the next tick by using setTimeout.
+          // This is necessary because we need to first check if
+          // another child of the element has received focus as
+          // the blur event fires prior to the new focus event.
+          const onBlurHandler = () => {
+                    setTimeOutId(
+                              setTimeout(() => {
+                                        setIsOpen(false);
+                              })
+                    )
+          }
+
+          // If a child receives focus, do not close the popover.
+          const onFocusHandler = () => {
+                    clearTimeout(timeOutId);
+          }
+
+          
+          // React assists us by bubbling the blur and
+          // focus events to the parent.
+          return (
+                    <div 
+                              onBlur={onBlurHandler}
+                              onFocus={onFocusHandler}
+                    >
+                              <button 
+                                        onClick={onClickHandler}
+                                        aria-haspopup='true'
+                                        aria-expanded={isOpen}
+                              >
+                                        Select an option
+                              </button>
+
+                              {
+                                        isOpen && (
+                                                  <ul>
+                                                            <a href='https://www.google.com'><li> Option 1</li></a>
+                                                            <li> Option 2</li>
+                                                            <li> Option 3</li>
+                                                  </ul>
+                                        )
+                              }
+                    </div>
+          )
+}
+
+
+export default BlurExample
