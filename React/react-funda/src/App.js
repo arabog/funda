@@ -19,6 +19,11 @@ import {UserContext} from './advancedGuides/context/multipleConsumers/UserContex
 import Layout from './advancedGuides/context/multipleConsumers/Layout';
 
 
+/*
+If two or more context values are often used together, you 
+might want to consider creating your own render prop 
+component that provides both.
+*/ 
 
 function App(props) {
 	const theme = useContext(ThemeContext);
