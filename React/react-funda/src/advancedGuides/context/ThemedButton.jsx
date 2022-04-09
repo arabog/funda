@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ThemeContext } from './ThemeContext'
 
 
-const ThemedButton = () => {
+const ThemedButton = (props) => {
+	const anodaTheme = useContext(ThemeContext);
+
+
 	return (
-		<div>ThemedButton</div>
+		<div>
+			<button
+				{...props}
+				style={{backgroundColor: anodaTheme.background, color: anodaTheme.foreground}}
+			>
+				{props.children || 'Hello'}
+			</button>
+		</div>
 	)
 }
 

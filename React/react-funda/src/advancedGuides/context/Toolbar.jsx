@@ -3,6 +3,8 @@ import ThemedButton from './ThemedButton'
 
 
 const Toolbar = (props) => {
+
+          
           return (
                     <ThemedButton onClick={props.changeTheme}>
                               Toolbar
