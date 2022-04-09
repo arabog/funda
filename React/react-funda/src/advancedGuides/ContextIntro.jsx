@@ -1,4 +1,4 @@
-// /*
+/*
 Context
 Context provides a way to pass data through the component 
 tree without having to pass props down manually at every level.
@@ -206,7 +206,7 @@ use defaultValue.
 
 
 Context.Provider
-<MyContext.Provider value={/* some value */}>
+<MyContext.Provider value={/* some value /}>
 
 Every Context object comes with a Provider React component that allows 
 consuming components to subscribe to context changes.
@@ -229,22 +229,22 @@ Class.contextType
 class MyClass extends React.Component {
           componentDidMount() {
                     let value = this.context;
-                    /* perform a side-effect at mount using the value of MyContext */
+                    /* perform a side-effect at mount using the value of MyContext /
           }
 
           componentDidUpdate() {
                     let value = this.context;
-                    /* ... */
+                    /* ... /
           }
           
           componentWillUnmount() {
                     let value = this.context;
-                    /* ... */
+                    /* ... /
           }
           
           render() {
                     let value = this.context;
-                    /* render something based on the value of MyContext */
+                    /* render something based on the value of MyContext /
           }
 }
 
@@ -263,14 +263,14 @@ class MyClass extends React.Component {
 
           render() {
                     let value = this.context;
-                    /* render something based on the value */
+                    /* render something based on the value /
           }
 }
 
 
 Context.Consumer
 <MyContext.Consumer>
-          {value => /* render something based on the context value */}
+          {value => /* render something based on the context value /}
 </MyContext.Consumer>
 
 A React component that subscribes to context changes. Using this 
@@ -291,12 +291,16 @@ uses this string to determine what to display for the context.
 For example, the following component will appear as MyDisplayName 
 in the DevTools:
 
-const MyContext = React.createContext(/* some value */);
+const MyContext = React.createContext(/* some value /);
 MyContext.displayName = 'MyDisplayName';
 
 <MyContext.Provider> // "MyDisplayName.Provider" in DevTools
 <MyContext.Consumer> // "MyDisplayName.Consumer" in DevTools
 
 
+Examples
+Dynamic Context
+A more complex example with dynamic values for the theme:
 
-
+</MyContext.Consumer>
+*/
