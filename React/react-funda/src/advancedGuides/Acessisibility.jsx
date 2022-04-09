@@ -239,10 +239,7 @@ The same functionality can be achieved by using appropriate event
 handlers instead, such as onBlur and onFocus:
 
 
-*/
-
 import React, { useState } from 'react'
-
 
 const BlurExample = () => {
           const [isOpen, setIsOpen] = useState(false);
@@ -300,3 +297,19 @@ const BlurExample = () => {
 
 
 export default BlurExample
+
+This code exposes the functionality to both pointer device and 
+keyboard users. Also note the added aria-* props to support 
+screen-reader users. 
+
+Create React App has this plugin with a subset of rules activated. 
+If you want to enable even more accessibility rules, you can create 
+an .eslintrc file in the root of your project with this content:
+
+{
+          "extends": ["react-app", "plugin:jsx-a11y/recommended"],
+          "plugins": ["jsx-a11y"]
+}
+
+
+*/
