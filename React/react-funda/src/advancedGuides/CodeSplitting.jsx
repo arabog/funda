@@ -219,6 +219,33 @@ const MyComponent = () => (
 );
 
 
+Route-based code splitting
+A good place to start is with routes. Most people on the 
+web are used to page transitions taking some amount of 
+time to load. You also tend to be re-rendering the entire 
+page at once so your users are unlikely to be interacting 
+with other elements on the page at the same time.
 
+Here’s an example of how to setup route-based code splitting 
+into your app using libraries like React Router with React.lazy.
+
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+const Home = lazy(() => import('./routes/Home'));
+const About = lazy(() => import('./routes/About'));
+
+const App = () => (
+          <Router>
+                    <Suspense fallback={<div>Loading...</div>}>
+
+                              <Routes>
+                                        <Route path="/" element={<Home />} />
+                                        <Route path="/about" element={<About />} />
+                              </Routes>
+                    
+                    </Suspense>
+          </Router>
+);
 
 
