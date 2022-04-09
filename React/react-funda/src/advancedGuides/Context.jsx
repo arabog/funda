@@ -84,3 +84,112 @@ class ThemedButton extends React.Component {
           }
 }
 
+
+Before You Use Context
+Context is primarily used when some data needs to be accessible 
+by many components at different nesting levels. Apply it sparingly 
+because it makes component reuse more difficult.
+
+If you only want to avoid passing some props through many levels, 
+component composition is often a simpler solution than context.
+
+For example, consider a Page component that passes a user and 
+avatarSize prop several levels down so that deeply nested Link 
+and Avatar components can read it:
+
+<Page user={user} avatarSize={avatarSize} />
+
+// ... which renders ...
+<PageLayout user={user} avatarSize={avatarSize} />
+
+// ... which renders ...
+<NavigationBar user={user} avatarSize={avatarSize} />
+
+// ... which renders ...
+<Link href={user.permalink}>
+  <Avatar user={user} size={avatarSize} />
+</Link>
+
+It might feel redundant to pass down the user and avatarSize props 
+through many levels if in the end only the Avatar component really 
+needs it. It’s also annoying that whenever the Avatar component needs 
+more props from the top, you have to add them at all the intermediate 
+levels too.
+
+One way to solve this issue without context is to pass down the 
+Avatar component itself so that the intermediate components don’t 
+need to know about the user or avatarSize props:
+
+function Page(props) {
+          const user = props.user;
+
+          const userLink = (
+                    <Link href={user.permalink}>
+                              <Avatar user={user} size={props.avatarSize} />
+                    </Link>
+          );
+
+          return <PageLayout userLink={userLink} />;
+}
+
+// Now, we have:
+<Page user={user} avatarSize={avatarSize} />
+
+// ... which renders ...
+<PageLayout userLink={...} />
+
+// ... which renders ...
+<NavigationBar userLink={...} />
+
+// ... which renders ...
+{props.userLink}
+
+With this change, only the top-most Page component needs to know 
+about the Link and Avatar components’ use of user and avatarSize.
+
+This inversion of control can make your code cleaner in many cases 
+by reducing the amount of props you need to pass through your 
+application and giving more control to the root components. Such 
+inversion, however, isn’t the right choice in every case; moving more 
+complexity higher in the tree makes those higher-level components 
+more complicated and forces the lower-level components to be more 
+flexible than you may want.
+
+You’re not limited to a single child for a component. You may pass 
+multiple children, or even have multiple separate “slots” for children, 
+
+function Page(props) {
+          const user = props.user;
+          const content = <Feed user={user} />;
+
+          const topBar = (
+                    <NavigationBar>
+                              <Link href={user.permalink}>
+                                        <Avatar user={user} size={props.avatarSize} />
+                              </Link>
+                    </NavigationBar>
+          );
+
+          return (
+                    <PageLayout
+                              topBar={topBar}
+                              content={content}
+                    />
+          );
+}
+
+This pattern is sufficient for many cases when you need to decouple 
+a child from its immediate parents. You can take it even further with 
+render props if the child needs to communicate with the parent before 
+rendering.
+
+However, sometimes the same data needs to be accessible by many 
+components in the tree, and at different nesting levels. Context lets 
+you “broadcast” such data, and changes to it, to all components below. 
+Common examples where using context might be simpler than the 
+alternatives include managing the current locale, theme, or a data cache.
+
+
+
+
+
