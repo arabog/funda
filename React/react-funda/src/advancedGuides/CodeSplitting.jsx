@@ -80,11 +80,11 @@ The React.lazy function lets you render a dynamic import as
 a regular component.
 
 Before:
-
 import OtherComponent from './OtherComponent';
-After:
 
+After:
 const OtherComponent = React.lazy(() => import('./OtherComponent'));
+
 This will automatically load the bundle containing the OtherComponent 
 when this component is first rendered.
 
@@ -133,6 +133,65 @@ function MyComponent() {
                     </div>
           );
 }
+
+
+Avoiding fallbacks
+Any component may suspend as a result of rendering, even components 
+that were already shown to the user. In order for screen content to always 
+be consistent, if an already shown component suspends, React has to hide 
+its tree up to the closest <Suspense> boundary. However, from the user’s 
+perspective, this can be disorienting.
+
+Consider this tab switcher:
+
+import React, { Suspense } from 'react';
+import Tabs from './Tabs';
+import Glimmer from './Glimmer';
+
+const Comments = React.lazy(() => import('./Comments'));
+const Photos = React.lazy(() => import('./Photos'));
+
+function MyComponent() {
+          const [tab, setTab] = React.useState('photos');
+          
+          function handleTabSelect(tab) {
+                    setTab(tab);
+          };
+
+          return (
+                    <div>
+                              <Tabs onTabSelect={handleTabSelect} />
+
+                              <Suspense fallback={<Glimmer />}>
+                                        {tab === 'photos' ? <Photos /> : <Comments />}
+                              </Suspense>
+                    </div>
+          );
+}
+
+In this example, if tab gets changed from 'photos' to 'comments', but 
+Comments suspends, the user will see a glimmer. This makes sense 
+because the user no longer wants to see Photos, the Comments 
+component is not ready to render anything, and React needs to keep 
+the user experience consistent, so it has no choice but to show 
+the Glimmer above.
+
+However, sometimes this user experience is not desirable. In particular, 
+it is sometimes better to show the “old” UI while the new UI is being 
+prepared. You can use the new startTransition API to make React do this:
+
+function handleTabSelect(tab) {
+          startTransition(() => {
+                    setTab(tab);
+          });
+}
+
+Here, you tell React that setting tab to 'comments' is not an urgent update, 
+but is a transition that may take some time. React will then keep the old 
+UI in place and interactive, and will switch to showing <Comments /> 
+when it is ready.
+
+
 
 
 
