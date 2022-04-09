@@ -28,6 +28,24 @@ function App() {
 			<Content />
 		</ThemeContext.Provider>
 	)
+
+	
+
+	// return (
+	// 	<div>
+	// 		<Calculator />
+
+	// 		<FitterableProductTable />
+
+	// 		{/* <OuterClickExample /> */}
+
+	// 		<ThemeContext.Provider value={theme} >
+	// 			<Toolbar changeTheme={toggleTheme} />
+	// 		</ThemeContext.Provider>
+
+	// 		<ThemedButton />
+	// 	</div>
+	// );
 }
 
 
