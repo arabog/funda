@@ -5,7 +5,7 @@ const ProfilePage = (props) => {
 
 
           return (
-                    <div style= {{backgroundColor: 'purple'}} >
+                    <div style= {{backgroundColor: 'purple', cursor: 'pointer'}} >
                               {props.user}
                     </div>
           )
