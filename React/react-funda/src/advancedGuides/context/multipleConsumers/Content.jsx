@@ -5,6 +5,21 @@ import { UserContext } from './UserContext'
 
 
 const Content = () => {
+/* A context consumer must be rendered with a fxn
+return (
+          <ThemeContext.Consumer>
+                    {
+                              theme => (
+                                        <UserContext.Consumer>
+                                                  {
+                                                            user => (<ProfilePage theme={theme} user={user.name} />)
+                                                  }
+                                        </UserContext.Consumer>
+                              )
+                    }
+          </ThemeContext.Consumer>
+)
+*/
 
 
           return (
@@ -14,7 +29,10 @@ const Content = () => {
                                                   <UserContext.Consumer>
                                                             {
                                                                       user => (
-                                                                                <ProfilePage user={user.name} theme={theme} />
+                                                                                <ProfilePage 
+                                                                                          theme={theme} 
+                                                                                          user={user.name} 
+                                                                                />
                                                                       )
                                                             }
                                                   </UserContext.Consumer>
@@ -24,4 +42,6 @@ const Content = () => {
           )
 }
 
+
 export default Content
+

@@ -1,4 +1,4 @@
-/*
+// /*
 import React, {  useContext } from 'react';
 
 
@@ -32,10 +32,10 @@ function App(props) {
 
 }
 
-*/
+// */
 
 
-// /* context and nested components
+/* context and nested components
 import React, { useState } from 'react';
 
 import { ThemeContext, themes } from './advancedGuides/context/contextAndNestedComponent/ThemeContext'
@@ -61,7 +61,7 @@ function App(props) {
 	
 }
 
-// */
+*/
 
 
 /* Toggle:

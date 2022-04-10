@@ -8,6 +8,7 @@ function ThemeTogglerButton() {
 
 
           return (
+                    // A context consumer must be rendered with a fxn
                     <ThemeContext.Consumer>
                               {
                                         ({theme, toggleTheme}) => (

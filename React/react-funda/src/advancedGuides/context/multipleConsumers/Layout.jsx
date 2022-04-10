@@ -7,7 +7,7 @@ const Layout = () => {
 
           
           return (
-                    <div>
+                    <div style={{display: 'flex', justifyContent: 'space-btween', width: '100vw'}}>
                               <Sidebar />
 
                               <Content />
