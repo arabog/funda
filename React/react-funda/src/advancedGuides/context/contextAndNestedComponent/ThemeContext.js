@@ -21,9 +21,11 @@ to allow consumers to update the context:
 */
 
 export const ThemeContext = createContext({
+          // Make sure the shape of the default value passed to
+          // createContext matches the shape that the consumers expect!
           theme: themes.dark,
 
-          // toggleTheme: () => {}
+          toggleTheme: () => {}
 });
 
 
