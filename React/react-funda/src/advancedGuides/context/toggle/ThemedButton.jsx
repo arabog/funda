@@ -10,7 +10,7 @@ const ThemedButton = (props) => {
 		<div>
 			<button
 				{...props}
-				style={{backgroundColor: anodaTheme.background, color: anodaTheme.foreground}}
+				style={{backgroundColor: anodaTheme.background, color: anodaTheme.foreground, cursor: 'pointer'}}
 			>
 				{props.children || 'Hello'}
 			</button>

@@ -1,4 +1,4 @@
-// /*
+/*
 import React, {  useContext } from 'react';
 
 
@@ -17,23 +17,25 @@ function App(props) {
 	const theme = useContext(ThemeContext);
 	const signedInUser = useContext(UserContext);
 
-	console.log(theme, signedInUser)
-
 
 	return (
 		<ThemeContext.Provider value={theme}>
+
 			<UserContext.Provider value={signedInUser}>
+				
 				<Layout />
+			
 			</UserContext.Provider>
+		
 		</ThemeContext.Provider>
 	)
 
 }
 
-// */
+*/
 
 
-/* context and nested components
+// /* context and nested components
 import React, { useState } from 'react';
 
 import { ThemeContext, themes } from './advancedGuides/context/contextAndNestedComponent/ThemeContext'
@@ -59,7 +61,7 @@ function App(props) {
 	
 }
 
-*/
+// */
 
 
 /* Toggle:

@@ -1,16 +1,18 @@
 import { createContext } from 'react'
 
+
 export const themes = {
           light: {
                     foreground: 'white',
-                    background: 'blue',
+                    background: 'black',
           },
 
           dark: {
-                    foreground: 'red',
-                    background: 'green',
+                    foreground: 'black',
+                    background: 'white',
           },
 };
+
 
 export const ThemeContext = createContext(
           // default value

@@ -23,7 +23,7 @@ to allow consumers to update the context:
 export const ThemeContext = createContext({
           theme: themes.dark,
 
-          toggleTheme: () => {}
+          // toggleTheme: () => {}
 });
 
 
