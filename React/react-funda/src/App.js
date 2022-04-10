@@ -1,29 +1,17 @@
+// /*
 import React, {  useContext } from 'react';
-// import React, { useState } from 'react';
 
-import './App.css';
-
-// import Calculator from './mainConcept/calculator/Calculator';
-// import FitterableProductTable from './mainConcept/shopApp/FitterableProductTable';
-// import OuterClickExample from './advancedGuides/Acessisibility';
-
-// import { ThemeContext, themes } from './advancedGuides/context/toggle/ThemeContext'
-// import Toolbar from './advancedGuides/context/toggle/Toolbar'
-// import ThemedButton from './advancedGuides/context/toggle/ThemedButton'
-
-// import { ThemeContext, themes } from './advancedGuides/context/toggle2/ThemeContext'
-// import Content from './advancedGuides/context/toggle2/Content';
 
 import {ThemeContext} from './advancedGuides/context/multipleConsumers/ThemeContext'
 import {UserContext} from './advancedGuides/context/multipleConsumers/UserContext'
 import Layout from './advancedGuides/context/multipleConsumers/Layout';
 
 
-/*
-If two or more context values are often used together, you 
-might want to consider creating your own render prop 
-component that provides both.
-*/ 
+// If two or more context values are often used together, you 
+// might want to consider creating your own render prop 
+// component that provides both.
+
+
 
 function App(props) {
 	const theme = useContext(ThemeContext);
@@ -34,49 +22,99 @@ function App(props) {
 
 	return (
 		<ThemeContext.Provider value={theme}>
-			<UserContext.Provider value={signedInUser.name}>
+			<UserContext.Provider value={signedInUser}>
 				<Layout />
 			</UserContext.Provider>
 		</ThemeContext.Provider>
 	)
 
+}
+
+// */
 
 
-	// const [theme, setTheme] = useState(themes.light);
+/* context and nested components
+import React, { useState } from 'react';
+
+import { ThemeContext, themes } from './advancedGuides/context/contextAndNestedComponent/ThemeContext'
+import Content from './advancedGuides/context/contextAndNestedComponent/Content';
 
 
-
-	// const toggleTheme = () => {
-	// 	setTheme(
-	// 		theme === themes.dark ? themes.light : themes.dark
-	// 	)
-	// }
+function App(props) {
+	const [theme, setTheme] = useState(themes.light);
 
 
-	// return (
-	// 	<ThemeContext.Provider value ={{theme, toggleTheme}}>
-	// 		<Content />
-	// 	</ThemeContext.Provider>
-	// )
+	const toggleTheme = () => {
+		setTheme(
+			theme === themes.dark ? themes.light : themes.dark
+		)
+	}
 
+
+	return (
+		<ThemeContext.Provider value ={{theme, toggleTheme}}>
+			<Content />
+		</ThemeContext.Provider>
+	)
+	
+}
+
+*/
+
+
+/* Toggle:
+
+import React, { useState } from 'react';
+
+import { ThemeContext, themes } from './advancedGuides/context/toggle/ThemeContext'
+import Toolbar from './advancedGuides/context/toggle/Toolbar'
+import ThemedButton from './advancedGuides/context/toggle/ThemedButton'
+
+
+function App(props) {
+	const [theme, setTheme] = useState(themes.light);
+
+
+	const toggleTheme = () => {
+		setTheme(
+			theme === themes.dark ? themes.light : themes.dark
+		)
+	}
+
+
+	return (
+		<div>
+			<ThemeContext.Provider value ={theme}>
+				<Toolbar changeTheme={toggleTheme} />
+			</ThemeContext.Provider>
+
+			<ThemedButton />
+		</div>
+	)
+	
+}
+
+*/
+
+
+/*
+import Calculator from './mainConcept/calculator/Calculator';
+import FitterableProductTable from './mainConcept/shopApp/FitterableProductTable';
+
+
+function App(props) {
 	
 
-	// return (
-	// 	<div>
-	// 		<Calculator />
+	return (
+		<div>
+			<Calculator />
 
-	// 		<FitterableProductTable />
+			<FitterableProductTable />
 
-	// 		{/* <OuterClickExample /> */}
-
-	// 		<ThemeContext.Provider value={theme} >
-	// 			<Toolbar changeTheme={toggleTheme} />
-	// 		</ThemeContext.Provider>
-
-	// 		<ThemedButton />
-	// 	</div>
-	// );
+		</div>
+	);
 }
+*/
 
 
 export default App;

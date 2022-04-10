@@ -21,8 +21,8 @@ to allow consumers to update the context:
 */
 
 export const ThemeContext = createContext({
-          // default value
           theme: themes.dark,
+
           toggleTheme: () => {}
 });
 

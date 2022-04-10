@@ -14,7 +14,7 @@ const Content = () => {
                                                   <UserContext.Consumer>
                                                             {
                                                                       user => (
-                                                                                <ProfilePage user={user} theme={theme} />
+                                                                                <ProfilePage user={user.name} theme={theme} />
                                                                       )
                                                             }
                                                   </UserContext.Consumer>
