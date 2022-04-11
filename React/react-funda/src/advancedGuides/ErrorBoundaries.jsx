@@ -48,6 +48,22 @@ build your own) so that you can learn about unhandled exceptions
 as they happen in production, and fix them.
 
 
+How About try/catch?
+try / catch is great but it only works for imperative code:
+
+try {
+          showButton();
+} catch (error) {
+          // ...
+}
+
+However, React components are declarative and specify what 
+should be rendered:
+<Button />
+
+Error boundaries preserve the declarative nature of React, 
+and behave as you would expect. 
+
 
 
 
