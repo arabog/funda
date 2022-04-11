@@ -1,3 +1,19 @@
+
+import React from 'react'
+
+
+const App = () => {
+	return (
+		<div>App</div>
+	)
+}
+
+
+export default App
+
+
+
+/* Error boundary A
 import React from 'react'
 import MyErrorComponent from './advancedGuides/ErrorBoundaries'
 
@@ -13,6 +29,8 @@ const App = () => {
 
 
 export default App
+
+*/
 
 
 /* Using router with code splitting
