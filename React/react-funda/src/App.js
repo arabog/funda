@@ -1,6 +1,34 @@
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+
+const Home = lazy(() => import('./advancedGuides/codeSplitting/fourth/routes/Home'));
+const About = lazy(() => import('./advancedGuides/codeSplitting/fourth/routes/About'));
+
+
+const App = () => {
+	return (
+		<Router>
+			<Suspense fallback={<div>Loading...</div>}>
+				<Routes>
+					<Route path='/' element={<Home />} />
+
+					<Route path='/about' element={<About />} />
+				</Routes>
+			</Suspense>
+
+		</Router>
+	)
+}
+
+export default App
+
+
+/*
 import React from 'react'
 import MyComponent from './advancedGuides/codeSplitting/first/MyComponent'
 import MyComponent2 from './advancedGuides/codeSplitting/second/MyComponent2'
+// import MyComponent3 from './advancedGuides/codeSplitting/third/MyComponent3'
 
 
 const App = () => {
@@ -9,6 +37,7 @@ const App = () => {
 			<MyComponent />
 
 			<MyComponent2 />
+
 		</div>
 	)
 }
@@ -16,7 +45,7 @@ const App = () => {
 
 export default App
 
-
+*/
 
 /*
 import React, {  useContext } from 'react';
