@@ -1,4 +1,21 @@
-// /*
+import React from 'react'
+import MyComponent from './advancedGuides/codeSplitting/first/MyComponent'
+
+
+const App = () => {
+	return (
+		<div>
+			<MyComponent />
+		</div>
+	)
+}
+
+
+export default App
+
+
+
+/*
 import React, {  useContext } from 'react';
 
 
@@ -32,7 +49,7 @@ function App(props) {
 
 }
 
-// */
+*/
 
 
 /* context and nested components
@@ -119,4 +136,4 @@ function App(props) {
 */
 
 
-export default App;
+// export default App;
