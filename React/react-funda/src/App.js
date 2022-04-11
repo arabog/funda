@@ -1,11 +1,14 @@
 import React from 'react'
 import MyComponent from './advancedGuides/codeSplitting/first/MyComponent'
+import MyComponent2 from './advancedGuides/codeSplitting/second/MyComponent2'
 
 
 const App = () => {
 	return (
 		<div>
 			<MyComponent />
+
+			<MyComponent2 />
 		</div>
 	)
 }
