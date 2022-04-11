@@ -31,3 +31,27 @@ message, the error will propagate to the closest error boundary above
 it. This, too, is similar to how the catch {} block works in JavaScript.
 
 
+Where to Place Error Boundaries
+The granularity of error boundaries is up to you. You may wrap 
+top-level route components to display a “Something went wrong” 
+message to the user, just like how server-side frameworks often 
+handle crashes. You may also wrap individual widgets in an error 
+boundary to protect them from crashing the rest of the application.
+
+For example, Facebook Messenger wraps content of the sidebar, 
+the info panel, the conversation log, and the message input into 
+separate error boundaries. If some component in one of these UI 
+areas crashes, the rest of them remain interactive.
+
+We also encourage you to use JS error reporting services (or 
+build your own) so that you can learn about unhandled exceptions 
+as they happen in production, and fix them.
+
+
+
+
+
+
+
+
+
