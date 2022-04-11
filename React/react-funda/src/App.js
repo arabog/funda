@@ -1,3 +1,18 @@
+import React from 'react'
+
+
+const App = () => {
+
+	return (
+		<div>App</div>
+	)
+}
+
+
+export default App
+
+
+/* Using router with code splitting
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -7,6 +22,8 @@ const About = lazy(() => import('./advancedGuides/codeSplitting/fourth/routes/Ab
 
 
 const App = () => {
+
+
 	return (
 		<Router>
 			<Suspense fallback={<div>Loading...</div>}>
@@ -16,15 +33,16 @@ const App = () => {
 					<Route path='/about' element={<About />} />
 				</Routes>
 			</Suspense>
-
 		</Router>
 	)
 }
 
+
 export default App
+*/
 
 
-/*
+/* Code splitting
 import React from 'react'
 import MyComponent from './advancedGuides/codeSplitting/first/MyComponent'
 import MyComponent2 from './advancedGuides/codeSplitting/second/MyComponent2'

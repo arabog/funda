@@ -8,6 +8,7 @@ const Comments = React.lazy(() => import('./Comments'));
 const Photo = React.lazy(() => import('./Photo'));
 
 
+// it didnt work bcos useTransition is a React18 hook
 const MyComponent2 = () => {
           const [tab, setTab] = useState('photo');
           const [isPending, startTransition] = useTransition({timeoutMs: 3000});
