@@ -1,10 +1,13 @@
 import React from 'react'
+import MyErrorComponent from './advancedGuides/ErrorBoundaries'
 
 
 const App = () => {
 
 	return (
-		<div>App</div>
+		<div>
+			<MyErrorComponent />
+		</div>
 	)
 }
 

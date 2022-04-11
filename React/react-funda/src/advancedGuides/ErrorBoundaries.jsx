@@ -1,4 +1,4 @@
-// /*
+/*
 https://dev.to/edemagbenyo/handle-errors-in-react-components-like-a-pro-l7l4\
 
 
@@ -76,34 +76,44 @@ React still knows what to display on the screen.
 If you need to catch an error inside an event handler, use the regular 
 JavaScript try / catch statement:
 
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { error: null };
-    this.handleClick = this.handleClick.bind(this);
-  }
+*/
 
-  handleClick() {
-    try {
-      // Do something that could throw
-    } catch (error) {
-      this.setState({ error });
-    }
-  }
+import React, { useState } from 'react';
 
-  render() {
-    if (this.state.error) {
-      return <h1>Caught an error.</h1>
-    }
-    return <button onClick={this.handleClick}>Click Me</button>
-  }
+
+const MyErrorComponent = () => {
+          const [errorMsg, setErrorMsg] = useState(null);
+
+          const handleClick = () => {
+                    try {
+                              // Do something that could throw
+                              const user = 'Ade';
+
+                              user = 'Tunji';
+                    } catch (error) {
+                              setErrorMsg({ error });
+                              console.log(error)
+                    }
+          }
+
+          if(errorMsg) {
+                    return <h1> Caught an error.</h1>
+          }
+
+
+          return (
+                    <button onClick={handleClick}>Click Me</button>
+          )
 }
 
 
+export default MyErrorComponent
 
-
+/*
 Note that the above example is demonstrating regular JavaScript 
 behavior and doesn’t use error boundaries.
+
+*/
 
 
 
