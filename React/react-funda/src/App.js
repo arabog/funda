@@ -2,15 +2,48 @@ import React from 'react'
 
 
 const App = () => {
+
+
 	return (
-		<div>App</div>
+		<div>Forward Ref </div>
+	)
+}
+
+
+export default App
+
+
+/* ErrorRecovery from react-error-boundary npmjs page
+
+import React, { useState } from 'react'
+import {ErrorBoundary} from 'react-error-boundary'
+import {Bomb, ErrorFallback} from './advancedGuides/errorBoundaries/ErrorRecover/ErrorRecovery'
+
+
+
+const App = () => {
+	const [explode, setExplode] = useState(false);
+
+
+	return (
+		<div>
+			<button onClick={() => setExplode(e => !e )}>Toggle Explode </button>
+			
+			<ErrorBoundary 
+				FallbackComponent={ErrorFallback}
+				onReset={() => setExplode(false)}
+				resetKeys= {[explode]}
+			>
+				{ explode ? <Bomb /> : null }
+			</ErrorBoundary>
+		</div>
 	)
 }
 
 export default App
 
 
-/*
+ErrorBoundary with React Error Boundary 
 import React from 'react'
 import {ErrorBoundary} from 'react-error-boundary'
 
@@ -30,13 +63,11 @@ function App() {
 }
 
 export default App
-*/
 
-/*  ErrorBoundary with trycatch & ReactErrorBoundary
+
+ErrorBoundary with trycatch 
 import React from 'react'
 import TryAndCatch from './advancedGuides/errorBoundaries/tryCatch/TryAndCatch'
-
-
 
 
 function App() {
@@ -49,10 +80,9 @@ function App() {
 
 
 export default App
-*/
 
 
-/* Error boundary A
+Error boundary A
 import React from 'react'
 import MyErrorComponent from './advancedGuides/ErrorBoundaries'
 
@@ -69,10 +99,8 @@ const App = () => {
 
 export default App
 
-*/
 
-
-/* Using router with code splitting
+Using router with code splitting
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -99,10 +127,9 @@ const App = () => {
 
 
 export default App
-*/
 
 
-/* Code splitting
+Code splitting
 import React from 'react'
 import MyComponent from './advancedGuides/codeSplitting/first/MyComponent'
 import MyComponent2 from './advancedGuides/codeSplitting/second/MyComponent2'
@@ -123,9 +150,7 @@ const App = () => {
 
 export default App
 
-*/
 
-/*
 import React, {  useContext } from 'react';
 
 
@@ -159,10 +184,9 @@ function App(props) {
 
 }
 
-*/
 
 
-/* context and nested components
+context and nested components
 import React, { useState } from 'react';
 
 import { ThemeContext, themes } from './advancedGuides/context/contextAndNestedComponent/ThemeContext'
@@ -188,10 +212,9 @@ function App(props) {
 	
 }
 
-*/
 
 
-/* Toggle:
+Toggle:
 
 import React, { useState } from 'react';
 
@@ -223,10 +246,7 @@ function App(props) {
 	
 }
 
-*/
 
-
-/*
 import Calculator from './mainConcept/calculator/Calculator';
 import FitterableProductTable from './mainConcept/shopApp/FitterableProductTable';
 
@@ -243,7 +263,7 @@ function App(props) {
 		</div>
 	);
 }
+
+
+export default App;
 */
-
-
-// export default App;

@@ -193,8 +193,69 @@ each component because the wrapping component(ErrorBoundary) takes
 care of that and display the component of the FallbackComponent provided.
 
 
+export function ErrorFallback({error, resetErrorBoundary}) {
+          return (
+                    <div role='alert'>
+                              <p>Something went wrong: </p>
+                              <pre>{error.message}</pre>
+
+                              <button onClick={resetErrorBoundary} >
+                                        Try Again
+                              </button>
+                    </div>
+          )
+}
+
+export function Bomb() {
+          throw new Error('💥 CABOOM 💥')
+}
+
+
+import React, { useState } from 'react'
+import {ErrorBoundary} from 'react-error-boundary'
+import {Bomb, ErrorFallback} from './advancedGuides/errorBoundaries/ErrorRecover/ErrorRecovery'
+
+
+
+const App = () => {
+	const [explode, setExplode] = useState(false);
+
+
+	return (
+		<div>
+			<button onClick={() => setExplode(e => !e )}>Toggle Explode </button>
+
+			<ErrorBoundary 
+				FallbackComponent={ErrorFallback}
+				onReset={() => setExplode(false)}
+				resetKeys= {[explode]}
+			>
+				{ explode ? <Bomb /> : null }
+			</ErrorBoundary>
+		</div>
+	)
+}
+
+export default App
+
+The ErrorBoundary component accepts two other props to help recover 
+from a state of error. The second prop onReset receives a function which 
+will be triggered when resetErrorBoundary of the FallbackComponent is 
+called. The onReset function is used to reset the state and perform any 
+cleanup that will bring the component to a working state.
+
+The other prop of ErrorBoundary is resetKeys, it accepts an array of 
+elements that will be checked when an error has been caught. In case any 
+of these elements changes, the ErrorBoundary will reset the state and 
+re-render the component.
+
+Handling error in React functional components should be a breeze for 
+anyone using the react-error-boundary library. 
+
+It provides the following features:
+Fallback components to display incase of error
+Granular capturing of error at component level
+Recovery of error using a function or by resetting the elements 
+causing the component to fail.
+
 */
-
-
-
-
