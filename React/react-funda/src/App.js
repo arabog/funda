@@ -1,7 +1,26 @@
-
-//  ErrorBoundary with trycatch & ReactErrorBoundary
 import React from 'react'
-import ReactErrorBoundry from './advancedGuides/errorBoundaries/info'
+import {ErrorBoundary} from 'react-error-boundary'
+
+import { City, Country, ErrorHandler } from './advancedGuides/errorBoundaries/ReactErrorBoundary/ReactErrorBoundry'
+
+
+function App() {
+
+
+	return (
+		<ErrorBoundary FallbackComponent={ErrorHandler}>
+                              <Country />
+
+                              <City />
+                    </ErrorBoundary>
+	)
+}
+
+export default App
+
+
+/*  ErrorBoundary with trycatch & ReactErrorBoundary
+import React from 'react'
 import TryAndCatch from './advancedGuides/errorBoundaries/tryCatch/TryAndCatch'
 
 
@@ -11,15 +30,13 @@ function App() {
 	return (
 		<div>
 			<TryAndCatch />
-
-			<ReactErrorBoundry />
 		</div>
 	)
 }
 
 
 export default App
-
+*/
 
 
 /* Error boundary A

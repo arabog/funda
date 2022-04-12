@@ -1,8 +1,5 @@
-import React from 'react'
-import { ErrorBoundary } from 'react-error-boundary'
 
-
-const ErrorHandler = ({error}) => {
+export const ErrorHandler = ({error}) => {
 
 
           return (
@@ -15,7 +12,7 @@ const ErrorHandler = ({error}) => {
 }
 
 
-const City = ({name}) => {
+export const City = ({name}) => {
 
 
           return (
@@ -26,7 +23,7 @@ const City = ({name}) => {
 }
 
 
-const Country = ({capital}) => {
+export const Country = ({capital}) => {
 
 
           return (
@@ -35,18 +32,3 @@ const Country = ({capital}) => {
                     </div>
           )
 }
-
-const ReactErrorBoundry = () => {
-
-
-          return (
-                    <ErrorBoundary FallbackComponent={ErrorHandler}>
-                              <Country />
-
-                              <City />
-                    </ErrorBoundary>
-          )
-}
-
-
-export default ReactErrorBoundry

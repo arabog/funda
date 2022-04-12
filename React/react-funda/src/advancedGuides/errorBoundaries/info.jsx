@@ -117,10 +117,6 @@ App in a try/catch block will not work, due to the nature of how React
 calls functions. That is when React Error Boundary comes in.
 
 
-
-
-*/
-
 React Error Boundary
 Error boundaries are React components that catch JavaScript errors 
 anywhere in their child component tree, log those errors, and display 
@@ -197,6 +193,7 @@ each component because the wrapping component(ErrorBoundary) takes
 care of that and display the component of the FallbackComponent provided.
 
 
+*/
 
 
 
