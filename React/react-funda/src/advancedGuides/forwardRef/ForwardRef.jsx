@@ -61,7 +61,87 @@ it as a JSX attribute.
 5. When the ref is attached, ref.current will point to the <button> DOM node.
 
 
+Note
+The second ref argument only exists when you define a component 
+with React.forwardRef call. Regular function or class components 
+don’t receive the ref argument, and ref is not available in props either.
+
+Ref forwarding is not limited to DOM components. You can 
+forward refs to class component instances, too.
+
+
+Forwarding refs in higher-order components
+This technique can also be particularly useful with higher-order 
+components. Let’s start with an example HOC that logs component 
+props to the console:
+
+
 */
+
+import { useEffect } from "react/cjs/react.development"
+
+
+function logProps(WrappedComponent) {
+          const LogProps = (prevProps) => {
+                    useEffect(() => {
+                              console.log('old props: ', prevProps);
+                              console.log('new props: ', props);
+                    }, [])
+
+                    return (
+                              <div>
+                                        <WrappedComponent {...props} />
+                              </div>
+                    )
+          }
+
+          return LogProps;
+
+}
+
+
+The “logProps” HOC passes all props through to the component it 
+wraps, so the rendered output will be the same. For example, we 
+can use this HOC to log all props that get passed to our “fancy 
+button” component:
+
+function FancyButton {
+          focus() {
+          // ...
+          }
+
+          // ...
+}
+
+// Rather than exporting FancyButton, we export LogProps.
+// It will render a FancyButton though.
+export default logProps(FancyButton);
+
+There is one caveat to the above example: refs will not get passed 
+through. That’s because ref is not a prop. Like key, it’s handled 
+differently by React. If you add a ref to a HOC, the ref will refer 
+to the outermost container component, not the wrapped component.
+
+This means that refs intended for our FancyButton component will 
+actually be attached to the LogProps component:
+
+import FancyButton from './FancyButton';
+
+const ref = React.createRef();
+
+// The FancyButton component we imported is the LogProps HOC.
+// Even though the rendered output will be the same,
+// Our ref will point to LogProps instead of the inner FancyButton component!
+// This means we can't call e.g. ref.current.focus()
+
+<FancyButton
+          label="Click Me"
+          handleClick={handleClick}
+          ref={ref}
+/>;
+
+
+
 
 
 
