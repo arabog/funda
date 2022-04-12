@@ -1,11 +1,13 @@
 import React from 'react'
-
+import ForwardRef from './advancedGuides/forwardRef/code/ForwardRef'
 
 const App = () => {
 
 
 	return (
-		<div>Forward Ref </div>
+		<div>
+			<ForwardRef />
+		</div>
 	)
 }
 
