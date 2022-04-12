@@ -1,9 +1,9 @@
 import React from 'react'
 
 
-const ErrorHandler =({error}) => {
+function ErrorHandler({error}) {
 
-          
+
           return (
                     <div role='alert'>
                               <p>An error occurred:</p>
@@ -14,7 +14,7 @@ const ErrorHandler =({error}) => {
 }
 
 
-const City = ({name}) => {
+function City({name}) {
           try {
                     return (
                               <div>
@@ -28,7 +28,7 @@ const City = ({name}) => {
 }
 
 
-const Country = ({capital}) => {
+function Country({capital}) {
           try {
                     return (
                               <div>
@@ -42,7 +42,7 @@ const Country = ({capital}) => {
 }
 
 
-const TryAndCatch = () => {
+function TryAndCatch() {
 
 
           return (

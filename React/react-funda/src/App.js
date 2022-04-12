@@ -1,6 +1,6 @@
 
 import React from 'react'
-import TryAndCatch from './advancedGuides/errorBoundaries/info'
+import TryAndCatch from './advancedGuides/errorBoundaries/tryCatch/TryAndCatch'
 
 
 
