@@ -76,14 +76,12 @@ components. Let’s start with an example HOC that logs component
 props to the console:
 
 
-*/
-
 import { useEffect } from "react/cjs/react.development"
 
 
 function logProps(WrappedComponent) {
-          const LogProps = (prevProps) => {
-                    useEffect(() => {
+          const LogProps = () => {
+                    useEffect((prevProps) => {
                               console.log('old props: ', prevProps);
                               console.log('new props: ', props);
                     }, [])
@@ -140,9 +138,78 @@ const ref = React.createRef();
           ref={ref}
 />;
 
+Fortunately, we can explicitly forward refs to the inner FancyButton 
+component using the React.forwardRef API. React.forwardRef accepts 
+a render function that receives props and ref parameters and returns a 
+React node. For example:
+
+import { useEffect } from "react/cjs/react.development"
 
 
+function logProps(Component) {
+          const LogProps = () => {
+                    useEffect((prevProps) => {
+                              console.log('old props: ', prevProps);
+                              console.log('new props: ', props);
+                    }, [])
+
+                    const {forwardRef, ...rest} = props;
+
+                     // Assign the custom prop "forwardedRef" as a ref
+                    return <Component ref={forwardRef} {...rest} />
+          }
 
 
+          // Note the second param "ref" provided by React.forwardRef.
+          // We can pass it along to LogProps as a regular prop, e.g. "forwardedRef"
+          // And it can then be attached to the Component.
+          return React.forwardRef((props, ref) => {
+                    return <LogProps {...props} forwardedRef={ref} />;
+          });
+
+}
 
 
+Displaying a custom name in DevTools
+React.forwardRef accepts a render function. React DevTools uses 
+this function to determine what to display for the ref forwarding component.
+
+For example, the following component will appear as ”ForwardRef” 
+in the DevTools:
+
+const WrappedComponent = React.forwardRef((props, ref) => {
+          return <LogProps {...props} forwardedRef={ref} />;
+});
+
+If you name the render function, DevTools will also include its name 
+(e.g. ”ForwardRef(myFunction)”):
+
+
+const WrappedComponent = React.forwardRef(
+          function myFunction(props, ref) {
+                    return <LogProps {...props} forwardedRef={ref} />;
+          }
+);
+
+You can even set the function’s displayName property to include the 
+component you’re wrapping:
+
+function logProps(Component) {
+          class LogProps extends React.Component {
+            // ...
+          }
+
+          function forwardRef(props, ref) {
+                    return <LogProps {...props} forwardedRef={ref} />;
+          }
+
+          // Give this component a more helpful display name in DevTools.
+          // e.g. "ForwardRef(logProps(MyComponent))"
+          const name = Component.displayName || Component.name;
+          forwardRef.displayName = `logProps(${name})`;
+
+          return React.forwardRef(forwardRef);
+}
+
+
+*/
