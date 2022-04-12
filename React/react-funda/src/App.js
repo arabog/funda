@@ -1,6 +1,9 @@
 
+//  ErrorBoundary with trycatch & ReactErrorBoundary
 import React from 'react'
+import ReactErrorBoundry from './advancedGuides/errorBoundaries/info'
 import TryAndCatch from './advancedGuides/errorBoundaries/tryCatch/TryAndCatch'
+
 
 
 
@@ -8,6 +11,8 @@ function App() {
 	return (
 		<div>
 			<TryAndCatch />
+
+			<ReactErrorBoundry />
 		</div>
 	)
 }

@@ -120,3 +120,84 @@ calls functions. That is when React Error Boundary comes in.
 
 
 */
+
+React Error Boundary
+Error boundaries are React components that catch JavaScript errors 
+anywhere in their child component tree, log those errors, and display 
+a fallback UI instead of the component tree that crashed. Error 
+boundaries catch errors during rendering, in lifecycle methods, and 
+in constructors of the whole tree below them.
+
+As at React 17.0.2, Error Boundary works only in
+
+Class component
+and It must implement static getDerivedStateFromError() or 
+componentDidCatch(). In order to use Error Boundary in 
+Functional Component, I use react-error-boundary.
+
+import React from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+
+
+const ErrorHandler = ({error}) => {
+
+
+          return (
+                    <div role='alert'>
+                              <p>An error occurred:</p>
+
+                              <pre> {error.message} </pre>          
+                    </div>
+          )
+}
+
+
+const City = ({name}) => {
+
+
+          return (
+                    <div>
+                              Hello, visit {name.toUpperCase()}
+                    </div>
+          )
+}
+
+
+const Country = ({capital}) => {
+
+
+          return (
+                    <div>
+                              Hello, visit {capital.toUpperCase()}
+                    </div>
+          )
+}
+
+const ReactErrorBoundry = () => {
+
+
+          return (
+                    <ErrorBoundary FallbackComponent={ErrorHandler}>
+                              <Country />
+
+                              <City />
+                    </ErrorBoundary>
+          )
+}
+
+
+export default ReactErrorBoundry
+
+
+When we run this application, we will get a nice error display form 
+the content of ErrorHandler component. React error boundary catches 
+any error from the components below them in the tree. This is really 
+handy and useful because we need not declare a separate try/catch for 
+each component because the wrapping component(ErrorBoundary) takes 
+care of that and display the component of the FallbackComponent provided.
+
+
+
+
+
+
