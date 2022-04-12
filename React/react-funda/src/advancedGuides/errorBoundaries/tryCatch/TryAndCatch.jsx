@@ -1,6 +1,9 @@
 import React from 'react'
 
+
 const ErrorHandler =({error}) => {
+
+          
           return (
                     <div role='alert'>
                               <p>An error occurred:</p>
@@ -45,6 +48,7 @@ const TryAndCatch = () => {
           return (
                     <div>
                               <Country />
+
                               <City />          
                     </div>
           )

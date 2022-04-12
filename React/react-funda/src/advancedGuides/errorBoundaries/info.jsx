@@ -1,4 +1,4 @@
-// /*
+/*
 https://dev.to/edemagbenyo/handle-errors-in-react-components-like-a-pro-l7l
 
 
@@ -119,4 +119,4 @@ calls functions. That is when React Error Boundary comes in.
 
 
 
-// */
+*/

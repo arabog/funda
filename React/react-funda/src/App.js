@@ -1,10 +1,14 @@
 
 import React from 'react'
+import TryAndCatch from './advancedGuides/errorBoundaries/info'
 
 
-const App = () => {
+
+function App() {
 	return (
-		<div>App</div>
+		<div>
+			<TryAndCatch />
+		</div>
 	)
 }
 
