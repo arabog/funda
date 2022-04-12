@@ -1,4 +1,17 @@
 import React from 'react'
+
+
+const App = () => {
+	return (
+		<div>App</div>
+	)
+}
+
+export default App
+
+
+/*
+import React from 'react'
 import {ErrorBoundary} from 'react-error-boundary'
 
 import { City, Country, ErrorHandler } from './advancedGuides/errorBoundaries/ReactErrorBoundary/ReactErrorBoundry'
@@ -17,7 +30,7 @@ function App() {
 }
 
 export default App
-
+*/
 
 /*  ErrorBoundary with trycatch & ReactErrorBoundary
 import React from 'react'
