@@ -1,5 +1,5 @@
 /*
-https://dev.to/edemagbenyo/handle-errors-in-react-components-like-a-pro-l7l4\
+https://dev.to/edemagbenyo/handle-errors-in-react-components-like-a-pro-l7l
 
 
 Introducing Error Boundaries
