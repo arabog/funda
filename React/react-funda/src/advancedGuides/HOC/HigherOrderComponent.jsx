@@ -1,4 +1,4 @@
-// /*
+/*
 Higher-Order Components
 A higher-order component (HOC) is an advanced technique in React 
 for reusing component logic. HOCs are not part of the React API, per se. 
@@ -212,7 +212,7 @@ that communicates that it’s the result of a HOC.
 
 Don’t Use HOCs Inside the render Method
 
-
-
-
-// */
+Refs Aren’t Passed Through
+While the convention for higher-order components is to pass through all props to 
+the wrapped component, this does not work for refs.
+*/
