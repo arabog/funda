@@ -11,11 +11,11 @@ Forwarding refs to DOM components
 Consider a FancyButton component that renders the native button DOM element:
 
 function FancyButton(props) {
-          return (
-                    <button className="FancyButton">
-                              {props.children}
-                    </button>
-          );
+	return (
+		<button className="FancyButton">
+			{props.children}
+		</button>
+	);
 }
 
 React components hide their implementation details, including their 
@@ -31,17 +31,22 @@ a child.
 In the example below, FancyButton uses React.forwardRef to obtain 
 the ref passed to it, and then forward it to the DOM button that it renders:
 
+Fancy.jsx
 const FancyButton = React.forwardRef((props, ref) => (
-          <button ref={ref} className="FancyButton">
-                    {props.children}
-          </button>
+	<button ref={ref} className="FancyButton">
+		{props.children}
+	</button>
 ));
 
-// You can now get a ref directly to the DOM button:
+You can now get a ref directly to the DOM button:
+
+Compo.jsx
+import FancyButton from './Fancy'
+
 const ref = React.createRef();
 
 <FancyButton ref={ref}>
-          Click me!
+	Click me!
 </FancyButton>;
 
 This way, components using FancyButton can get a ref to the underlying 
@@ -80,20 +85,20 @@ import { useEffect } from "react/cjs/react.development"
 
 
 function logProps(WrappedComponent) {
-          const LogProps = () => {
-                    useEffect((prevProps) => {
-                              console.log('old props: ', prevProps);
-                              console.log('new props: ', props);
-                    }, [])
+	const LogProps = () => {
+		useEffect((prevProps) => {
+			console.log('old props: ', prevProps);
+			console.log('new props: ', props);
+		}, [])
 
-                    return (
-                              <div>
-                                        <WrappedComponent {...props} />
-                              </div>
-                    )
-          }
+		return (
+			<div>
+				<WrappedComponent {...props} />
+			</div>
+		)
+	}
 
-          return LogProps;
+	return LogProps;
 
 }
 
@@ -104,15 +109,16 @@ can use this HOC to log all props that get passed to our “fancy
 button” component:
 
 function FancyButton {
-          focus() {
-          // ...
-          }
+	focus() {
+		// ...
+	}
 
-          // ...
+	// ...
 }
 
-// Rather than exporting FancyButton, we export LogProps.
-// It will render a FancyButton though.
+Rather than exporting FancyButton, we export LogProps.
+It will render a FancyButton though.
+
 export default logProps(FancyButton);
 
 There is one caveat to the above example: refs will not get passed 
@@ -127,15 +133,15 @@ import FancyButton from './FancyButton';
 
 const ref = React.createRef();
 
-// The FancyButton component we imported is the LogProps HOC.
-// Even though the rendered output will be the same,
-// Our ref will point to LogProps instead of the inner FancyButton component!
-// This means we can't call e.g. ref.current.focus()
+The FancyButton component we imported is the LogProps HOC.
+Even though the rendered output will be the same,
+Our ref will point to LogProps instead of the inner FancyButton component!
+This means we can't call e.g. ref.current.focus()
 
 <FancyButton
-          label="Click Me"
-          handleClick={handleClick}
-          ref={ref}
+	label="Click Me"
+	handleClick={handleClick}
+	ref={ref}
 />;
 
 Fortunately, we can explicitly forward refs to the inner FancyButton 
@@ -147,25 +153,25 @@ import { useEffect } from "react/cjs/react.development"
 
 
 function logProps(Component) {
-          const LogProps = () => {
-                    useEffect((prevProps) => {
-                              console.log('old props: ', prevProps);
-                              console.log('new props: ', props);
-                    }, [])
+	const LogProps = (props) => {
+		useEffect((prevProps) => {
+			console.log('old props: ', prevProps);
+			console.log('new props: ', props);
+		}, [])
 
-                    const {forwardRef, ...rest} = props;
+		const {forwardRef, ...rest} = props;
 
-                     // Assign the custom prop "forwardedRef" as a ref
-                    return <Component ref={forwardRef} {...rest} />
-          }
+		// Assign the custom prop "forwardedRef" as a ref
+		return <Component ref={forwardRef} {...rest} />
+	}
 
 
-          // Note the second param "ref" provided by React.forwardRef.
-          // We can pass it along to LogProps as a regular prop, e.g. "forwardedRef"
-          // And it can then be attached to the Component.
-          return React.forwardRef((props, ref) => {
-                    return <LogProps {...props} forwardedRef={ref} />;
-          });
+	Note the second param "ref" provided by React.forwardRef.
+	We can pass it along to LogProps as a regular prop, e.g. "forwardedRef"
+	And it can then be attached to the Component.
+	return React.forwardRef((props, ref) => {
+		return <LogProps {...props} forwardedRef={ref} />;
+	});
 
 }
 
@@ -178,7 +184,7 @@ For example, the following component will appear as ”ForwardRef”
 in the DevTools:
 
 const WrappedComponent = React.forwardRef((props, ref) => {
-          return <LogProps {...props} forwardedRef={ref} />;
+	return <LogProps {...props} forwardedRef={ref} />;
 });
 
 If you name the render function, DevTools will also include its name 
@@ -186,29 +192,29 @@ If you name the render function, DevTools will also include its name
 
 
 const WrappedComponent = React.forwardRef(
-          function myFunction(props, ref) {
-                    return <LogProps {...props} forwardedRef={ref} />;
-          }
+	function myFunction(props, ref) {
+		return <LogProps {...props} forwardedRef={ref} />;
+	}
 );
 
 You can even set the function’s displayName property to include the 
 component you’re wrapping:
 
 function logProps(Component) {
-          class LogProps extends React.Component {
-            // ...
-          }
+	function LogProps() {
+		// ...
+	}
 
-          function forwardRef(props, ref) {
-                    return <LogProps {...props} forwardedRef={ref} />;
-          }
+	function forwardRef(props, ref) {
+		return <LogProps {...props} forwardedRef={ref} />;
+	}
 
-          // Give this component a more helpful display name in DevTools.
-          // e.g. "ForwardRef(logProps(MyComponent))"
-          const name = Component.displayName || Component.name;
-          forwardRef.displayName = `logProps(${name})`;
+	// Give this component a more helpful display name in DevTools.
+	// e.g. "ForwardRef(logProps(MyComponent))"
+	const name = Component.displayName || Component.name;
+	forwardRef.displayName = `logProps(${name})`;
 
-          return React.forwardRef(forwardRef);
+	return React.forwardRef(forwardRef);
 }
 
 

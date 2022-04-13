@@ -5,6 +5,8 @@ import { FancyButton } from './FancyButton';
 const ForwardRef = () => {
           const ref = React.createRef();
 
+          console.log(ref.current);
+
 
           return (
 
