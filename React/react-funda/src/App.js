@@ -1,10 +1,21 @@
 import React from 'react'
 
+const App = () => {
+  return (
+    <div>App</div>
+  )
+}
+
+export default App
+
+/* Frag,emts
+import React from 'react'
+
 import Fragment from './advancedGuides/Fragments'
 
 const App = () => {
 
-	
+
 	return (
 		<div>
 			<Fragment />
@@ -14,7 +25,8 @@ const App = () => {
 
 export default App
 
-/*
+
+ForwardRef
 import React from 'react'
 import ForwardRef from './advancedGuides/forwardRef/code/ForwardRef'
 
