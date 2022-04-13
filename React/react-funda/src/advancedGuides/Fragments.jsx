@@ -40,8 +40,10 @@ function Table() {
 
 {/* <Columns /> would need to return multiple <td> elements in order 
 for the rendered HTML to be valid. If a parent div was used inside 
-the render() of <Columns />, then the resulting HTML will be invalid. */}
+the return() of <Columns />, then the resulting HTML will be invalid. */}
+ 
 
+/*
 const Columns = () => {
           return (
                     <div>
@@ -52,5 +54,42 @@ const Columns = () => {
 }
 
 export default Table;
+
+results in a <Table /> output of:
+
+<table>
+          <tr>
+                    <div>
+                              <td>Hello</td>
+                              <td>World</td>
+                    </div>
+          </tr>
+</table>
+
+Fragments solve this problem.
+
+Usage */
+const Columns = () =>  {
+          return (
+                    <React.Fragment>
+                              <td>Hello</td>
+                              <td>World</td>
+                    </React.Fragment>
+          );
+}
+
+export default Table;
+
+/*
+which results in a correct <Table /> output of:
+
+<table>
+          <tr>
+                    <td>Hello</td>
+                    <td>World</td>
+          </tr>
+</table>
+
+*/
 
 // */
