@@ -216,6 +216,4 @@ function logProps(Component) {
 
 	return React.forwardRef(forwardRef);
 }
-
-
 */
