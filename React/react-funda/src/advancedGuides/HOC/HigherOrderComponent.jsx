@@ -37,7 +37,7 @@ const CommentList = () => {
                     // Update component state whenever the data source changes
                     setComments(DataSource.getComments());
           }
-          
+
           useEffect(() => {
                     // Subscribe to changes
                     DataSource.addChangeListener(handleChange);
@@ -147,7 +147,70 @@ function withSubscription(WrappedComponent, selectData) {
           };
 }
 
+Note that a HOC doesn’t modify the input component, nor does it use 
+inheritance to copy its behavior. Rather, a HOC composes the original 
+component by wrapping it in a container component. A HOC is a pure 
+function with zero side-effects.
 
+And that’s it! The wrapped component receives all the props of the 
+container, along with a new prop, data, which it uses to render its output. 
+The HOC isn’t concerned with how or why the data is used, and the 
+wrapped component isn’t concerned with where the data came from.
+
+Because withSubscription is a normal function, you can add as many 
+or as few arguments as you like. For example, you may want to make 
+the name of the data prop configurable, to further isolate the HOC from 
+the wrapped component. 
+
+Like components, the contract between withSubscription and the wrapped 
+component is entirely props-based. This makes it easy to swap one HOC 
+for a different one, as long as they provide the same props to the wrapped 
+component. This may be useful if you change data-fetching libraries, 
+for example.
+
+
+Don’t Mutate the Original Component. Use Composition.
+Resist the temptation to modify a component’s prototype (or otherwise 
+mutate it) inside a HOC.
+
+function logProps(InputComponent) {
+          InputComponent.prototype.componentDidUpdate = function(prevProps) {
+                    console.log('Current props: ', this.props);
+                    console.log('Previous props: ', prevProps);
+          };
+          // The fact that we're returning the original input is a hint that it has
+          // been mutated.
+          return InputComponent;
+}
+
+// EnhancedComponent will log whenever props are received
+const EnhancedComponent = logProps(InputComponent);
+
+
+Instead of mutation, HOCs should use composition, by wrapping 
+the input component in a container component:
+
+function logProps(WrappedComponent) {
+          return class extends React.Component {
+                    componentDidUpdate(prevProps) {
+                              console.log('Current props: ', this.props);
+                              console.log('Previous props: ', prevProps);
+                    }
+
+                    render() {
+                              // Wraps the input component in a container, without mutating it. Good!
+                              return <WrappedComponent {...this.props} />;
+                    }
+          }
+}
+
+
+Convention: Wrap the Display Name for Easy Debugging
+The container components created by HOCs show up in the React Developer 
+Tools like any other component. To ease debugging, choose a display name 
+that communicates that it’s the result of a HOC.
+
+Don’t Use HOCs Inside the render Method
 
 
 
