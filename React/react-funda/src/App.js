@@ -1,4 +1,21 @@
 import React from 'react'
+
+import Fragment from './advancedGuides/Fragments'
+
+const App = () => {
+
+	
+	return (
+		<div>
+			<Fragment />
+		</div>
+	)
+}
+
+export default App
+
+/*
+import React from 'react'
 import ForwardRef from './advancedGuides/forwardRef/code/ForwardRef'
 
 const App = () => {
@@ -13,6 +30,8 @@ const App = () => {
 
 
 export default App
+
+*/
 
 
 /* ErrorRecovery from react-error-boundary npmjs page
