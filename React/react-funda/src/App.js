@@ -1,14 +1,20 @@
 import React from 'react'
+import Example from './advancedGuides/OtherLib/JQuery/Example'
+
 
 const App = () => {
-  return (
-    <div>App</div>
-  )
+
+
+	return (
+		<div>
+			<Example />
+		</div>
+	)
 }
 
 export default App
 
-/* Frag,emts
+/* Fragmemts
 import React from 'react'
 
 import Fragment from './advancedGuides/Fragments'

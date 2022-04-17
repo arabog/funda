@@ -7,9 +7,9 @@ const Example = () => {
 
           return (
                     <Chosen>
-                              <option>vanilla</option>
-                              <option>chocolate</option>
-                              <option>strawberry</option>
+                              <option value='vanilla'>vanilla</option>
+                              <option value='chocolate'>chocolate</option>
+                              <option value='strawberry'>strawberry</option>
                     </Chosen>
           )
 }
