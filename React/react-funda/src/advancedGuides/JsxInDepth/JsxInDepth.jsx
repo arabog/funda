@@ -374,43 +374,114 @@ function Hello(props) {
 }
 
 
+-: Functions as Children
+Normally, JavaScript expressions inserted in JSX will evaluate to a string, 
+a React element, or a list of those things. However, props.children works 
+just like any other prop in that it can pass any sort of data, not just the 
+sorts that React knows how to render. For example, if you have a custom 
+component, you could have it take a callback as props.children:
+
+// Calls the children callback numTimes to produce a repeated component
+function Repeat(props) {
+          let items = [];
+
+          for (let i = 0; i < props.numTimes; i++) {
+                    items.push(props.children(i));
+          }
+
+          return <div>{items}</div>;
+}
+
+function ListOfTenThings() {
+          return (
+                    <Repeat numTimes={10}>
+                              {
+                                        (index) => <div key={index}>This is item {index} in the list</div>
+                              }
+                    </Repeat>
+          );
+}
+
+Children passed to a custom component can be anything, as long 
+as that component transforms them into something React can 
+understand before rendering. This usage is not common, but it 
+works if you want to stretch what JSX is capable of.
 
 
+-: Booleans, Null, and Undefined Are Ignored
+false, null, undefined, and true are valid children. They simply 
+don’t render. These JSX expressions will all render to the same thing:
 
+<div />
 
+<div></div>
 
+<div>{false}</div>
 
+<div>{null}</div>
 
+<div>{undefined}</div>
 
+<div>{true}</div>
 
+This can be useful to conditionally render React elements. This 
+JSX renders the <Header /> component only if showHeader is true:
 
+<div>
+          {showHeader && <Header />}
+          <Content />
+</div>
+
+One caveat is that some “falsy” values, such as the 0 number, are 
+still rendered by React. For example, this code will not behave as 
+you might expect because 0 will be printed when props.messages 
+is an empty array:
+
+<div>
+          {
+                    props.messages.length && <MessageList messages={props.messages} />
+          }
+</div>
+
+To fix this, make sure that the expression before && is always boolean:
+
+<div>
+          {
+                    props.messages.length > 0 && <MessageList messages={props.messages} />
+          }
+</div>
+
+Conversely, if you want a value like false, true, null, or undefined to appear 
+in the output, you have to convert it to a string first:
+
+<div>
+          My JavaScript variable is {String(myVariable)}.
+</div>
 
 */
 
-// import React from 'react';
-
-// const MyComponents = {
-
-//           DatePicker: function DatePicker(props) {
-//                     return (
-//                                         <div>
-//                                                   Imagine a {props.color} datepicker here.
-//                                         </div>
-//                     )
-//           }
-// }
-
-// function BlueDatePicker() {
-//           return <MyComponents.DatePicker color="blue" />;
-// }
-
-// export default BlueDatePicker;
-
+import React from 'react';
 import './JsxInDepth.css';
 
 
+const MyComponents = {
+
+          DatePicker: function DatePicker(props) {
+                    return (
+                                        <div>
+                                                  Imagine a {props.color} datepicker here.
+                                        </div>
+                    )
+          }
+}
+
+function BlueDatePicker() {
+          return <MyComponents.DatePicker color="blue" />;
+}
+
+// ===============================
+
 const Button = (props) => {
-          console.log(props);
 
           const { kind, ...other } = props;
 
@@ -430,4 +501,4 @@ const AppButton = () => {
 };
 
 
-export default AppButton;
+export { BlueDatePicker, AppButton};

@@ -1,5 +1,5 @@
 import React from 'react'
-import BlueDatePicker from './advancedGuides/JsxInDepth/JsxInDepth'
+import {BlueDatePicker, AppButton } from './advancedGuides/JsxInDepth/JsxInDepth'
 
 
 const App = () => {
@@ -8,6 +8,8 @@ const App = () => {
 	return (
 		<div>
 			<BlueDatePicker />
+
+			<AppButton />
 		</div>
 	)
 }
