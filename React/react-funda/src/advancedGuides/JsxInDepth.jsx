@@ -201,6 +201,24 @@ these two JSX expressions are equivalent:
 <MyComponent message={'<3'} />
 
 
+-: Props Default to “True”
+If you pass no value for a prop, it defaults to true. These two JSX 
+expressions are equivalent:
+
+<MyTextBox autocomplete />
+
+<MyTextBox autocomplete={true} />
+
+In general, we don’t recommend not passing a value for a prop, 
+because it can be confused with the ES6 object shorthand {foo} 
+which is short for {foo: foo} rather than {foo: true}. This behavior 
+is just there so that it matches the behavior of HTML.
+
+
+
+
+
+
 
 
 
