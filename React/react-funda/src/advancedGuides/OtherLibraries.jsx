@@ -88,6 +88,99 @@ function Example() {
           );
 }
 
+We will implement it as an uncontrolled component for simplicity.
+
+First, we will create an empty component with a render() method where 
+we return <select> wrapped in a <div>:
+
+class Chosen extends React.Component {
+          render() {
+                    return (
+                              <div>
+                                        <select className="Chosen-select" ref={el => this.el = el}>
+                                                  {this.props.children}
+                                        </select>
+                              </div>
+                    );
+          }
+}
+
+Notice how we wrapped <select> in an extra <div>. This is necessary 
+because Chosen will append another DOM element right after the 
+<select> node we passed to it. However, as far as React is concerned, 
+<div> always only has a single child. This is how we ensure that React 
+updates won’t conflict with the extra DOM node appended by Chosen. 
+It is important that if you modify the DOM outside of React flow, you 
+must ensure React doesn’t have a reason to touch those DOM nodes.
+
+Next, we will implement the lifecycle methods. We need to initialize 
+Chosen with the ref to the <select> node in componentDidMount, 
+and tear it down in componentWillUnmount:
+
+componentDidMount() {
+          this.$el = $(this.el);
+          this.$el.chosen();
+}
+
+componentWillUnmount() {
+          this.$el.chosen('destroy');
+}
+
+Note that React assigns no special meaning to the this.el field. It only 
+works because we have previously assigned this field from a ref in the 
+render() method:
+
+<select className="Chosen-select" ref={el => this.el = el}>
+
+This is enough to get our component to render, but we also want to 
+be notified about the value changes. To do this, we will subscribe to 
+the jQuery change event on the <select> managed by Chosen.
+
+We won’t pass this.props.onChange directly to Chosen because component’s 
+props might change over time, and that includes event handlers. Instead, 
+we will declare a handleChange() method that calls this.props.onChange, 
+and subscribe it to the jQuery change event:
+
+componentDidMount() {
+          this.$el = $(this.el);
+          this.$el.chosen();
+
+          this.handleChange = this.handleChange.bind(this);
+          this.$el.on('change', this.handleChange);
+}
+
+componentWillUnmount() {
+          this.$el.off('change', this.handleChange);
+          this.$el.chosen('destroy');
+}
+
+handleChange(e) {
+          this.props.onChange(e.target.value);
+}
+
+Finally, there is one more thing left to do. In React, props can change over 
+time. For example, the <Chosen> component can get different children if 
+parent component’s state changes. This means that at integration points it 
+is important that we manually update the DOM in response to prop updates, 
+since we no longer let React manage the DOM for us.
+
+Chosen’s documentation suggests that we can use jQuery trigger() API 
+to notify it about changes to the original DOM element. We will let 
+React take care of updating this.props.children inside <select>, but 
+we will also add a componentDidUpdate() lifecycle method that 
+notifies Chosen about changes in the children list:
+
+componentDidUpdate(prevProps) {
+          if (prevProps.children !== this.props.children) {
+                    this.$el.trigger("chosen:updated");
+          }
+}
+
+This way, Chosen will know to update its DOM element when the 
+<select> children managed by React change.
+
+The complete implementation of the Chosen component looks like this:
+
 
 
 */ 
