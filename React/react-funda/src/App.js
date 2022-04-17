@@ -1,3 +1,16 @@
+
+import React from 'react'
+
+const App = () => {
+  return (
+    <div>App</div>
+  )
+}
+
+export default App
+
+
+/* JSX in depth
 import React from 'react'
 import {BlueDatePicker, AppButton } from './advancedGuides/JsxInDepth/JsxInDepth'
 
@@ -16,7 +29,7 @@ const App = () => {
 
 export default App
 
-/* oda lib
+oda lib
 import React from 'react'
 import Example from './advancedGuides/OtherLib/JQuery/Example'
 
