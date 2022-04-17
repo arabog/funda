@@ -1,4 +1,15 @@
 import React from 'react'
+
+const App = () => {
+  return (
+    <div>App</div>
+  )
+}
+
+export default App
+
+/* oda lib
+import React from 'react'
 import Example from './advancedGuides/OtherLib/JQuery/Example'
 
 
@@ -14,7 +25,7 @@ const App = () => {
 
 export default App
 
-/* Fragmemts
+Fragmemts
 import React from 'react'
 
 import Fragment from './advancedGuides/Fragments'
