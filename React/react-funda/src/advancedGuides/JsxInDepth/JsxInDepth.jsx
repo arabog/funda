@@ -251,6 +251,8 @@ const App = () => {
           );
 };
 
+N.B: d props in App component inclue kind, onClick and Hello World(children)
+
 
 In the example above, the kind prop is safely consumed and is not 
 passed on to the <button> element in the DOM. All other props are 
@@ -308,6 +310,7 @@ useful for displaying nested components:
 
 <MyContainer>
           <MyFirstComponent />
+
           <MySecondComponent />
 </MyContainer>
 
@@ -324,7 +327,6 @@ which JSX is like HTML, so that this is both valid JSX and valid HTML:
 </div>
 
 A React component can also return an array of elements:
-
 No need to wrap list items in an extra element!
 
 const ReturnArr = () => {
@@ -393,6 +395,8 @@ function Repeat(props) {
 }
 
 function ListOfTenThings() {
+
+
           return (
                     <Repeat numTimes={10}>
                               {
@@ -429,6 +433,7 @@ JSX renders the <Header /> component only if showHeader is true:
 
 <div>
           {showHeader && <Header />}
+
           <Content />
 </div>
 
