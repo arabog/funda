@@ -1,9 +1,15 @@
 import React from 'react'
+import BlueDatePicker from './advancedGuides/JsxInDepth'
+
 
 const App = () => {
-  return (
-    <div>App</div>
-  )
+
+
+	return (
+		<div>
+			<BlueDatePicker />
+		</div>
+	)
 }
 
 export default App
