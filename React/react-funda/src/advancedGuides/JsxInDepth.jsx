@@ -79,24 +79,107 @@ function BlueDatePicker() {
 }
 
 
+-: User-Defined Components Must Be Capitalized
+When an element type starts with a lowercase letter, it refers 
+to a built-in component like <div> or <span> and results in 
+a string 'div' or 'span' passed to React.createElement. Types 
+that start with a capital letter like <Foo /> compile to 
+React.createElement(Foo) and correspond to a component 
+defined or imported in your JavaScript file.
 
-*/
+We recommend naming components with a capital letter. If you 
+do have a component that starts with a lowercase letter, assign 
+it to a capitalized variable before using it in JSX.
+
+For example, this code will not run as expected:
 
 import React from 'react';
 
-const MyComponents = {
-
-          DatePicker: function DatePicker(props) {
-                    return (
-                                        <div>
-                                                  Imagine a {props.color} datepicker here.
-                                        </div>
-                    )
-          }
+// Wrong! This is a component and should have been capitalized:
+function hello(props) {
+          // Correct! This use of <div> is legitimate because div is a valid HTML tag:
+          return <div>Hello {props.toWhat}</div>;
 }
 
-function BlueDatePicker() {
-          return <MyComponents.DatePicker color="blue" />;
+function HelloWorld() {
+          // Wrong! React thinks <hello /> is an HTML tag because it's not capitalized:
+          return <hello toWhat="World" />;
 }
 
-export default BlueDatePicker;
+To fix this, we will rename hello to Hello and use <Hello /> when referring to it:
+
+import React from 'react';
+
+// Correct! This is a component and should be capitalized:
+function Hello(props) {
+          // Correct! This use of <div> is legitimate because div is a valid HTML tag:
+          return <div>Hello {props.toWhat}</div>;
+}
+
+function HelloWorld() {
+          // Correct! React knows <Hello /> is a component because it's capitalized.
+          return <Hello toWhat="World" />;
+}
+
+
+-: Choosing the Type at Runtime
+You cannot use a general expression as the React element type. If you 
+do want to use a general expression to indicate the type of the element, 
+just assign it to a capitalized variable first. This often comes up when 
+you want to render a different component based on a prop:
+
+import React from 'react';
+import { PhotoStory, VideoStory } from './stories';
+
+const components = {
+          photo: PhotoStory,
+          video: VideoStory
+};
+
+function Story(props) {
+          // Wrong! JSX type can't be an expression.
+          return <components[props.storyType] story={props.story} />;
+}
+
+To fix this, we will assign the type to a capitalized variable first:
+
+import React from 'react';
+import { PhotoStory, VideoStory } from './stories';
+
+const components = {
+          photo: PhotoStory,
+          video: VideoStory
+};
+
+function Story(props) {
+          // Correct! JSX type can be a capitalized variable.
+          const SpecificStory = components[props.storyType];
+          
+          return <SpecificStory story={props.story} />;
+}
+
+
+
+
+
+
+*/
+
+// import React from 'react';
+
+// const MyComponents = {
+
+//           DatePicker: function DatePicker(props) {
+//                     return (
+//                                         <div>
+//                                                   Imagine a {props.color} datepicker here.
+//                                         </div>
+//                     )
+//           }
+// }
+
+// function BlueDatePicker() {
+//           return <MyComponents.DatePicker color="blue" />;
+// }
+
+// export default BlueDatePicker;
