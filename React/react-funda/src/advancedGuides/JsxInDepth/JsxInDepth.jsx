@@ -329,13 +329,48 @@ No need to wrap list items in an extra element!
 
 const ReturnArr = () => {
 
-          
+
           return [
                     Don't forget the keys:
                     <li key="A">First item</li>,
                     <li key="B">Second item</li>,
                     <li key="C">Third item</li>,
           ];
+}
+
+
+-: JavaScript Expressions as Children
+You can pass any JavaScript expression as children, by enclosing it 
+within {}. For example, these expressions are equivalent:
+
+<MyComponent>foo</MyComponent>
+
+<MyComponent>{'foo'}</MyComponent>
+
+This is often useful for rendering a list of JSX expressions of arbitrary 
+length. For example, this renders an HTML list:
+
+function Item(props) {
+          return <li>{props.message}</li>;
+}
+
+function TodoList() {
+          const todos = ['finish doc', 'submit pr', 'nag dan to review'];
+
+          return (
+                    <ul>
+                              {
+                                        todos.map((message) => <Item key={message} message={message} />)
+                              }
+                    </ul>
+          );
+}
+
+JavaScript expressions can be mixed with other types of children. 
+This is often useful in lieu of string templates:
+
+function Hello(props) {
+          return <div>Hello {props.addressee}!</div>;
 }
 
 
