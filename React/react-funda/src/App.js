@@ -1,5 +1,5 @@
 import React from 'react'
-import BlueDatePicker from './advancedGuides/JsxInDepth'
+import BlueDatePicker from './advancedGuides/JsxInDepth/JsxInDepth'
 
 
 const App = () => {
