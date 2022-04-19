@@ -188,18 +188,58 @@ class CounterButton extends React.PureComponent {
 }
 
 
--: 
+-: The Power Of Not Mutating Data
+handleClick() {
+          // This section is bad style and causes a bug
+          const words = this.state.words;
+          words.push('marklar');
+          this.setState({words: words});
+}
 
+The simplest way to avoid this problem is to avoid mutating values that 
+you are using as props or state. For example, the handleClick method 
+above could be rewritten using concat as:
 
+handleClick() {
+          this.setState(state => ({
+                    words: state.words.concat(['marklar'])
+          }));
+}
 
+ES6 supports a spread syntax for arrays which can make this easier. 
+If you’re using Create React App, this syntax is available by default.
 
+handleClick() {
+          this.setState(state => ({
+                    words: [...state.words, 'marklar'],
+          }));
+};
 
+You can also rewrite code that mutates objects to avoid mutation, 
+in a similar way. For example, let’s say we have an object named 
+colormap and we want to write a function that changes colormap.right 
+to be 'blue'. We could write:
 
+function updateColorMap(colormap) {
+          colormap.right = 'blue';
+}
 
+To write this without mutating the original object, we can use Object.assign method:
 
+function updateColorMap(colormap) {
+          return Object.assign({}, colormap, {right: 'blue'});
+}
 
+updateColorMap now returns a new object, rather than mutating the old one.
+
+Object spread syntax makes it easier to update objects without mutation as well:
+
+function updateColorMap(colormap) {
+          return {...colormap, right: 'blue'};
+}
 
 */
+
 const { useState, useEffect } = require("react");
 
 function CounterButton(props) {
