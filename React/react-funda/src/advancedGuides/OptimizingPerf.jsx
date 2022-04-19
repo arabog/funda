@@ -129,8 +129,66 @@ whole rendering process, including calling render() on this component
 and below.
 
 
+-: Examples
+If the only way your component ever changes is when the props.color or 
+the state.count variable changes, you could have shouldComponentUpdate check that:
+
+class CounterButton extends React.Component {
+          constructor(props) {
+                    super(props);
+                    this.state = {count: 1};
+          }
+
+          shouldComponentUpdate(nextProps, nextState) {
+                    if (this.props.color !== nextProps.color) {
+                              return true;
+                    }
+
+                    if (this.state.count !== nextState.count) {
+                              return true;
+                    }
+
+                    return false;
+          }
+
+          render() {
+                    return (
+                              <button
+                                        color={this.props.color}
+                                        onClick={() => this.setState(state => ({count: state.count + 1}))}
+                              >
+                                        Count: {this.state.count}
+                              </button>
+                    );
+          }
+}
+
+In this code, shouldComponentUpdate is just checking if there is any change 
+in props.color or state.count. If those values don’t change, the component 
+doesn’t update.
+
+So this code is a simpler way to achieve the same thing:
+
+class CounterButton extends React.PureComponent {
+          constructor(props) {
+                    super(props);
+                    this.state = {count: 1};
+          }
+
+          render() {
+                    return (
+                              <button
+                                        color={this.props.color}
+                                        onClick={() => this.setState(state => ({count: state.count + 1}))}
+                              >
+                                        Count: {this.state.count}
+                              </button>
+                    );
+          }
+}
 
 
+-: 
 
 
 
@@ -142,3 +200,56 @@ and below.
 
 
 */
+const { useState, useEffect } = require("react");
+
+function CounterButton(props) {
+          const [count, setCount] = useState(1);
+
+
+          useEffect((nextProps, nextState)=> {
+                    if(props.color !== nextProps.color) {
+                              return true;
+                    }
+
+                    if(count !== nextState.count) {
+                              return true;
+                    }
+
+                    return false;
+          }, [count, props.color])
+
+          const handleCount = () => {
+                    setCount(count + 1);
+          }
+
+          return (
+                    <button
+                              color={props.color}
+                              onClick={handleCount}
+                    >
+                              Count: {count}
+                    </button>
+          );
+}
+
+/*
+So this code is a simpler way to achieve the same thing:
+
+function CounterButton(props) {
+          const [count, setCount] = useState(1);
+
+
+          return (
+                    <button
+                              color={props.color}
+                              onClick={handleCount}
+                    >
+                              Count: {count}
+                    </button>
+          );
+}
+
+*/
+
+
+export default CounterButton;
