@@ -57,6 +57,21 @@ commit. You can drill into these to learn more about what the component
 actually rendered during the commit:
 
 
+-: Ranked chart
+The chart is ordered so that the components which took the longest to 
+render are at the top.
+
+Note:
+A component’s render time includes the time spent rendering its children, 
+so the components which took the longest to render are generally near 
+the top of the tree.
+
+
+
+
+
+
+
 
 
 
