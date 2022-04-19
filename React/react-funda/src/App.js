@@ -1,4 +1,3 @@
-
 import React from 'react'
 
 const App = () => {
@@ -10,7 +9,26 @@ const App = () => {
 export default App
 
 
-/* JSX in depth
+/* React Portal
+import React from 'react'
+import AppPortal1 from './advancedGuides/portal/portal1/AppPortal1'
+
+
+const App = () => {
+
+
+	return (
+		<div>
+			<AppPortal1 />
+		</div>
+	)
+}
+
+
+export default App
+
+
+ JSX in depth
 import React from 'react'
 import {BlueDatePicker, AppButton } from './advancedGuides/JsxInDepth/JsxInDepth'
 

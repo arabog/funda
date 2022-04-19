@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 
 const ModalPortal1 = (props) => {
-          // const appRoot = document.getElementById('app-root');
           const modalRoot = document.getElementById('modal-root');
 
           const el = document.createElement('div');
@@ -16,6 +15,7 @@ const ModalPortal1 = (props) => {
                     modalRoot.removeChild(el)
           }, [el, modalRoot])
 
+          console.log(modalRoot)
 
           return ReactDOM.createPortal (
                     props.children,

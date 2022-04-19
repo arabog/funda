@@ -6,10 +6,11 @@ import './ModalPortal1.css'
 
 
 const AppPortal1 = () => {
-          const [showModal, setShowModal] = useState(false);
+          const [showModal, setShowModal] = useState(true);
 
           const handleShow = () => {
                     setShowModal(!showModal)
+                    alert('clicked')
           }
 
 
