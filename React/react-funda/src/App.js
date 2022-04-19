@@ -1,35 +1,10 @@
 
-// import React from 'react'
-
-// const App = () => {
-//   return (
-//     <div>App</div>
-//   )
-// }
-
-// export default App
-import React, { useState } from 'react'
-import {ErrorBoundary} from 'react-error-boundary'
-import {Bomb, ErrorFallback} from './advancedGuides/errorBoundaries/ErrorRecover/ErrorRecovery'
-
+import React from 'react'
 
 const App = () => {
-	const [explode, setExplode] = useState(false);
-
-
-	return (
-		<div>
-			<button onClick={() => setExplode(e => !e )}>Toggle Explode </button>
-			
-			<ErrorBoundary 
-				FallbackComponent={ErrorFallback}
-				onReset={() => setExplode(false)}
-				resetKeys= {[explode]}
-			>
-				{ explode ? <Bomb /> : null }
-			</ErrorBoundary>
-		</div>
-	)
+  return (
+    <div>App</div>
+  )
 }
 
 export default App
