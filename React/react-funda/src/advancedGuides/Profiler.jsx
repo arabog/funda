@@ -48,6 +48,14 @@ component and its children. (The width of a bar represents how much time
 was spent when the component last rendered and the color represents how 
 much time was spent as part of the current commit.)
 
+Yellow components took more time, blue components took less time, 
+and gray components did not render at all during this commit.
+
+Clicking on a component will also select it and show information in the 
+right side panel which includes its props and state at the time of this 
+commit. You can drill into these to learn more about what the component 
+actually rendered during the commit:
+
 
 
 
