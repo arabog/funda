@@ -31,7 +31,41 @@ on your app, and the production mode when deploying your app
 to the users.
 
 
--: 
+-: Create React App
+If your project is built with Create React App, run:
+
+npm run build
+
+This will create a production build of your app in the build/ folder 
+of your project.
+
+Remember that this is only necessary before deploying to production. 
+For normal development, use npm start.
+
+
+Single-File Builds
+We offer production-ready versions of React and React DOM as single files:
+
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+Remember that only React files ending with .production.min.js are suitable for production.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 */
