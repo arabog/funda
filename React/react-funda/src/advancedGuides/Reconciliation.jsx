@@ -90,6 +90,14 @@ unique among its siblings, not globally unique.
 As a last resort, you can pass an item’s index in the array as a key. This 
 can work well if the items are never reordered, but reorders will be slow.
 
+Tradeoffs
+It is important to remember that the reconciliation algorithm is an 
+implementation detail. React could rerender the whole app on every 
+action; the end result would be the same. Just to be clear, rerender in 
+this context means calling render for all components, it doesn’t mean 
+React will unmount and remount them. It will only apply the differences 
+following the rules stated in the previous sections.
+
 
 
 
