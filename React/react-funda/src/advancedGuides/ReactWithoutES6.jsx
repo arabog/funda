@@ -51,6 +51,31 @@ var Greeting = createReactClass({
 });
 
 
+-: Setting the Initial State
+In ES6 classes, you can define the initial state by assigning this.state in the constructor:
+
+class Counter extends React.Component {
+          constructor(props) {
+                    super(props);
+                    this.state = {count: props.initialCount};
+          }
+          // ...
+}
+
+With createReactClass(), you have to provide a separate getInitialState method 
+that returns the initial state:
+
+var Counter = createReactClass({
+          getInitialState: function() {
+                    return {count: this.props.initialCount};
+          },
+            // ...
+});
+
+
+
+
+
 
 
 
