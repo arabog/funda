@@ -1,9 +1,12 @@
 
 import React from 'react'
+import RenderProps from './advancedGuides/RenderProps'
 
 const App = () => {
   return (
-    <div>App</div>
+	<div>
+		<RenderProps />
+	</div>
   )
 }
 

@@ -31,7 +31,78 @@ need that same state.
 For example, the following component tracks the mouse 
 position in a web app:
 
+import React, { useState } from 'react'
+
+const MouseTracker = () => {
+          const [xAxis, setXAxis] = useState(0)
+          const [yAxis, setYAxis] = useState(0)
+
+          const handleMouseMove = (e) => {
+                    setXAxis(e.clientX)
+
+                    setYAxis(e.clientY)
+          }
+
+          return (
+                    <div style={{height: '100vh'}} onMouseMove={handleMouseMove}>
+                              <h1>Move the mouse around!</h1>
+
+                              <p>The current mouse position is ({xAxis}, {yAxis})</p>
+                    </div>
+          )
+}
+
+
+export default MouseTracker
+
+As the cursor moves around the screen, the component displays 
+its (x, y) coordinates in a <p>.
+
+Now the question is: How can we reuse this behavior in another 
+component? In other words, if another component needs to know 
+about the cursor position, can we encapsulate that behavior so 
+that we can easily share it with that component?
+
+Since components are the basic unit of code reuse in React, 
+let’s try refactoring the code a bit to use a <Mouse> 
+component that encapsulates the behavior we need to reuse 
+elsewhere.
+
 
 
 
 */
+
+import React, { useState } from 'react'
+
+const Mouse = () => {
+          const [xAxis, setXAxis] = useState(0)
+          const [yAxis, setYAxis] = useState(0)
+
+          const handleMouseMove = (e) => {
+                    setXAxis(e.clientX)
+
+                    setYAxis(e.clientY)
+          }
+
+          return (
+                    <div style={{height: '100vh'}} onMouseMove={handleMouseMove}>
+                              {/* ...but how do we render something other than a <p>? */}
+                              <p>The current mouse position is ({xAxis}, {yAxis})</p>
+                    </div>
+          )
+}
+
+const MouseTracker = () => {
+
+          
+          return (
+                    <>
+                              <h1>Move the mouse around!</h1>
+
+                              <Mouse />
+                    </>
+          )
+}
+
+export default MouseTracker
