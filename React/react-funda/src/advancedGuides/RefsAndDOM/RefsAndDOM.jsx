@@ -91,6 +91,41 @@ function CustomTextInput() {
           )
 }
 
+You can, however, use the ref attribute inside a function component 
+as long as you refer to a DOM element or a class component:
+
+function CustomTextInput(props) {
+          // textInput must be declared here so the ref can refer to it
+          const textInput = useRef(null);
+          
+          function handleClick() {
+                    textInput.current.focus();
+          }
+
+          return (
+                    <div>
+                              <input
+                                        type="text"
+                                        ref={textInput} 
+                              />
+                              
+                              <input
+                                        type="button"
+                                        value="Focus the text input"
+                                        onClick={handleClick}
+                              />
+                    </div>
+          );
+}
+
+React will assign the current property with the DOM element 
+when the component mounts, and assign it back to null when 
+it unmounts. ref updates happen before componentDidMount 
+or componentDidUpdate lifecycle methods.
+
+
+
+
 
 
 
@@ -104,7 +139,7 @@ function CustomTextInput() {
                      // Explicitly focus the text input using the raw DOM API
                     // Note: we're accessing "current" to get the DOM node
 
-                    textInput.current.focus();
+                    return textInput.current.focus();
           }
 
           // tell React that we want to associate the <input> ref

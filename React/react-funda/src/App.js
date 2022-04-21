@@ -1,5 +1,5 @@
 import React from 'react'
-import RefAndDOM from './advancedGuides/RefsAndDOM'
+import RefAndDOM from './advancedGuides/RefsAndDOM/RefsAndDOM'
 
 
 const App = () => {
