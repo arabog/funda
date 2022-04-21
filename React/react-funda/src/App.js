@@ -1,3 +1,17 @@
+
+import React from 'react'
+
+const App = () => {
+  return (
+    <div>App</div>
+  )
+}
+
+export default App
+
+
+/*  forwardRef not yet clear
+Refs and the DOM
 import React from 'react'
 import RefAndDOM from './advancedGuides/RefsAndDOM/RefsAndDOM'
 
@@ -15,7 +29,7 @@ const App = () => {
 export default App
 
 
-/* React Portal
+React Portal
 import React from 'react'
 import AppPortal1 from './advancedGuides/portal/portal1/AppPortal1'
 
