@@ -1,9 +1,15 @@
 import React from 'react'
+import RefAndDOM from './advancedGuides/RefsAndDOM'
+
 
 const App = () => {
-  return (
-    <div>App</div>
-  )
+
+
+	return (
+		<div>
+			<RefAndDOM />
+		</div>
+	)
 }
 
 export default App
