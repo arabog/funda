@@ -12,4 +12,28 @@ or it could be a DOM element. For both of these cases, React provides
 an escape hatch.
 
 
+-: When to Use Refs
+There are a few good use cases for refs:
+Managing focus, text selection, or media playback.
+Triggering imperative animations.
+Integrating with third-party DOM libraries.
+
+Avoid using refs for anything that can be done declaratively.
+For example, instead of exposing open() and close() methods 
+on a Dialog component, pass an isOpen prop to it.
+
+Don’t Overuse Refs
+Your first inclination may be to use refs to “make things happen” 
+in your app. If this is the case, take a moment and think more 
+critically about where state should be owned in the component 
+hierarchy. Often, it becomes clear that the proper place to “own” 
+that state is at a higher level in the hierarchy.
+
+
+
+
+
+
+
+
 */
