@@ -380,6 +380,30 @@ it directly inside the element!
           }
 </Mouse>
 
+function MouseTracker(props) {
+
+          function LetCheck() {
+          
+                    return (
+                              <>
+                                        <h1>Move the mouse around!</h1>
+                              
+                                        <Mouse>
+                                                  {
+                                                            mouse => (
+                                                                      <Cat {...props} mouse={mouse} />
+                                                            )
+                                                  }
+                                        </Mouse>
+                              </>
+                    );
+          
+          }
+
+          return LetCheck()
+
+}
+
 
 
 
@@ -427,7 +451,10 @@ const Mouse = (props) => {
                     <div style={{height: '100vh'}} onMouseMove={handleMouseMove}>
                               <p>The current mouse position is ({xAxis}, {yAxis})</p>
                               
-                              {props.render({...propsValues})}
+                              {/* {props.render({...propsValues})} */}
+
+                              {props.children({...propsValues})}
+
                     </div>
           )
 }
@@ -450,6 +477,27 @@ const Mouse = (props) => {
 // }
 
 // HOC
+// function MouseTracker(props) {
+
+//           function LetCheck() {
+          
+//                     return (
+//                               <>
+//                                         <h1>Move the mouse around!</h1>
+                              
+//                                         <Mouse render={mouse => (
+//                                                             <Cat {...props} mouse={mouse} />
+//                                                   )}
+//                                         />
+//                               </>
+//                     );
+          
+//           }
+
+//           return LetCheck()
+
+// }
+
 function MouseTracker(props) {
 
           function LetCheck() {
@@ -458,10 +506,13 @@ function MouseTracker(props) {
                               <>
                                         <h1>Move the mouse around!</h1>
                               
-                                        <Mouse render={mouse => (
-                                                            <Cat {...props} mouse={mouse} />
-                                                  )}
-                                        />
+                                        <Mouse>
+                                                  {
+                                                            mouse => (
+                                                                      <Cat {...props} mouse={mouse} />
+                                                            )
+                                                  }
+                                        </Mouse>
                               </>
                     );
           
@@ -470,6 +521,7 @@ function MouseTracker(props) {
           return LetCheck()
 
 }
+
 
 export default MouseTracker
 
