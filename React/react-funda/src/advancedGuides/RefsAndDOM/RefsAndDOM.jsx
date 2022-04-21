@@ -123,39 +123,65 @@ when the component mounts, and assign it back to null when
 it unmounts. ref updates happen before componentDidMount 
 or componentDidUpdate lifecycle methods.
 
+Exposing DOM Refs to Parent Components
+In rare cases, you might want to have access to a child’s 
+DOM node from a parent component. This is generally 
+not recommended because it breaks component encapsulation, 
+but it can occasionally be useful for triggering focus or 
+measuring the size or position of a child DOM node.
 
+While you could add a ref to the child component, this is not 
+an ideal solution, as you would only get a component instance 
+rather than a DOM node. Additionally, this wouldn’t work 
+with function components.
 
+-: Callback Refs
+React also supports another way to set refs called “callback refs”, 
+which gives more fine-grain control over when refs are set and unset.
 
+Instead of passing a ref attribute created by createRef(), you 
+pass a function. The function receives the React component 
+instance or HTML DOM element as its argument, which can 
+be stored and accessed elsewhere.
 
-
-
-*/
-import React, { useRef } from 'react'
+import React, {useCallback, useEffect} from 'react'
 
 function CustomTextInput() {
-          const textInput = useRef();
 
-          const focusTextInput = () => {
-                     // Explicitly focus the text input using the raw DOM API
-                    // Note: we're accessing "current" to get the DOM node
-
-                    return textInput.current.focus();
+          let textInput = null;
+          
+          function setTextInputRef(element) {
+                    textInput = element
           }
 
-          // tell React that we want to associate the <input> ref
-          // with the `textInput` that we created in the constructor
-          return(
-                    <div>
-                              <input type='text' ref={textInput} />
+          const focusTextInput = useCallback(() => {
+                              if(textInput) {
+                                        textInput.focus()
 
-                              <input 
-                                        type="button" 
-                                        value='Focus the text input'
-                                        onClick={focusTextInput}
+                              } 
+                    }, [textInput]
+          )
+
+          useEffect(() => {
+                    focusTextInput()
+          }, [focusTextInput])
+
+          return (
+                    <div>
+                              <input
+                                        type="text"
+                                        ref={setTextInputRef} 
                               />
                               
+                              <input
+                                        type="button"
+                                        value="Focus the text input"
+                                        onClick={focusTextInput}
+                              />
                     </div>
-          )
+          );
 }
 
 export default CustomTextInput
+
+*/
