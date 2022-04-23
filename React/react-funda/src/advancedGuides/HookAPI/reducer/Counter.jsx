@@ -5,8 +5,7 @@ import {Reducer, InitialState} from "./Reducer";
 function Counter() {
           const [state, dispatch] = useReducer(Reducer, InitialState);
 
-          console.log(state);
-
+          
           return (
                     <>
                               Count: {state.count}

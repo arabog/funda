@@ -1,13 +1,23 @@
 import React from 'react'
+
+import { ThemeProvider } from './advancedGuides/HookAPI/context/Theme'
+// import { themes } from './advancedGuides/HookAPI/context/Theme'
+
+
+import ThemedButton from './advancedGuides/HookAPI/context/Context'
+
 import Counter from './advancedGuides/HookAPI/reducer/Counter'
+
 
 const App = () => {
 
-
+	
 	return (
-		<div>
+                    <ThemeProvider> 
+			<ThemedButton />
+		
 			<Counter />
-		</div>
+                    </ThemeProvider>
 	)
 }
 
