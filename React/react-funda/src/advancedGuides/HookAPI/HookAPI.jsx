@@ -36,11 +36,50 @@ function Counter({initialCount}) {
                               <button onClick={() => setCount(initialCount)}>Reset</button>
 
                               <button onClick={() => setCount(prevCount => prevCount - 1)}>-</button>
-                              
+
                               <button onClick={() => setCount(prevCount => prevCount + 1)}>+</button>
                     </>
           );
 }
+
+The ”+” and ”-” buttons use the functional form, because the 
+updated value is based on the previous value. But the “Reset” 
+button uses the normal form, because it always sets the count 
+back to the initial value.
+
+If your update function returns the exact same value as the current 
+state, the subsequent rerender will be skipped completely.
+
+Note
+Unlike the setState method found in class components, useState 
+does not automatically merge update objects. You can replicate 
+this behavior by combining the function updater form with 
+object spread syntax:
+
+const [state, setState] = useState({});
+
+setState(prevState => {
+          // Object.assign would also work
+          return {...prevState, ...updatedValues};
+});
+
+Another option is useReducer, which is more suited for managing 
+state objects that contain multiple sub-values.
+
+Lazy initial state
+The initialState argument is the state used during the initial render. 
+In subsequent renders, it is disregarded. If the initial state is the 
+result of an expensive computation, you may provide a function 
+instead, which will be executed only on the initial render:
+
+const [state, setState] = useState(() => {
+          const initialState = someExpensiveComputation(props);
+          
+          return initialState;
+});
+
+
+
 
 
 
