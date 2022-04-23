@@ -52,5 +52,63 @@ function Counter() {
 }
 
 
+Specifying the initial state
+There are two different ways to initialize useReducer state. You 
+may choose either one depending on the use case. The simplest 
+way is to pass the initial state as a second argument:
 
-*/
+const [state, dispatch] = useReducer(
+          reducer,
+          {count: initialCount}
+);
+
+Lazy initialization
+You can also create the initial state lazily. To do this, you can 
+pass an init function as the third argument. The initial state 
+will be set to init(initialArg).
+
+It lets you extract the logic for calculating the initial state 
+outside the reducer. This is also handy for resetting the state 
+later in response to an action:
+
+function init(initialCount) {
+          return {count: initialCount};
+}
+
+function reducer(state, action) {
+          switch (action.type) {
+                    case 'increment':
+                              return {count: state.count + 1};
+                    
+                    case 'decrement':
+                              return {count: state.count - 1};
+                    
+                    case 'reset':
+                              return init(action.payload);
+                    
+                    default:
+                              throw new Error();
+          }
+}
+
+function Counter({initialCount}) {
+          const [state, dispatch] = useReducer(reducer, initialCount, init);
+
+          return (
+                    <>
+                              Count: {state.count}
+
+                              <button
+                                        onClick={() => dispatch({type: 'reset', payload: initialCount})}
+                              >
+                                        Reset
+                              </button>
+
+                              <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+                              <button onClick={() => dispatch({type: 'increment'})}>+</button>
+                    </>
+          );
+}
+
+
+// */
