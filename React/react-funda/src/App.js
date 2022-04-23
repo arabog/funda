@@ -1,4 +1,15 @@
+import React from 'react'
 
+const App = () => {
+  return (
+    <div>App</div>
+  )
+}
+
+export default App
+
+
+/* Render Props
 import React from 'react'
 import RenderProps from './advancedGuides/RenderProps'
 
@@ -13,7 +24,7 @@ const App = () => {
 export default App
 
 
-/*  forwardRef not yet clear
+forwardRef not yet clear
 Refs and the DOM
 import React from 'react'
 import RefAndDOM from './advancedGuides/RefsAndDOM/RefsAndDOM'
