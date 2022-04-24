@@ -226,6 +226,103 @@ Essentially, useRef is like a “box” that can hold a mutable
 value in its .current property.
 
 
+-: useImperativeHandle
+useImperativeHandle(ref, createHandle, [deps])
+
+useImperativeHandle customizes the instance value that is 
+exposed to parent components when using ref. As always, 
+imperative code using refs should be avoided in most cases. 
+useImperativeHandle should be used with forwardRef:
+
+function FancyInput(props, ref) {
+          const inputRef = useRef();
+
+          useImperativeHandle(ref, () => ({ focus: () => { inputRef.current.focus() }   })  );
+
+          return <input ref={inputRef} ... />;
+}
+
+FancyInput = forwardRef(FancyInput);
+
+In this example, a parent component that renders 
+<FancyInput ref={inputRef} /> would be able to call 
+inputRef.current.focus().
+
+
+-: useLayoutEffect
+The signature is identical to useEffect, but it fires synchronously after 
+all DOM mutations. Use this to read layout from the DOM and 
+synchronously re-render. Updates scheduled inside useLayoutEffect 
+will be flushed synchronously, before the browser has a chance to paint.
+
+Prefer the standard useEffect when possible to avoid blocking visual updates.
+
+Tip
+If you’re migrating code from a class component, note useLayoutEffect 
+fires in the same phase as componentDidMount and componentDidUpdate. 
+However, we recommend starting with useEffect first and only trying 
+useLayoutEffect if that causes a problem.
+
+If you use server rendering, keep in mind that neither useLayoutEffect nor 
+useEffect can run until the JavaScript is downloaded. This is why React 
+warns when a server-rendered component contains useLayoutEffect. 
+To fix this, either move that logic to useEffect (if it isn’t necessary for the 
+first render), or delay showing that component until after the client renders 
+(if the HTML looks broken until useLayoutEffect runs).
+
+To exclude a component that needs layout effects from the server-rendered 
+HTML, render it conditionally with showChild && <Child /> and defer 
+showing it with useEffect(() => { setShowChild(true); }, []). This way, the 
+UI doesn’t appear broken before hydration.
+
+
+-: useDebugValue
+useDebugValue(value)
+
+useDebugValue can be used to display a label for custom 
+hooks in React DevTools.
+
+For example, consider the useFriendStatus custom Hook 
+described in “Building Your Own Hooks”:
+
+function useFriendStatus(friendID) {
+          const [isOnline, setIsOnline] = useState(null);
+
+          // ...
+
+          // Show a label in DevTools next to this Hook
+          // e.g. "FriendStatus: Online"
+          useDebugValue(isOnline ? 'Online' : 'Offline');
+
+          return isOnline;
+}
+
+Tip
+We don’t recommend adding debug values to every custom 
+Hook. It’s most valuable for custom Hooks that are part of 
+shared libraries.
+
+Defer formatting debug values
+In some cases formatting a value for display might be an 
+expensive operation. It’s also unnecessary unless a Hook 
+is actually inspected.
+
+For this reason useDebugValue accepts a formatting function 
+as an optional second parameter. This function is only called 
+if the Hooks are inspected. It receives the debug value as a 
+parameter and should return a formatted display value.
+
+For example a custom Hook that returned a Date value 
+could avoid calling the toDateString function unnecessarily 
+by passing the following formatter:
+
+useDebugValue(date, date => date.toDateString());
+
+
+
+
+
+
 
 
 
