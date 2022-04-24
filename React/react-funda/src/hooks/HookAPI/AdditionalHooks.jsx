@@ -117,6 +117,22 @@ const memoizedCallback = useCallback(() => {
           }, [a, b],
 );
 
+function ProductPage({ productId }) {
+          // ✅ Wrap with useCallback to avoid change on every render
+          const fetchProduct = useCallback(() => {
+                    // ... Does something with productId ...
+          }, [productId]); // ✅ All useCallback dependencies are specified
+
+          return <ProductDetails fetchProduct={fetchProduct} />;
+}
+
+function ProductDetails({ fetchProduct }) {
+          useEffect(() => {
+                    fetchProduct();
+          }, [fetchProduct]); // ✅ All useEffect dependencies are specified
+          // ...
+}
+
 Returns a memoized callback.
 Pass an inline callback and an array of dependencies. useCallback 
 will return a memoized version of the callback that only changes if 
@@ -151,9 +167,66 @@ If no array is provided, a new value will be computed on every render.
 You may rely on useMemo as a performance optimization, not as a 
 semantic guarantee.
 
+Conveniently, useMemo also lets you skip an expensive re-render of a child:
+
+function Parent({ a, b }) {
+
+          // Only re-rendered if `a` changes:
+          const child1 = useMemo(() => <Child1 a={a} />, [a]);
+
+          // Only re-rendered if `b` changes:
+          const child2 = useMemo(() => <Child2 b={b} />, [b]);
+
+          return (
+                    <>
+                              {child1}
+                              {child2}
+                    </>
+          )
+}
+
+Note that this approach won’t work in a loop because Hook 
+calls can’t be placed inside loops. But you can extract a 
+separate component for the list item, and call useMemo there.
 
 
--: 
+
+-: useRef
+useRef is primarily a way to access the DOM. However, 
+useRef() is useful for more than the ref attribute. It’s 
+handy for keeping any mutable value around 
+
+const refContainer = useRef(initialValue);
+
+useRef returns a mutable ref object whose .current property 
+is initialized to the passed argument (initialValue). The 
+returned object will persist for the full lifetime of the 
+component.
+
+A common use case is to access a child imperatively:
+
+function TextInputWithFocusButton() {
+          const inputEl = useRef(null);
+
+          const onButtonClick = () => {
+                    // `current` points to the mounted text input element
+                    inputEl.current.focus();
+          };
+
+
+          return (
+                    <>
+                              <input ref={inputEl} type="text" />
+                              <button onClick={onButtonClick}>Focus the input</button>
+                    </>
+          );
+}
+
+Essentially, useRef is like a “box” that can hold a mutable 
+value in its .current property.
+
+
+
 
 
 
