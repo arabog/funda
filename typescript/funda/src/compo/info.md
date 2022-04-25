@@ -61,3 +61,33 @@ We will probably need to explicitly define the never type
 annotation because the TypeScript compiler isn't smart 
 enough yet to infer that.
 
+-: Enumerations
+Enumerations allow us to declare a meaningful set of friendly 
+names that a variable can be set to. We use the enum keyword, 
+followed by the name we want to give to it, followed by
+the possible values in curly braces.
+
+Here's an example:
+enum OrderStatus {
+          Paid,
+          Shipped,
+          Completed,
+          Cancelled
+}
+
+In addition, all the values can be explicitly declared, as in 
+the following example:
+
+enum OrderStatus {
+          Paid = 1,
+          Shipped = 2,
+          Completed = 3,
+          Cancelled = 0
+}
+
+Enumerations are great for data such as a status that is 
+stored as a specific set of integers but actually has some 
+business meaning. They make our code more readable and 
+less prone to error.
+
+conti on pg 21
