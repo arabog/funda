@@ -13,3 +13,15 @@ function calculateTotalPrice(product: IProduct, quantity: number, discount: numb
 }
 
 */
+
+import React from 'react'
+
+const Utils = () => {
+
+          return (
+                    <div> Utils </div>
+          )
+}
+
+
+export default Utils
