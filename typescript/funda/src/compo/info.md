@@ -47,3 +47,17 @@ return anything. So, we've marked the return type as void .
 The never type represents something that would never occur 
 and is typically used to specify unreachable areas of code.
 
+function foreverTask(taskName: string) : never {
+          while(true) {
+                    console.log(`Doing ${taskName} over and over again ...`)
+          }
+} 
+
+The function invokes an infinite loop and never returns, and 
+so we have given it a type annotation of never . This is different 
+to void because void means it will return, but with no value.
+
+We will probably need to explicitly define the never type 
+annotation because the TypeScript compiler isn't smart 
+enough yet to infer that.
+
