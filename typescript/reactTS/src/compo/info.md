@@ -173,6 +173,64 @@ variable, we'll see it has been correctly inferred
 as a number . We could have put a type annotation here, 
 but we have saved ourselves a few keystrokes:
 
+-: Creating interfaces, types aliases, and classes
+Interfaces, type aliases, and classes are ways that we can
+define an object structure before we start using it.
+
+Following here is the customer object we worked with, 
+where we declared the customer variable with an initial 
+object value:
+
+const customer = {
+          name: "Lamps Ltd",
+          turnover: 2000134,
+          active: true
+};
+
+1. Let's try to declare the customer variable and set its value 
+on a subsequent line:
+
+let customer: object;
+          
+customer = {
+          name: "Lamps Ltd",
+          turnover: 2000134,
+          active: true
+};
+
+2. So far, so good. However, let's see what happens when we 
+try to change the customers turnover value:
+customer.turnover = 2000200;
+
+3. The lack of IntelliSense when we type turnover isn't what 
+we are used to. When we've finished typing the line, we get 
+a compiler error:
+Property 'turnover' does not exist on type 'object'.
+
+The TypeScript compiler doesn't know about the properties 
+in the customer object and so thinks there's a problem.
+
+So, we need another way of defining an object structure with 
+the ability to set property values later in the program. That's 
+where interfaces, type aliases, and classes come in; they
+let us define the structure of an object by letting us define our 
+own types.
+
+
+-: Interfaces
+We create an interface with the interface keyword, followed 
+by its name, followed by the bits that make up the interface 
+in curly braces:
+
+interface Product {
+          ...
+}
+
+
+
+
+
+
 
 
 
