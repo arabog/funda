@@ -190,6 +190,77 @@ will notice that Next.js will give precedence to your route
 variable, such that you will see Hello, Mitch! displayed 
 on the page.
 
+-: Client-side navigation
+In fact, it supports the HTML standard <a> tags for linking 
+pages, but it also provides a more optimized way for navigating 
+between different routes: the Link component.
+
+We can import it as a standard React component and use it 
+for linking different pages or sections of our website. Let's 
+look at an easy example:
+
+import Link from 'next/link';
+
+function Navbar() {
+          return (
+                    <div>
+                              <Link href='/about'>Home</Link>
+                              <Link href='/about'>About</Link>
+                              <Link href='/about'>Contacts</Link>
+                    </div>
+          );
+}
+
+export default Navbar;
+
+By default, Next.js will preload every single Link found 
+on the viewport, meaning that once we click on one of 
+the links, the browser will already have all the data 
+needed to render the page.
+
+You can disable this feature by passing the preload={false} 
+prop to the Link component:
+
+import Link from 'next/link';
+function Navbar() {
+          return (
+                    <div>
+                              <Link href='/about' preload={false}>Home</Link>
+                              <Link href='/about' preload={false}>About</Link>
+                              <Link href='/about' preload={false}>Contacts</Link>
+                    </div>
+          );
+}
+
+export default Navbar;
+
+If we are building complex URLs, we can also pass an object 
+to the href prop:
+<Link
+          href={{
+                    pathname: '/blog/[date]/[slug]'
+                    query: {
+                              date: '2020-01-01',
+                              slug: 'happy-new-year',
+                              foo: 'bar'
+                    }
+          }}
+/>
+          Read post
+</Link>
+
+Once the user clicks that link, Next.js will redirect the 
+browser to the following URL:
+http://localhost:3000/blog/2020-01-01/happy-new-year?foo=bar .
+
+
+
+-: Using the router.push method
+
+
+
+
+
 
 
 
