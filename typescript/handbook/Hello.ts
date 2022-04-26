@@ -233,12 +233,36 @@ let userInput = sanitizeInput(getInput())
 userInput = 'new input'
 
 
+-: Interfaces
+An interface declaration is another way to name an object type:
+interface Point {
+          x: number;
+          y: number;
+}
 
+Or:
+
+interface Point {
+          x: number,
+          y: number,
+}
+
+function printCoord(pt : Point) {
+          console.log("The coordinate's x value is " + pt.x)
+
+          console.log("The coordinate's y value is " + pt.y)
+}
+
+printCoord({x: 100, y: 100})
+
+
+-: Differences Between Type Aliases and Interfaces
 
 
 stop at pg 28
 */
-type Point = {
+interface Point  {
           x: number,
           y: number,
 }
+
