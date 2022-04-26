@@ -129,6 +129,72 @@ your page, make sure to pass them inside the returning object's
 props property.
 
 
+-: Using route variables inside components
+In the previous section, we have learned how to use route 
+variables inside our pages. Next.js does not allow us to use 
+both getServerSideProps and getStaticProps functions outside 
+of our pages, so how are we supposed to use them inside other 
+components?
+
+Next.js makes this effortless thanks to the useRouter hook; we 
+can import it from the next/router file:
+
+import { useRouter } from 'next/router';
+
+Let's refactor the previous greetings page as follows:
+
+import { useRouter } from "next/router";
+
+function Greet() {
+          const { query } = useRouter();
+
+          return (
+                    <h1> Hello, {query.name}! </h1>
+          )
+}
+
+export default Greet;
+
+We can observe how Next.js passes both route variables 
+and query strings via the useRouter hook by trying to 
+append any query parameter to our URL and log the
+query variable inside our component:
+
+
+import { useRouter } from "next/router";
+
+function Greet() {
+          const { query } = useRouter();
+
+          console.log(query)
+
+          return (
+                    <h1> Hello, {query.name}! </h1>
+          )
+}
+
+export default Greet;
+
+If we now try to call the following URL, http://localhost:3000/greet/
+Mitch?learning_nextjs=true , we will see the following object 
+logged inside our terminal:
+
+{learning_nextjs: "true", name: "Mitch"}
+
+Important Note
+Next.js does not throw any error if you try to append a 
+query parameter with the same key as your routing variable. 
+You can easily try that by calling the following URL: 
+http://localhost:3000/greet/Mitch?name=Christine . You 
+will notice that Next.js will give precedence to your route 
+variable, such that you will see Hello, Mitch! displayed 
+on the page.
+
+
+
+
+
+
 
 stop at pg 53
 */ 
