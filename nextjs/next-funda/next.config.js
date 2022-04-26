@@ -7,6 +7,7 @@ module.exports = nextConfig
 
 module.exports = {
   images: {
-  domains: ['images.unsplash.com']
+    loader: 'akamai',
+    domains: ['images.unsplash.com']
   }
   };

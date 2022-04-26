@@ -422,6 +422,57 @@ different image sizes, which will be served using the
 srcset property of a standard img HTML tag:
 
 
+-: Running automatic image optimization on external services
+By default, automatic image optimization runs on the same 
+server as Next.js. Of course, if you're running your website 
+on a small server with low resources, this could potentially
+affect its performance. For that reason, Next.js allows you 
+to run automatic image optimization on external services 
+by setting the loader option inside your next. config.js file:
+
+module.exports = {
+          images: {
+                    loader: 'akamai',
+                    domains: ['images.unsplash.com']
+          }
+};
+
+If you're deploying your web app to Vercel, you don't actually \
+need to set up any loader in your next.config.js file as Vercel 
+will take care of optimizing and serving the image files for you. 
+Otherwise, you can use the following external services:
+• Akamai: https://www.akamai.com
+• Imgix: https://www.imgix.com
+• Cloudinary: https://cloudinary.com
+
+If you don't want to use any of these services, or you want 
+to use your custom image optimization server, you can use 
+the loader prop directly inside your component:
+
+import Image from 'next/image'
+
+const loader = ({src, width, quality}) => {
+          return `https://example.com/${src}?w=${width}&q=${quality|| 75}`
+}
+
+function CustomImage() {
+          return (
+                    <Image
+                              loader={loader}
+                              src="/myimage.png"
+                              alt="My image alt text"
+                              width={350}
+                              height={540}
+                    />
+          )
+}
+
+This way, you'll be able to serve images coming from 
+any external service
+
+Important Note
+Before creating a custom loader, read the documentation of 
+your image optimization server.
 
 
 
