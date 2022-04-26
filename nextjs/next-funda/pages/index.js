@@ -3,12 +3,14 @@ import Image from "next/image";
 
 function Homepage() {
 	return (
-		<div>
+		<div style={{width: 500, height: 200, position: 'relative'}}>
 			<Image 
 				src=' https://images.unsplash.com/photo-1605460375648-278bcbd579a6'
 				
-				width={500}	
-				height={200}
+				// width={500}	
+				// height={200}
+				layout="fill"
+				objectFit="cover"
 				alt= 'A beautiful English Setter'
 			/>
 
