@@ -94,7 +94,39 @@ represent whatever you want, so feel free to experiment
 by calling different routes on the browser.
 
 
+-: Using route variables inside our pages
+Let's take an easy example: a greetings page. Inside the 
+project used in the previous section, let's create the following 
+file: pages/greet/[name].js . We're going to use Next.js' 
+built-in getServerSideProps function to dynamically get 
+the [name] variable from the URL and greet the user:
 
+export async function getServerSideProps({params}) {
+          const { name } = params;
+
+          return {
+                    props: { name }
+          }
+}
+
+
+function Greet(props) {
+          return (
+                    <h1> Hello, {props.name}! </h1>
+          )
+}
+
+export default Greet;
+
+Now, open your favorite browser and go to http://localhost:3000/greet/
+Mitch ; you should see a "Hello, Mitch!" message appear on the screen.
+
+Important Note
+When using both the getServerSideProps and getStaticProps
+functions, remember that they must return an object. Also, if 
+you want to pass any prop from one of those two functions to 
+your page, make sure to pass them inside the returning object's 
+props property.
 
 
 
