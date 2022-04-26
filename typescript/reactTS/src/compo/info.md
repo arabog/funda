@@ -280,6 +280,88 @@ This gives us the flexibility to create complex object structures,
 which is critical when writing large, complex apps.
 
 
+-: Method signatures
+Interfaces can contain method signatures as well. These 
+won't contain the implementation of the method; they define 
+the contracts for when interfaces are used in an implementation.
+
+Let's look at an example:
+1. Let's add a method to the OrderDetail interface we just 
+created. Our method is called getTotal and it has a discount 
+parameter of type number and returns a number :
+
+interface OrderDetail {
+          product: Product;
+          quantity: number;
+
+          getTotal: (discount: number) => number;
+}
+
+Notice that the getTotal method on the interface doesn't 
+specify anything about how the total is calculated – it 
+just specifies the method signature that should be used.
+
+2. Having adjusted our OrderDetail interface, our 
+tableOrder object, which implemented this interface, 
+will now be giving a compilation error. So, let's
+resolve the error by implementing getTotal :
+
+const tableOrder: OrderDetail = {
+          product: table,
+          quantity: 1,
+
+          getTotal(discount: number) : number {
+              const priceWithoutDiscount = this.product.unitPrice * this.quantity;
+              const discountAmount = priceWithoutDiscount * discount;
+              return priceWithoutDiscount - discountAmount;
+          }
+};
+
+Notice that the implemented method has the same signature as 
+in the OrderDetail interface.
+The method implementation uses the this keyword to get access to
+properties on the object. If we simply referenced product.unitPrice
+and quantity without this , we would get a compilation error, because
+TypeScript would assume these variables are local within the method.
+
+3. Let's tweak the method signature to discover what we can and 
+can't do. We'll start by changing the parameter name:
+
+getTotal(discountPercentage: number): number {
+          const priceWithoutDiscount = this.product.unitPrice * this.quantity;
+          const discountAmount = priceWithoutDiscount * discountPercentage;
+          return priceWithoutDiscount - discountAmount;
+}
+
+4. We'll see that we don't get a compilation error. Let's change 
+the method name now:
+
+total(discountPercentage: number): number {
+          const priceWithoutDiscount = this.product.unitPrice * this.quantity;
+          const discountAmount = priceWithoutDiscount * discountPercentage;
+          return priceWithoutDiscount - discountAmount;
+}
+
+5. This does cause an error because a total method doesn't exist 
+on the OrderDetail interface:
+
+The errors provided by TypeScript are fantastic—they are very 
+specific about where the problem is, allowing us to quickly correct 
+our mistakes.
+
+10. So, when implementing a method from an interface, the 
+parameter names aren't important, but the other parts of the 
+signature are. In fact, we don't even need to declare the 
+parameter names in the interface:
+
+interface OrderDetail {
+          ...
+          getTotal(number): number;
+}
+
+However, omitting the parameter names arguably makes the 
+interface harder to understand—how do we know exactly 
+what the parameter is for?
 
 https://www.typescriptlang.org/play/
 
