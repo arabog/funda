@@ -257,12 +257,64 @@ printCoord({x: 100, y: 100})
 
 
 -: Differences Between Type Aliases and Interfaces
+Almost all features of an interface are available in type , 
+the key distinction is that a type cannot be re-opened to 
+add new properties vs an interface which is always extendable.
 
+Interface 
+A. Extending an interface 
 
-stop at pg 28
-*/
-interface Point  {
-          x: number,
-          y: number,
+interface Animal {
+          name: string
 }
 
+interface Bear extends Animal {
+          honey: boolean
+}
+
+const bear = getBear()
+bear.name
+bear.honey
+
+B. Adding new fields to an existing interface
+interface Window {
+          title: string 
+}
+
+interface Window {
+          ts: TypeScriptAPI
+}
+
+const src ='const a = "hello world" ';
+window.ts.transpileModule(src, {});
+
+
+
+Type
+A. Extending a type via intersections
+
+type Animal = {
+          name: string
+}
+
+typee Bear =  Animal & {
+          honey: boolean
+}
+
+const bear = getBear();
+bear.name;
+bear.honey;
+
+B. A type cannot be changed after being created
+type Window = {
+          title: string
+}
+
+type Window = {
+          ts: TypeScriptAPI
+}
+
+// Error: Duplicate identifier 'Window'.
+
+stop at pg 30: Type Assertions
+*/
