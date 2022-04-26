@@ -309,6 +309,12 @@ will be redirected to
 http://localhost:3000/blog/2020-01-01/happy-new-year?foo=bar .
 
 
+Serving static assets
+Using the term static asset, we refer to all of those non-dynamic 
+files, such as images, fonts, icons, compiled CSS, and JS files.
+The easiest way to serve those assets is by using the default /public 
+folder provided by Next.js. In fact, every file inside this folder will 
+be considered and served as a static asset.
 
 
 
