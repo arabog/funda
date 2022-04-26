@@ -1,28 +1,28 @@
 /*
 Arrays
-To specify the type of an array like [1, 2, 3] , you can use the syntax 
-number[] ; this syntax works for any type (e.g. string[] is an array 
+To specify the type of an array like [1, 2, 3] , you can use the syntax
+number[] ; this syntax works for any type (e.g. string[] is an array
 of strings, and so on). You may also see this written as Array<number>
 
 any
-TypeScript also has a special type, any , that you can use whenever 
+TypeScript also has a special type, any , that you can use whenever
 you don't want a particular value to cause typechecking errors.
 
 Type Annotations on Variables
-When you declare a variable using const , var , or let , you can 
-optionally add a type annotation to explicitly specify the type of 
+When you declare a variable using const , var , or let , you can
+optionally add a type annotation to explicitly specify the type of
 the variable:
 
 let myName: string = "Alice";
 
 Functions
-Functions are the primary means of passing data around in JavaScript. 
-TypeScript allows you to specify the types of both the input and output 
+Functions are the primary means of passing data around in JavaScript.
+TypeScript allows you to specify the types of both the input and output
 values of functions.
 
 Parameter Type Annotations
 When you declare a function, you can add type annotations after each p
-arameter to declare what types of parameters the function accepts. 
+arameter to declare what types of parameters the function accepts.
 Parameter type annotations go after the parameter name:
 
 // Parameter type annotation
@@ -31,20 +31,20 @@ function greet(name: string) {
 }
 
 Return Type Annotations
-You can also add return type annotations. Return type annotations appear 
+You can also add return type annotations. Return type annotations appear
 after the parameter list:
 
 function getFavoriteNumber(): number {
           return 26;
 }
 
-Much like variable type annotations, you usually don't need a 
-return type annotation because TypeScript will infer the function's 
+Much like variable type annotations, you usually don't need a
+return type annotation because TypeScript will infer the function's
 return type based on its return statements.
 
 Anonymous Functions
-When a function appears in a place where TypeScript can 
-determine how it's going to be called, the parameters of 
+When a function appears in a place where TypeScript can
+determine how it's going to be called, the parameters of
 that function are automatically given types.
 
 Here's an example:
@@ -65,8 +65,8 @@ names.forEach((s) => {
 
 
 -: Object Types
-To define an object type, we simply list its properties 
-and their types. For example, here's a function that 
+To define an object type, we simply list its properties
+and their types. For example, here's a function that
 takes a point-like object:
 
 // The parameter's type annotation is an object type
@@ -78,25 +78,12 @@ function printCoord(pt: { x: number; y: number }) {
 
 printCoord({ x: 3, y: 7 });
 
-Optional Properties
-Object types can also specify that some or all of their 
-properties are optional. To do this, add a ? after the 
-property name:
-
-function printName(obj: { first: string; last?: string }) {
-          // ...
-}
-
-// Both OK
-printName({ first: "Bob" });
-printName({ first: "Alice", last: "Alisson" });
-
-
-
-
-
 
 
 stop at pg 28
 */
-
+function printCoord(pt) {
+    console.log("The coordinate's x value is " + pt.x);
+    console.log("The coordinate's y value is " + pt.y);
+}
+printCoord({ x: 3, y: 7 });
