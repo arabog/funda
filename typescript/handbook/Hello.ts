@@ -165,6 +165,30 @@ function printId(id: number | string) {
 }
 
 Another example is to use a function like Array.isArray :
+let x = ['Taye', 'Kehinde']
+
+function welcomePeople(x: string[] | string) {
+          if(Array.isArray(x)) {
+                    console.log('Hello, ' + x.join(' and ') )
+          }else {
+                    console.log('Welcome lone traveler ' + x)
+          }
+}
+
+welcomePeople(x)
+
+Sometimes you'll have a union where all the members have 
+something in common. For example, both arrays and strings 
+have a slice method. If every member in a union has a property 
+in common, you can use that property without narrowing:
+
+Return type is inferred as number[] | string
+function getFirstThree(x: number[] | string) {
+          return x.slice(0, 3);
+}
+
+
+
 
 
 stop at pg 28
