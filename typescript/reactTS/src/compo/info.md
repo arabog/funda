@@ -90,4 +90,43 @@ stored as a specific set of integers but actually has some
 business meaning. They make our code more readable and 
 less prone to error.
 
-conti on pg 21
+
+-: Objects
+Let's work through an example:
+Let's enter the following code into the TypeScript playground, 
+which creates an object with several properties of information:
+
+const customer = {
+          name: "Lamps Ltd",
+          turnover: 2000134,
+          active: true
+};
+
+If we hover over name , turnover , and active , we'll see that 
+TypeScript has smartly inferred the types to be string , number, 
+and boolean respectively.
+
+customer.turnover = 500000
+
+We used const to declare the customer variable and then 
+was able to change one of its property values later in the 
+program. Shouldn't this have thrown an error? Well, the 
+customer variable reference hasn't changed —just some 
+properties within it. So, this is fine with the TypeScript
+compiler.
+
+Now let's set a property on customer that doesn't exist yet:
+
+customer.profit = 10000;
+
+We'll see that TypeScript complains:
+
+
+
+
+
+
+
+https://www.typescriptlang.org/play/
+
+conti on pg 31

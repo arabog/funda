@@ -317,4 +317,6 @@ type Window = {
 // Error: Duplicate identifier 'Window'.
 
 stop at pg 30: Type Assertions
+
+https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
 */
