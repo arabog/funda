@@ -363,6 +363,31 @@ However, omitting the parameter names arguably makes the
 interface harder to understand—how do we know exactly 
 what the parameter is for?
 
+-: Optional properties and parameters
+We might want to make a property optional because not every 
+situation where the interface is implemented requires it. Let's 
+take the following steps in our OrderDetail interface:
+
+1. Let's create an optional property for the date it was added. 
+We specify an optional value by putting a ? at the end of the 
+property name but before the type annotation:
+
+interface OrderDetail {
+          product: Product;
+          quantity: number;
+
+          dateAdded?: Date,
+          
+          getTotal(discount: number): number;
+}
+
+We'll see that our implementation of this interface, tableOrder, 
+isn't broken. We can choose to add dateAdded to tableOrder but 
+it isn't required.
+
+
+
+
 https://www.typescriptlang.org/play/
 
-conti on pg 31
+conti on pg 33
