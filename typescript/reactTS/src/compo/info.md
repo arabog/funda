@@ -226,11 +226,58 @@ interface Product {
           ...
 }
 
+Properties
+Properties are one of the elements that can be part of an interface. 
+Properties can hold values associated with an object. So, when we 
+define a property in an interface, we are saying that objects that 
+implement the interface must have the property we have defined.
 
+1. Enter the following interface:
+          interface Product {
+                    name: string;
+                    unitPrice: number;
+          }
 
+2. The preceding example creates a Product interface with name 
+and unitPrice properties. Let's go on to use this interface by using 
+it as the type for a table variable:
+          const table: Product {
+                    name: 'Table',
+                    unitPrice: 500
+          }
 
+3. Let's try to set a property that doesn't exist in the interface:
+          const chair: Product = {
+                    productName: "Table",
+                    price: 70
+          }
 
+4. Properties on an interface can reference another interface 
+because an interface is just a type. The following example 
+shows an OrderDetail interface making use of a Product interface:
 
+interface Product {
+          name: string;
+          unitPrice: number;
+}
+
+interface OrderDetail {
+          product: Product;
+          quantity: number;
+}
+
+const table: Product = {
+          name: "Table",
+          unitPrice: 500
+}
+
+const tableOrder: OrderDetail = {
+          product: table,
+          quantity: 1
+};
+
+This gives us the flexibility to create complex object structures, 
+which is critical when writing large, complex apps.
 
 
 
