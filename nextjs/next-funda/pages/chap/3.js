@@ -475,9 +475,70 @@ Before creating a custom loader, read the documentation of
 your image optimization server.
 
 
+-: Handling metadata
+So far, we haven't yet talked about how to set open graph 
+data, HTML titles, or HTML meta tags dynamically. While 
+a website could technically work even without that data,
+search engines would penalize your pages, as they would 
+miss important information.
+
+The user experience could also be negatively affected as 
+these meta tags would help the browser create an optimized 
+experience for our users.
+
+We can start with one of the most common dynamic parts of 
+our metadata: the HTML <title> tag. Let's set up a new 
+Next.js project and then create two new pages.
+The first page we will create is index.js :
+
+import Head from 'next/head';
+import Link from 'next/link';
+
+function IndexPage() {
+          return (
+                    <>
+                              <Head>
+                                        <title> Welcome to my Next.js website </title>
+                              </Head>
+
+                              <div>
+                                        <Link href='/about' passHref>
+                                                  <a>About us</a>
+                                        </Link>
+                              </div>
+                    </>
+          );
+}
 
 
+export default IndexPage;
 
-stop at pg 53
+The second page is about.js :
+import Head from 'next/head';
+import Link from 'next/link';
+function AboutPage() {
+          return (
+                    <>
+                              <Head>
+                                        <title> About this website </title>
+                              </Head>
+
+                              <div>
+                                        <Link href='/'passHref>
+                                                  <a>Back to home</a>
+                                        </Link>
+                              </div>
+                    </>
+          );
+}
+
+export default AboutPage;
+
+Running the server, you will be able to navigate 
+between those two pages and see that the <title> 
+content changes depending on the route you're visiting.
+
+continue pg 54
+// stop at pg 74
 
 */ 
