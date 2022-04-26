@@ -188,9 +188,57 @@ function getFirstThree(x: number[] | string) {
 }
 
 
+-: Type Aliases
+The syntax for a type alias is:
+type Point = {
+          x: number;
+          y: number;
+}
+
+Or:
+
+type Point = {
+          x: number,
+          y: number,
+}
+
+function printCoord(pt : Point) {
+          console.log("The coordinate's x value is " + pt.x)
+
+          console.log("The coordinate's y value is " + pt.y)
+}
+
+printCoord({x: 100, y: 100})
+
+You can actually use a type alias to give a name to any 
+type at all, not just an object type. For example, a type 
+alias can name a union type:
+
+type ID = number | string
+
+This code might look illegal, but is OK according to 
+TypeScript because both types are aliases for the 
+same type:
+
+type UserInputSanitizedString = string;
+
+function sanitizeInput(str: string) : UserInputSanitizedString {
+          return sanitize(str);
+}
+
+// create a sanitized input
+let userInput = sanitizeInput(getInput())
+
+// can still be re-assigned with a string though
+userInput = 'new input'
+
+
 
 
 
 stop at pg 28
 */
-
+type Point = {
+          x: number,
+          y: number,
+}
