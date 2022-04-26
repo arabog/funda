@@ -1,3 +1,14 @@
+function Homepage() {
+	return (
+		<div>
+			This is the homepage
+		</div>
+	)
+} 
+
+export default Homepage;
+
+/* 
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
@@ -67,3 +78,5 @@ export default function Home() {
     </div>
   )
 }
+
+*/
