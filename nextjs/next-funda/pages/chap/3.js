@@ -316,11 +316,50 @@ The easiest way to serve those assets is by using the default /public
 folder provided by Next.js. In fact, every file inside this folder will 
 be considered and served as a static asset.
 
+-: Next.js' automatic image optimization
+Using standard HTML tags, we could just do the following:
+<img
+          src=' https://images.unsplash.com/photo-1605460375648-
+          278bcbd579a6'
+          alt='A beautiful English Setter'
+/>
 
+However, we may also want to use the srcset property for responsive 
+images, so we'll actually need to optimize the picture for different 
+screen resolutions, which involves some extra steps for serving our 
+assets.
 
+Next.js makes it very easy by just configuring the next.config.js file 
+and using the Image component. We just said that we want to serve 
+images coming from Unsplash, so let's add that service hostname 
+to our next.config.js file, under the images property:
 
+module.exports = {
+          images: {
+                    domains: ['images.unsplash.com']
+          }
+};
 
+That way, every time we use an image coming from that hostname 
+inside an Image component, Next.js will automatically optimize it 
+for us. Now, let's try to import that image inside a page:
 
+import Image from 'next/image';
+
+function IndexPage() {
+          return (
+                    <div>
+                              <Image
+                                        src=' https://images.unsplash.com/photo-1605460375648-278bcbd579a6'
+                                        width={500}
+                                        height={200}
+                                        alt='A beautiful English Setter'
+                              />
+                    </div>
+          );
+}
+
+export default IndexPage;
 
 stop at pg 53
 */ 
