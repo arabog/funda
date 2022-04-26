@@ -121,8 +121,57 @@ customer.profit = 10000;
 
 We'll see that TypeScript complains:
 
+This makes sense if we think about it. We've declared 
+customer with name , turnover , and active properties, 
+so setting a profit property should cause an error. If 
+we wanted a profit property, we should have declared 
+it in the original declaration.
+
+In summary, the object type is flexible because we get 
+to define any properties we require, but TypeScript 
+will narrow down the type to prevent us incorrectly 
+typing a property name.
 
 
+-: Arrays
+Arrays are structures that TypeScript inherits from 
+JavaScript. We add type annotations to arrays as 
+usual, but with square brackets at the end to denote 
+that this is an array type.
+
+Let's take a look at an example:
+Let's declare the following array of numbers 
+
+const numbers: number[] = [];
+
+Here, we have initialized the array as empty.
+
+We used const to declare the numbers variable and 
+was able to change its array elements later in the 
+program. The array reference hasn't changed
+– just the elements within it. So, this is fine with the 
+TypeScript compiler.
+
+We can use type inference to save a few keystrokes 
+if we declare an array with some initial values. As 
+an example, if we type in the following declaration 
+and hover over the numbers variable, we'll see the 
+type has been inferred as number[] .
+
+const numbers = [1, 3, 5]
+
+while this will be type any:
+const numbers = []
+
+numbers.forEach(function (num) {
+          console.log(num);
+});
+
+forEach calls a nested function for each array element, 
+passing in the array element. If we hover over the num 
+variable, we'll see it has been correctly inferred
+as a number . We could have put a type annotation here, 
+but we have saved ourselves a few keystrokes:
 
 
 
