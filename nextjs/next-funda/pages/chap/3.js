@@ -256,8 +256,57 @@ http://localhost:3000/blog/2020-01-01/happy-new-year?foo=bar .
 
 
 -: Using the router.push method
+Using the router.push method
+There is another way to move between your Next.js website pages: 
+by using the useRouter hook.
 
+Let's pretend that we want to give access to a given page only to 
+logged-in users, and we already have a useAuth hook for that. 
+We can use the useRouter hook to dynamically redirect a user if, 
+in this case, they're not logged in:
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import PrivateComponent from '../components/Private';
+import useAuth from '../hooks/auth';
+
+function MyPage() {
+          const router = useRouter();
+          const { loggedIn } = useAuth();
+
+          useEffect(() => {
+                    if (!loggedIn) {
+                              router.push('/login')
+                    }
+          }, [loggedIn]);
+
+          return loggedIn ? <PrivateComponent /> : null;
+}
+
+export default MyPage;
+
+As you can see, we're using the useEffect hook to run the 
+code on the client side only.
+
+In that case, if the user isn't logged in, we use the router.push 
+method to redirect them to the login page.
+
+Just like with the Link component, we can create more 
+complex page routes by passing an object to the push method:
+
+router.push({
+          pathname: '/blog/[date]/[slug]',
+
+          query: {
+                    date: '2021-01-01',
+                    slug: 'happy-new-year',
+                    foo: 'bar'
+          }
+});
+
+Once the router.push function has been called, the browser 
+will be redirected to
+http://localhost:3000/blog/2020-01-01/happy-new-year?foo=bar .
 
 
 
