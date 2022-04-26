@@ -381,9 +381,45 @@ but it will leave the largest image untouched on bigger screens.
 width and height; however, we can't use fill alongside the 
 width and height props. You can use fill or width and height ).
 
+So now, if we want to fix our English Setter image to display it 
+properly on our screen, we can refactor our Image component 
+as follows:
+
+import Image from "next/image";
 
 
+function Homepage() {
+	return (
+		<div style={{width: 500, height: 200, position: 'relative'}}>
+			<Image 
+				src=' https://images.unsplash.com/photo-1605460375648-278bcbd579a6'
+				
+				// width={500}	
+				// height={200}
+				layout="fill"
+				objectFit="cover"
+				alt= 'A beautiful English Setter'
+			/>
 
+			This is the homepage
+		</div>
+	)
+} 
+
+export default Homepage;
+
+As you can see, we wrapped the Image component with a 
+fixed size div and the CSS position property set to relative . 
+We also removed both the width and height props from our 
+Image component, as it will stretch following its parent 
+div sizes.We also added the objectFit prop set to cover so 
+that it will crop the image according to its parent div size, 
+and that's the final result.
+
+If we now try to inspect the resulting HTML on the browser, 
+we will see that the Image component generated many 
+different image sizes, which will be served using the 
+srcset property of a standard img HTML tag:
 
 
 
