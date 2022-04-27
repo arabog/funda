@@ -748,7 +748,19 @@ dark and light themes.
 We'll do that by creating a React context and wrapping the 
 <Component /> component inside our _app.js file.
 
+Let's start by creating a context in components/themeContext.js :
 
+Last but not least, we need to add a button for toggling dark/light 
+themes. We're going to add it to our navigation bar, so let's open 
+the components/Navbar.js file
+
+One important thing to remember when customizing the _app.js 
+page is that it is not meant for running data fetching using 
+getServerSideProps or getStaticProps , as other pages do. Its 
+main use cases are maintaining state between pages during
+navigation (dark/light themes, items in a cart, and so on), 
+adding global styles, handling page layouts, or adding 
+additional data to the page props.
 
 
 

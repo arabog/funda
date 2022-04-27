@@ -1,7 +1,11 @@
 import Link from "next/link";
+import { useContext } from "react";
+import { ThemeContext } from "./themeContext";
 
 
 function Navbar() {
+          const { toggleTheme, theme } = useContext(ThemeContext);
+          const newThemeName = theme === 'dark' ? 'light' : 'dark';
 
 
           return (
@@ -20,6 +24,10 @@ function Navbar() {
                                         <Link href="/">Home </Link>
                                         <Link href="/about">About </Link>
                                         <Link href="/contacts">Contacts </Link>
+
+                                        <button onClick={toggleTheme}> 
+                                                  Set {newThemeName} 
+                                        </button>
                               </div>
                     </div>
           )
