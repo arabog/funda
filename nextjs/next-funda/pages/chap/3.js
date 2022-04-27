@@ -689,6 +689,70 @@ logically separate head-related components from other
 components, leading to a more organized code base.
 
 
+-: Customizing _app.js and _document.js pages
+There are certain cases where you need to take control 
+over page initialization, so that every time we render a page, 
+Next.js will need to run certain operations before sending
+the resulting HTML to the client. To do that, the framework 
+allows us to create two new files, called _app.js and 
+_document.js , inside our pages/ directory.
+
+The _app.js page
+By default, Next.js ships with the following pages/_app.js file:
+import '../styles/globals.css'
+
+function MyApp({ Component, pageProps }) {
+          return <Component {...pageProps} />
+}
+
+export default MyApp
+
+As you can see, the function is just returning the Next.js 
+page component (the Component prop) and its props ( pageProps ).
+
+import Link from "next/link";
+
+
+function Navbar() {
+
+
+          return (
+                    <div
+                              style={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        justifyContent: 'space-between',
+                                        marginBottom: 25
+
+                              }}
+                    >
+                              <div>My Website</div>
+
+                              <div>
+                                        <Link href="/">Home </Link>
+                                        <Link href="/about">About </Link>
+                                        <Link href="/contacts">Contacts </Link>
+                              </div>
+                    </div>
+          )
+}
+
+export default Navbar;
+
+Now, we need to import it inside our _app.js page as follows:
+
+If we now create two more pages ( about.js and contacts.js ), we 
+will see that the navbar component will be rendered on any page.
+Now, let's make it a bit more complex by adding support for both 
+dark and light themes.
+We'll do that by creating a React context and wrapping the 
+<Component /> component inside our _app.js file.
+
+
+
+
+
+
 
 cont on pg 74
 */ 
