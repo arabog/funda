@@ -1,9 +1,9 @@
 import Head from "next/head";
 
 
-function PostMeta(props) {
+function PostMeta(props) {              //use in [slug].js
 
-          
+
           return (
                     <Head>
                               <title> { props.title } </title>
