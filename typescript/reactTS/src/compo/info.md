@@ -474,9 +474,64 @@ const table: ProductWithDiscountCodes = {
 }
 
 
--: 
+-: Type aliases
+In simple terms, a type alias creates a new name for a type. To 
+define a type alias, we use the type keyword, followed by the alias 
+name, followed by the type that we want to alias.
 
+We'll explore this with the following example:
+1. Let's create a type alias for the getTotal method in the OrderDetail 
+interface we have been working with.
 
+type GetTotal = (discount: number) => number;
+
+interface OrderDetail {
+	product: Product;
+	quantity: number;
+	getTotal: GetTotal;
+}
+
+2. Type aliases can also define the shape of an object. We could 
+use a type alias for our Product and OrderDetail types that we 
+previously defined with an interface:
+	
+type Product = {
+	name: string;
+	unitPrice: number;
+};
+
+type OrderDetail = {
+	product: Product;
+	quantity: number;
+	getTotal: (discount: number) => number;
+};
+
+3. We use these types in exactly the same way as we used our 
+interface-based types:
+
+const table: Product = {
+	name: "Table",
+	unitPrice: 500
+};
+
+const orderDetail: OrderDetail = {
+	product: table,
+	quantity: 1,
+	getTotal(discount: number): number {
+		const priceWithoutDiscount = this.product.unitPrice * this.quantity;
+		const discountAmount = priceWithoutDiscount * discount;
+		return priceWithoutDiscount - discountAmount;
+	}
+};
+
+So, type aliases seem very similar to interfaces. What is the 
+difference between a type alias and an interface? The main 
+difference is that type aliases can't be extended or implemented
+from like you can with interfaces. So, for a simple structure that 
+doesn't require inheritance, should we use an interface or should 
+we use a type alias? There isn't strong reasoning to prefer either 
+approach. However, we should be consistent with whichever 
+approach we choose to improve the readability of our code.
 
 
 
