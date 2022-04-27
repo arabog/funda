@@ -78,12 +78,15 @@ whether we forgot to handle null and undefined
 
 -: Type Assertions
 
-Sometimes you will have information about the type of a value that TypeScript can't know about.
+Sometimes you will have information about the type of a value 
+that TypeScript can't know about.
 For example, if you're using document.getElementById , TypeScript 
-only knows that this will return some kind of HTMLElement , but you might know that your page will always have an
+only knows that this will return some kind of HTMLElement , but 
+you might know that your page will always have an
 HTMLCanvasElement with a given ID.
 
-In this situation, you can use a type assertion to specify a more specific type:
+In this situation, you can use a type assertion to specify a more 
+specific type:
 
 const myCanvas = document.getElementById("main_canvas") as HTMLCanvasElement
 
@@ -96,9 +99,74 @@ Reminder: Because type assertions are removed at compile-time, there is
 no runtime checking associated with a type assertion. There won't be an 
 exception or null generated if the type assertion is wrong.
 
+function printAll(strs: string | string[] | null) {
+          if (typeof strs === "object") {
+                    for (const s of strs) {
+                              <!-- Error: Object is possibly 'null'. -->
+                              console.log(s);
+                    }
+          } else if (typeof strs === "string") {
+                    console.log(strs);
+          } else {
+                    // do nothing
+          }
+}
+
+In the printAll function, we try to check if strs is an object to 
+see if it's an array type (now might be a good time to reinforce 
+that arrays are object types in JavaScript). But it turns out that in
+JavaScript, typeof null is actually "object" ! This is one of those 
+unfortunate accidents of history.
 
 
+-: Truthiness narrowing
+In JavaScript, constructs like if first "coerce" their conditions 
+to boolean s to make sense of them, and then choose their 
+branches depending on whether the result is true or false . 
+Values like
+0
+NaN
+"" (the empty string)
+0n (the bigint version of zero)
+null
+undefined
+
+all coerce to false , and other values get coerced true . You can 
+always coerce values to boolean s by running them through the 
+Boolean function, or by using the shorter double-Boolean negation.
+
+// both of these result in 'true'
+Boolean("hello"); // type: boolean, value: true
+
+!!"world"; // type: true, value: true
+
+It's fairly popular to leverage this behavior, especially for guarding 
+against values like null or undefined . As an example, let's try using 
+it for our printAll function.
+
+function printAll(strs: string | string[] | null) {
+          if (strs && typeof strs === "object") {
+                    for (const s of strs) {
+                              console.log(s);
+                    }
+          } else if (typeof strs === "string") {
+                    console.log(strs);
+          }
+}
+
+You'll notice that we've gotten rid of the error above by checking 
+if strs is truthy. This at least prevents us from dreaded errors when 
+we run our code like:
+TypeError: null is not iterable
+
+Keep in mind though that truthiness checking on primitives can often 
+be error prone.
 
 
-cont on page 40
+-: Equality narrowing
+TypeScript also uses switch statements and equality checks like === , 
+!== , == , and != to narrow types. For example:
+
+
+cont on page 43
 */ 
