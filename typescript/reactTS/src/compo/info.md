@@ -599,7 +599,37 @@ const total = orderDetail.getTotal(0.1)
 
 console.log(total)
 
+Implementing interfaces
+We can use classes and interfaces together by defining the 
+contract in an interface and then implementing the class 
+as per the interface. We specify that a class is implementing a
+particular interface using the implements keyword.
 
+As an example, we can define an interface for the order detail 
+and then a class that implements this interface:
+
+interface IOrderDetail {
+	product: Product;
+	quantity: number;
+	getTotal(discount: number): number;
+}
+
+class OrderDetail implements IOrderDetail {
+	product: Product;
+	quantity: number;
+
+	getTotal(discount: number): number {
+		const priceWithoutDiscount = this.product.unitPrice * this.quantity;
+		const discountAmount = priceWithoutDiscount * discount;
+		return priceWithoutDiscount - discountAmount;
+	}
+}
+
+In the preceding example, we've prefixed the interface with I so that 
+readers of the code can quickly see when we are referencing interfaces.
+
+This approach allows us to have multiple implementations of an
+interface, which can be useful in certain situations.
 
 
 
