@@ -783,8 +783,4 @@ inside it as this would disable automatic site optimization,
 forcing the server to server-side render the page on each 
 request.
 
-
-
-
-cont on pg 76
 */ 
