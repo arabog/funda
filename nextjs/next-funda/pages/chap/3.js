@@ -538,7 +538,61 @@ Running the server, you will be able to navigate
 between those two pages and see that the <title> 
 content changes depending on the route you're visiting.
 
-continue pg 54
-// stop at pg 74
+Now, let's make things a bit more complex. We want to 
+create a new component that only displays a button. Once 
+we click on it, our page title will change depending on the
+page we're currently on; we can always roll back to the 
+original title by clicking on the button again.
 
+import { useState } from 'react'
+import Head  from 'next/head'
+
+function Widget({pageName}) {
+          const [active, setActive] = useState(false);
+
+          if(active) {
+                    return (
+                              <>
+                                        <Head> <title> You're browsing the {pageName} page </title> </Head>
+
+                                        <div>
+                                                  <button onClick={() => setActive(false)} > 
+                                                            Restore original title
+                                                  </button>          
+
+                                                  Take a look at the title!
+                                        </div>                    
+                              </>
+                    )
+          }
+
+          return (
+                    <>
+                              <button onClick={() => setActive(true)}>
+                                        Change page title
+                              </button>
+                    </>
+          )
+}
+
+
+export default Widget
+
+We'll start by opening the index.js file and importing the 
+Widget component and then we're going to render it inside 
+a new <div> :
+
+So far, we've seen how to handle metadata inside our pages 
+and components, but there are cases where you want to use 
+the same meta tags on different components. In those cases,
+you may not want to rewrite all the metadata from scratch for 
+each component, so here comes the concept of grouping 
+metadata by creating a whole component just for handling
+that kind of HTML tag.
+
+
+
+
+
+cont on pg 74
 */ 
