@@ -591,6 +591,102 @@ metadata by creating a whole component just for handling
 that kind of HTML tag.
 
 
+-: Grouping common meta tags
+Let's say that we want to add a blog section to our website. 
+We may want to add support for open graph data, Twitter cards, 
+and other metadata for our blog posts, so we could easily group 
+all this common data inside a PostHead component. Let's create 
+a new file, components/PostHead.js , and add the following script
+
+import Head from "next/head";
+
+
+function PostMeta(props) {
+          return (
+                    <Head>
+                              <title> { props.title } </title>
+                              <meta name="description" content={props.subtitle} />
+
+                              open-graph meta 
+                              <meta property="og:title" content={props.title} />
+                              <meta property="og:description" content={props.subtitle} />
+                              <meta property="og:image" content={props.image} />
+
+                              twitter card meta 
+                              <meta name="twitter:card" content="summary" />
+                              <meta name="twitter:title" content={props.title} />
+                              <meta name="twitter:description" content={props.description} />
+                              <meta name="twitter:image" content={props.image} />
+                    </Head>
+          )
+}
+
+export default PostMeta;
+
+Now, let's create a mock for our posts. We will create a new folder 
+called data and a file called posts.js inside it:
+
+export default [
+          {
+                    id: 'qWD3Pzce',
+                    slug: 'dog-of-the-day-the-english-setter',
+                    title: 'Dog of the day: the English Setter',
+                    subtitle: 'The English Setter dog breed was namedfor these dogs\' practice of "setting", or crouching low, when they found birds so hunters could throw their nets over them',
+                    image: 'https://images.unsplash.com/photo-1605460375648-278bcbd579a6'
+          },
+
+          {
+                    id: 'yI6BK404',
+                    slug: 'about-rottweiler',
+                    title: 'About Rottweiler',
+                    subtitle: "The Rottweiler is a breed of domestic dog, regarded as medium-to-large or large. The dogs were known in German as Rottweiler Metzgerhund, meaning Rottweil butchers' dogs, because their main use was to herd livestock and pull carts laden with butchered meat to market",
+                    image: 'https://images.unsplash.com/photo-1567752881298-894bb81f9379'
+          },
+
+          {
+                    id: 'VFOyZVyH',
+                    slug: 'running-free-with-collies',
+                    title: 'Running free with Collies',
+                    subtitle: 'Collies form a distinctive type of herding dogs, including many related landraces and standardized breeds. The type originated in Scotland and Northern England. Collies are medium-sized, fairly lightly-built dogs, with pointed snouts. Many types have a distinctive white color over the shoulders',
+                    image: 'https://images.unsplash.com/photo-1517662613602-4b8e02886677'
+          }
+]
+
+Great! Now we only need to create a [slug] page to display our posts. 
+The full route will be /blog/[slug] , so let's create a new file called 
+[slug].js inside pages/blog/ and add the following content:
+
+import PostHead from '../../components/PostHead'
+import posts from '../../data/posts'
+
+
+export function getServerSideProps({params}) {
+          const { slug } = params;
+
+          const post = posts.find(p => p.slug === slug);
+
+          return {
+                    props: {post}
+          }
+}
+
+
+function Post({post}) {
+          return (
+                    <div>
+                              <PostHead {...post} />
+
+                              <h1> {post.title} </h1>
+                              <p> {post.subtitle} </p>
+                    </div>
+          )
+}
+
+export default Post;
+
+This approach is not mandatory, but it allows you to 
+logically separate head-related components from other 
+components, leading to a more organized code base.
 
 
 
