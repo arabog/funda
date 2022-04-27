@@ -763,8 +763,28 @@ adding global styles, handling page layouts, or adding
 additional data to the page props.
 
 
+-: The _document.js page
+When we're writing Next.js page components, we don't need 
+to define fundamental HTML tags, such as <head> , <html> , 
+or <body> . We've already seen how to customize the <head> 
+tag using the Head component, but we will need a change of 
+approach for both <html> and <body> tags.
+
+In order to render those two essential tags, Next.js uses a 
+built-in class called Document, and it allows us to extend 
+it by creating a new file called _document.js inside our
+pages/ directory
+
+Just like _app.js , _document.js does not support server-side 
+data fetching methods such as getServerSideProps and 
+getStaticProps . We still get access to the getInitialProps 
+method, but we should avoid putting data fetching functions 
+inside it as this would disable automatic site optimization, 
+forcing the server to server-side render the page on each 
+request.
 
 
 
-cont on pg 74
+
+cont on pg 76
 */ 
