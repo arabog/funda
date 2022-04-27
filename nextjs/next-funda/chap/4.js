@@ -87,6 +87,15 @@ If you're interested in learning more about atomic design, here's
 a good article explaining it in detail: 
 https://bradfrost.com/blog/post/atomic-web-design .
 
+what is atomic design
+Atomic design is methodology for creating design systems. 
+There are five distinct levels in atomic design:
+          Atoms
+          Molecules
+          Organisms
+          Templates
+          Pages
+
 Now, let's pretend that we want to create a Button component. 
 When we create a new component, we often need at least three 
 different files: the component itself, its style, and a test file. 
@@ -177,5 +186,29 @@ That way, users browsing your Next.js app from a mobile
 device will be able to install it on their smartphones or tablets.
 
 
-cont on pg 78
+-: Organizing styles
+Style organization can really depend on the stack you want 
+to use to style your Next.js application.
+Starting from CSSinJS frameworks such as Emotion, 
+styled-components, JSS, and similar ones, one common 
+approach is to create a specific styling file for each component; 
+that way, it will be easier for us to find a particular component 
+style inside our code base when we need to make some changes.
+However, even though separating styling files depending on their 
+respective components can help us keep our code base organized, 
+we may need to create some common styles or utility files, such as 
+color palettes, themes, and media queries.
+
+In that case, it can be useful to reuse the default styles/ directory 
+shipped with a default Next.js installation. We can put our common 
+styles inside that folder and import them inside other styling files 
+only when we need them.
+
+
+-: Lib files
+
+
+
+
+cont on pg 79
 */ 
