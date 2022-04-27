@@ -691,6 +691,65 @@ class OrderDetail implements IOrderDetail {
 }
 
 
+-: Extending classes
+Classes can extend other classes. This is the same concept as 
+interfaces extending other interfaces, which we covered in the 
+Extending interfaces section. This is a way for class properties 
+and methods to be shared with child classes.
+
+As with interfaces, we use the extends keyword followed by the 
+class we are extending.
+
+1. Let's create a ProductWithDiscountCodes from our Product class:
+class Product {
+	name: string;
+	unitPrice: number;
+}
+
+interface DiscountCode {
+	code: string;
+	percentage: number;
+}
+
+class ProductWithDiscountCodes extends Product {
+	discountCodes: DiscountCode[];
+}
+
+2. We can then consume the ProductWithDiscountCodes class 
+as follows, leveraging properties from the base class as well 
+as the child class:
+
+const table = new ProductWithDiscountCodes();
+table.name = "Table";
+table.unitPrice = 500;
+table.discountCodes = [
+	{ code: "SUMMER10", percentage: 0.1 },
+	{ code: "BFRI", percentage: 0.2 }
+];
+
+3. If the parent class has a constructor, then the child class will 
+need to pass the constructor parameters using a function called 
+super :
+
+class Product {
+	constructor(public name: string, public unitPrice: number) {
+	}
+}
+
+interface DiscountCode {
+	code: string;
+	percentage: number;
+}
+
+class ProductWithDiscountCodes extends Product {
+	constructor(public name: string, public unitPrice: number) {
+		super(name, unitPrice);
+	}
+	
+	discountCodes: DiscountCode[];
+}
+
+
 
 
 https://www.typescriptlang.org/play/
