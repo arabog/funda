@@ -410,6 +410,78 @@ the method by using (discount || 0) in the discountAmount variable
 assignment.
 
 
+-: Readonly properties
+We can stop a property from being changed after it has initially 
+been set by using the readonly keyword before the property name.
+
+1. Let's give this a try on our Product interface by making the 
+name property readonly :
+interface Product {
+	readonly name: string;
+	unitPrice: number;
+}
+
+2. Let's also make sure we have an instance of the Product 
+interface in place:
+
+const table: Product = {
+	name: "Table",
+	unitPrice: 500
+};
+
+3. Let's change the name property table now on the next line:
+table.name = "Better Table";
+
+As expected, we get a compilation error: Cannot assign to 'name' 
+because it is a read-only property.
+
+Extending interfaces
+Interfaces can extend other interfaces so that they inherit all 
+the properties and methods from its parent. We do this using 
+the extends keyword after the new interface name and
+before the interface name that is being extended.
+
+Let's look at the following example:
+1. We create a new interface, taking Product as a base, and 
+add information about discount codes:
+
+interface Product {
+	name: string;
+	unitPrice: number;
+}
+
+interface DiscountCode {
+	code: string;
+	percentage: number
+}
+
+interface ProductWithDiscountCodes extends Product {
+	discountCodes: DiscountCode[];
+}
+
+2. We can create an instance of the interface in the usual way, 
+filling in properties from the base interface as well as the child 
+interface:
+
+const table: ProductWithDiscountCodes = {
+	name: 'Table',
+	unitPrice: 500,
+
+	discountCodes: [
+		{code: "SUMMER10", percentage: 0.1},
+		{code: "BFRI", percentage: 0.2}
+	]
+}
+
+
+-: 
+
+
+
+
+
+
+
 
 https://www.typescriptlang.org/play/
 
