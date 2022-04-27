@@ -104,8 +104,78 @@ we spot a bug in production that involves our Button component.
 We can easily find the component inside our code base, find its 
 test and styling files, and fix them.
 
+Organizing utilities
+There are specific files that don't export any component; they're just 
+modular scripts used for many different purposes. We're talking here 
+about the utility scripts.
+
+Let's pretend that we have several components whose purpose is to 
+check whether a particular hour of the day has passed to display 
+certain information. It wouldn't make any sense to write the same 
+function inside every component. We can therefore write a generic
+utility function and then import it inside every component that 
+needs that kind of feature.
 
 
-cont on pg 76
+-: Organizing static assets
+Next.js makes it easy to serve static files, as you only
+need to put them inside the public/ folder, and the 
+framework will do the rest.
 
+Moving inside our public/ folder, we can create a new 
+directory called assets/ :
+
+cd public && mkdir assets
+
+And inside that newly created directory, we will be creating 
+a new folder for each type of static asset:
+          cd assets
+          mkdir js
+          mkdir css
+          mkdir icons
+          mkdir images
+
+The icons/ directory will primarily be used to serve our 
+web app manifest icons. The web app manifest is a JSON 
+file that includes some useful information about the progressive
+web app that you're building, such as the app name and the 
+icons to use when installing it on a mobile device.
+
+We can easily create this manifest file by entering the 
+public/ folder and adding a new file called manifest.json :
+cd public/ && touch manifest.json
+
+At this point, we can fill the JSON file with some basic 
+information. Let's take the following JSON as an example:
+{
+          "name": "My Next.js App",
+          "short_name": "Next.js App",
+          "description": "A test app made with next.js",
+          "background_color": "#a600ff",
+          "display": "standalone",
+          "theme_color": "#a600ff",
+
+          "icons": [
+                    {
+                              "src": "/assets/icons/icon-192.png",
+                              "type": "image/png",
+                              "sizes": "192x192"
+                    },
+                    
+                    {
+                              "src": "/assets/icons/icon-512.png",
+                              "type": "image/png",
+                              "sizes": "512x512"
+                    }
+          ]
+}
+
+We can include that file using an HTML meta tag
+<link rel="manifest" href="/manifest.json">
+
+That way, users browsing your Next.js app from a mobile 
+device will be able to install it on their smartphones or tablets.
+
+
+cont on pg 78
 */ 
