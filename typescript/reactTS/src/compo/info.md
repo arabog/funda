@@ -534,6 +534,71 @@ approach. However, we should be consistent with whichever
 approach we choose to improve the readability of our code.
 
 
+-: Classes
+Classes feature in many programming languages, including 
+JavaScript. They let us shape objects with type annotations 
+in a similar way to interfaces and type aliases. However,
+classes have many more features than interfaces and type 
+aliases
+
+Basic classes
+Let's look at this in more depth with the following example:
+1. We could use a class to define the Product type we previously 
+defined as an interface and as a type alias:
+
+class Product {
+	name: string;
+	unitPrice: number;
+}
+
+2. We create an instance of our Product class by using the new 
+keyword followed by the class name and parentheses. We then 
+go on to interact with the class, setting property values or 
+calling methods:
+
+const table = new Product();
+table.name = "Table";
+table.unitPrice = 500;
+
+Notice that when we use this approach we don't need a type 
+annotation for the table variable because the type can be inferred.
+Classes have many more features than type aliases and interfaces 
+though. One of these features is the ability to define the 
+implementation of methods in a class.
+
+Let's explore this with an example:
+1. Let's change the OrderDetail type we have been working 
+within previous sections to a class. We can define the 
+implementation of the getTotal method in this class:
+
+class OrderDetail {
+	product: Product;
+	quantity: number;
+
+	getTotal(discount: number): number {
+		const priceWithoutDiscount = this.product.unitPrice * this.quantity;
+		const discountAmount = priceWithoutDiscount * discount;
+		return priceWithoutDiscount - discountAmount;
+	}
+}
+
+2. We can create an instance of OrderDetail , specifying a 
+product and quantity , and then calling the getTotal method 
+with a discount to get the total price:
+
+const table = new Product();
+table.name = 'Table';
+table.unitPrice =500;
+
+const orderDetail = new OrderDetail()
+
+orderDetail.product = table;
+orderDetail.quantity = 2;
+
+const total = orderDetail.getTotal(0.1)
+
+console.log(total)
+
 
 
 
