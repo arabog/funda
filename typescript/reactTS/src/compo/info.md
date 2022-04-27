@@ -745,11 +745,51 @@ class ProductWithDiscountCodes extends Product {
 	constructor(public name: string, public unitPrice: number) {
 		super(name, unitPrice);
 	}
-	
+
 	discountCodes: DiscountCode[];
 }
 
+Abstract classes
+Abstract classes are a special type of class that can only be 
+inherited from and not instantiated. They are declared with 
+the abstract keyword, as in the following example:
 
+1. We can define a base Product class as follows:
+abstract class Product {
+	name: string;
+	unitPrice: number;
+}
+
+2. If we try to create an instance of this, the compiler will 
+complain, as we would expect:
+Cannot create an instance of an abstract class.
+
+3. We can create a more specific usable class for food 
+products by extending Product :
+class Food extends Product {
+	constructor(public bestBefore: Date) {
+		super();
+	}
+}
+
+4. Here, we are adding a bestBefore date in our Food class. 
+We can then create an instance of Food , passing in the 
+bestBefore date:
+const bread = new Food(new Date(2019, 6, 1));
+
+Abstract classes can have abstract methods that child classes 
+must implement. Abstract methods are declared with the 
+abstract keyword in front of them, as in the following example:
+1. Let's add an abstract method to our base Product class:
+abstract class Product {
+	name: string;
+	unitPrice: number;
+	abstract delete(): void;
+}
+
+2. After we add the abstract method, the compiler immediately 
+complains about our Food class because it doesn't implement 
+the delete method:
 
 
 https://www.typescriptlang.org/play/
