@@ -385,9 +385,32 @@ We'll see that our implementation of this interface, tableOrder,
 isn't broken. We can choose to add dateAdded to tableOrder but 
 it isn't required.
 
+2. We might also want to make a method parameter optional. We 
+do this in a similar way by putting a ? after the parameter name. 
+In our example, let's make discount optional in the OrderDetail 
+interface:
+
+interface OrderDetail {
+	product: Product;
+	quantity: number;
+
+	dateAdded?: Date,
+	getTotal(discount?: number): number;
+}
+
+3. We can change the method implementation signature as well:
+getTotal(discount?: number): number {
+	const priceWithoutDiscount = this.product.unitPrice * this.quantity;
+	const discountAmount = priceWithoutDiscount * (discount || 0);
+	return priceWithoutDiscount - discountAmount;
+}
+
+We've also dealt with the case when a discount isn't passed into 
+the method by using (discount || 0) in the discountAmount variable 
+assignment.
 
 
 
 https://www.typescriptlang.org/play/
 
-conti on pg 33
+conti on pg 43
