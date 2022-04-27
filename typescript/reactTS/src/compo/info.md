@@ -632,6 +632,66 @@ This approach allows us to have multiple implementations of an
 interface, which can be useful in certain situations.
 
 
+-: Constructors
+Constructors are functions that perform the initialization of new 
+instances of a class. In order to implement a constructor, we 
+implement a function called constructor . It's common to set 
+property values in the constructor to simplify consumption of 
+the class.
+
+Let's look at the following example:
+1. Let's create a constructor in the OrderDetail class that allows 
+us to set the product and quantity :
+
+class OrderDetail implements IOrderDetail {
+	product: Product;
+	quantity: number;
+
+	constructor(product: Product, quantity: number) {
+		this.product = product;
+		this.quantity = quantity;
+	}
+
+	getTotal(discount: number): number {
+		...
+	}
+}
+
+2. If we create an instance of the class, we are forced to pass 
+in the product and quantity :
+const orderDetail = new OrderDetail(table, 2);
+
+3. This is nice because we've reduced three lines of code to 
+one line. However, we can make our class even nicer to work 
+with by making the default quantity parameter 1 if nothing is 
+passed in:
+
+constructor(product: Product, quantity: number = 1) {
+	this.product = product;
+	this.quantity = quantity;
+}
+
+4. We now don't have to pass in a quantity if it is 1 :
+const orderDetail = new OrderDetail(table);
+
+5. We can save ourselves a few keystrokes and let the 
+TypeScript compiler implement the product and quantity 
+properties by using the public keyword before the 
+parameters in the constructor:
+
+class OrderDetail implements IOrderDetail {
+	constructor(public product: Product, public quantity: number = 1) {
+		this.product = product;
+		this.quantity = quantity;
+	}
+
+	getTotal(discount: number): number {
+		...
+	}
+}
+
+
+
 
 https://www.typescriptlang.org/play/
 
