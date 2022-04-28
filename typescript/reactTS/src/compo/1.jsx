@@ -939,6 +939,43 @@ class OrderDetail {
 
 
 -: Structuring code into modules
+By default, TypeScript generated JavaScript code that executes in 
+what is called the global scope. This means code from one file is 
+automatically available in another file.
+
+Let's look at an example in Visual Studio Code:
+1. Let's create a file called product.ts
+interface Product {
+          name: string;
+          unitPrice: number;
+}
+
+2. Let's create another file, called orderDetail.ts
+class OrderDetail {
+          product: Product;
+
+          quantity: number;
+
+          getTotal(discount: number): number {
+                    const priceWithoutDiscount = this.product.unitPrice * this.quantity;
+
+                    const discountAmount = priceWithoutDiscount * discount;
+                    
+                    return priceWithoutDiscount - discountAmount;
+          }
+}
+
+The compiler doesn't give us any complaints. In particular, 
+the reference to the Product interface in the OrderDetail 
+class is able to be resolved, even though it's in a different 
+file. This is because both Product and OrderDetail are in the
+global scope.
+
+Operating in the global scope is problematic because item names 
+can conflict across different files, and as our code base grows, 
+this is harder to avoid. Modules resolve this issue and help us 
+write well organized and reusable code.
+
 
 
 
