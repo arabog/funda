@@ -1090,6 +1090,12 @@ executed in a browser. We do this by running the
 TypeScript compiler, tsc ,  on the files we want to compile.
 
 
+-: Common options
+As mentioned earlier, there are lots of configuration options for 
+the TypeScript compiler. All the configuration options can be 
+found at https:/​ / ​ www.​ typescriptlang.​ org/​ docs/handbook/​ 
+compiler-​ options.​ html .
+
 
 
 
