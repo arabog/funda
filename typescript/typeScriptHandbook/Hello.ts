@@ -545,6 +545,10 @@ x = true  //Type 'boolean' is not assignable to type 'string | number'.
 
 
 
+
+
+
+
 cont on page 53
 
 https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
