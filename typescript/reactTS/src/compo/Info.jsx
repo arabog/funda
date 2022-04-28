@@ -818,6 +818,66 @@ member to be available to interact with inside the class and
 on child classes, but not on class instances.
 
 
+-: Property setters and getters
+Our classes so far have had simple property declarations. 
+However, for more complex scenarios, we can implement 
+a property with a getter and a setter . When implementing
+getters and setters , generally, you'll need a private property 
+to hold the property value:
+
+getter is a function with the property name and the get 
+keyword at the beginning and no parameters. Generally, 
+this will return the value of the associated private property.
+
+setter is a function with the same name with the set keyword 
+at the beginning and a single parameter for the value. This 
+will set the value of the associated private property.
+
+The private property is commonly named the same as the 
+getter and setter with an underscore in front.
+
+Let's take a look at an example:
+1. Let's create getters and setters for the unitPrice property 
+in our Product class. The setter ensures the value is not less 
+than 0 . The getter ensures null or undefined is never returned:
+
+class Product {
+	name: string;
+	private _unitPrice: number;
+
+	get unitPrice(): number {
+		return this._unitPrice || 0;
+	}
+
+	set unitPrice(value: number) {
+		if (value < 0) {
+			value = 0;
+		}
+	
+		this._unitPrice = value;
+	}
+}
+
+2. Let's consume the Product class and try this out:
+	const table = new Product();
+	table.name = "Table";
+	console.log(table.unitPrice);
+
+	table.unitPrice = -10;
+	console.log(table.unitPrice);
+
+If we run this, we should see two 0's in the console.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
