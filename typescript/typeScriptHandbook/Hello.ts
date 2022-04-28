@@ -509,17 +509,6 @@ with new . As you might have guessed, instanceof is also a
 type guard, and TypeScript narrows in branches guarded by
 instanceof s.
 
-
-
-
-
-
-cont on page 53
-
-https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
-*/
-
-
 function move(x: Date | string) {
           if(x instanceof Date) {
                     console.log(x.toUTCString())  //x: Date
@@ -528,3 +517,35 @@ function move(x: Date | string) {
           }
 }
 
+
+-: Assignments
+When we assign to any variable, TypeScript looks at the right 
+side of the assignment and narrows the left side appropriately.
+
+let x = Math.random() < 0.5 ? 10 : 'Hello world!'           //x: string | number
+
+x = 1;
+console.log(x)      //x: number
+
+x = 'goodbye'
+console.log(x)      //x: string
+
+Notice that each of these assignments is valid. Even though 
+the observed type of x changed to number after our first 
+assignment, we were still able to assign a string to x . This 
+is because the declared type of x - the type that x started 
+with - is string | number , and assignability is always checked 
+against the declared type.
+
+If we'd assigned a boolean to x , we'd have seen an error since 
+that wasn't part of the declared type.
+
+x = true  //Type 'boolean' is not assignable to type 'string | number'.
+
+
+
+
+cont on page 53
+
+https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
+*/
