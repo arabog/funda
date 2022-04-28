@@ -238,6 +238,29 @@ discourage that approach as Next.js should only care
 about the frontend of our application
 
 
+-: Fetching data on the server side
+Next.js allows us to fetch data on the server side by 
+using its built-in getStaticProps and getServerSideProps 
+functions.
+
+Given that Node.js doesn't support JavaScript fetch APIs 
+like browsers do, we have two options for making HTTP 
+requests on the server:
+
+1. Using the Node.js' built-in http library: We can use this 
+module without installing any external dependency
+2. Using HTTP client libraries: There are several great 
+HTTP clients for Next.js, making it really straightforward 
+to make HTTP requests from the server. Axios (a very 
+popular HTTP client that runs both on client and server 
+with the same APIs).
+
+
+
+
+
+
+
 
 cont on pg 99
 */ 
