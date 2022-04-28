@@ -256,6 +256,17 @@ popular HTTP client that runs both on client and server
 with the same APIs).
 
 
+-; Consuming REST APIs on the server side
+When discussing the integration of REST APIs, we need to 
+divide them into public and private APIs. The public ones 
+are accessible by anyone without any kind of authorization,
+and the private ones always need to be authorized to return 
+some data.
+
+There may be other ways in which to authorize your requests, 
+but Oauth 2.0, JWT, and API Key are the most common ways 
+that you'll likely encounter while developing your
+Next.js applications.
 
 
 
