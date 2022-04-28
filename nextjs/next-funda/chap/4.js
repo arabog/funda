@@ -206,9 +206,28 @@ only when we need them.
 
 
 -: Lib files
+When talking about lib files, we refer to scripts that explicitly 
+wrap third-party libraries as lib files. While the utility scripts 
+are very generic and can be used by many different
+components and libraries, the lib files are specific for a ce
+
+If we try to visualize the folder structure for the preceding example, we will end up with
+the following schema:
+next-js-app
+          - lib/
+                    - graphql/
+                              - index.js
+                              - queries/
+                                        - query1.js
+                                        - query2.js
+                              - mutations/
+                                        - mutation1.js
+                                        - mutation2.js
 
 
 
 
-cont on pg 79
+
+
+cont on pg 99
 */ 
