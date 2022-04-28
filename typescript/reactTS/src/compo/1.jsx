@@ -654,7 +654,9 @@ class OrderDetail implements IOrderDetail {
 	}
 
 	getTotal(discount: number): number {
-		...
+		const priceWithoutDiscount = this.product.unitPrice * this.quantity;
+		const discountAmount = priceWithoutDiscount * discount;
+		return priceWithoutDiscount - discountAmount;
 	}
 }
 
@@ -869,12 +871,74 @@ class Product {
 If we run this, we should see two 0's in the console.
 
 
+-: Static
+Static properties and methods are held in the class itself 
+and not in class instances.
+
+Let's look at the following example:
+1. Let's make the getTotal method static on the OrderDetail 
+class we have been using:
+
+class OrderDetail {
+	product: Product;
+	quantity: number;
+
+	static getTotal(discount: number): number {
+		const priceWithoutDiscount = this.product.unitPrice * this.quantity;
+		const discountAmount = priceWithoutDiscount * discount;
+		return priceWithoutDiscount - discountAmount;
+	}
+}
+
+2. We get compilation errors where we try to reference the 
+properties on the class. This is because the static method 
+isn't in the class instance and therefore can't access these 
+properties:
+
+3. To make the static method work, we can move its 
+dependencies on the class instance to parameters in 
+the function:
+
+static getTotal(unitPrice: number, quantity: number, discount: number): number {
+	const priceWithoutDiscount = unitPrice * quantity;
+	const discountAmount = priceWithoutDiscount * discount;
+	return priceWithoutDiscount - discountAmount;
+}
+
+4. We can now call the static method on the class type itself, 
+passing in all the parameter values:
+const total = OrderDetail.getTotal(500, 2, 0.1);
+console.log(total);
+
+interface Product {
+	name: string;
+	unitPrice: number;
+};
+
+interface OrderDetail {
+	product: Product;
+	quantity: number;
+	getTotal(discount: number): number;
+};
+
+class OrderDetail {
+	product: Product;
+	quantity: number;
+
+	constructor(product: Product, quantity: number) {
+	this.product = product,
+	this.quantity = quantity
+	}
+
+	static getTotal(unitPrice: number, quantity: number, discount: number): number {
+			const priceWithoutDiscount = unitPrice * quantity;
+			const discountAmount = priceWithoutDiscount * discount;
+			return priceWithoutDiscount - discountAmount;
+	}
+}
 
 
-
-
-
-
+-: Structuring code into modules
 
 
 
