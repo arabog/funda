@@ -316,7 +316,214 @@ type Window = {
 
 // Error: Duplicate identifier 'Window'.
 
-stop at pg 30: Type Assertions
+
+Sometimes you will have information about the type of a value 
+that TypeScript can't know about.
+For example, if you're using document.getElementById , TypeScript 
+only knows that this will return some kind of HTMLElement , but 
+you might know that your page will always have an
+HTMLCanvasElement with a given ID.
+
+In this situation, you can use a type assertion to specify a more 
+specific type:
+
+const myCanvas = document.getElementById("main_canvas") as HTMLCanvasElement
+
+You can also use the angle-bracket syntax (except if the code is in a .tsx file), 
+which is equivalent:
+
+const myCanvas = <HTMLCanvasElement>document.getElementById("main_canvas")
+
+Reminder: Because type assertions are removed at compile-time, there is 
+no runtime checking associated with a type assertion. There won't be an 
+exception or null generated if the type assertion is wrong.
+
+function printAll(strs: string | string[] | null) {
+          if (typeof strs === "object") {
+                    for (const s of strs) {
+                              <!-- Error: Object is possibly 'null'. -->
+                              console.log(s);
+                    }
+          } else if (typeof strs === "string") {
+                    console.log(strs);
+          } else {
+                    // do nothing
+          }
+}
+
+In the printAll function, we try to check if strs is an object to 
+see if it's an array type (now might be a good time to reinforce 
+that arrays are object types in JavaScript). But it turns out that in
+JavaScript, typeof null is actually "object" ! This is one of those 
+unfortunate accidents of history.
+
+
+-: Truthiness narrowing
+In JavaScript, constructs like if first "coerce" their conditions 
+to boolean s to make sense of them, and then choose their 
+branches depending on whether the result is true or false . 
+Values like
+0
+NaN
+"" (the empty string)
+0n (the bigint version of zero)
+null
+undefined
+
+all coerce to false , and other values get coerced true . You can 
+always coerce values to boolean s by running them through the 
+Boolean function, or by using the shorter double-Boolean negation.
+
+// both of these result in 'true'
+Boolean("hello"); // type: boolean, value: true
+
+!!"world"; // type: true, value: true
+
+It's fairly popular to leverage this behavior, especially for guarding 
+against values like null or undefined . As an example, let's try using 
+it for our printAll function.
+
+function printAll(strs: string | string[] | null) {
+          if (strs && typeof strs === "object") {
+                    for (const s of strs) {
+                              console.log(s);
+                    }
+          } else if (typeof strs === "string") {
+                    console.log(strs);
+          }
+}
+
+You'll notice that we've gotten rid of the error above by checking 
+if strs is truthy. This at least prevents us from dreaded errors when 
+we run our code like:
+TypeError: null is not iterable
+
+Keep in mind though that truthiness checking on primitives can often 
+be error prone.
+
+
+-: Equality narrowing
+TypeScript also uses switch statements and equality checks like === , 
+!== , == , and != to narrow types. For example:
+
+function example(x: string | number, y: string | boolean) {
+          if(x === y) {
+                    we can now call any 'string' method on 'x' or 'y'
+                    x.toUpperCase();    //string
+                    y.toLowerCase();    //string
+          }else {
+                    console.log(x);     //x: string | number
+                    console.log(y);     //y: //string | boolean
+          }
+}
+
+When we checked that x and y are both equal in the above 
+example, TypeScript knew their types also had to be equal. 
+Since string is the only common type that both x and y could 
+take on, TypeScript knows that x and y must be a string in 
+the first branch.
+
+Checking against specific literal values (as opposed to variables) 
+works also. In our section about truthiness narrowing, we wrote 
+a printAll function which was error-prone because it accidentally 
+didn't handle empty strings properly. Instead we could have done 
+a specific check to block out null s, and TypeScript still correctly 
+removes null from the type of strs .
+
+function printAll(strs: string | string[] | null) {
+          if(str !== null) {
+                    if(typeof strs === 'object') {
+                              for(const s of strs) {        //strs: string[]
+                                        console.log(s)
+                              }
+                    }else if (typeof strs === 'string') {
+                              console.log(str)    //strs: string
+                    }
+          }
+}
+
+JavaScript's looser equality checks with == and != also 
+get narrowed correctly. If you're unfamiliar, checking 
+whether something == null actually not only checks 
+whether it is specifically the value null - it also checks 
+whether it's potentially undefined . The same applies to ==
+undefined : it checks whether a value is either null or undefined .
+
+interface Container {
+          value: number | null | undefined
+}
+
+function multipleValue(container: Container, factor: number) {
+          // remove both 'null' and 'undefined' from d type
+          if(container.value != null) {
+                    console.log(container.value) // value= Container.value: number
+
+                    // now we can safely multiply 'container.value'
+                    container.value * factor;
+          }
+}
+
+
+-: The in operator narrowing
+JavaScript has an operator for determining if an object 
+has a property with a name: the in operator.
+
+For example, with the code: "value" in x . where "value" 
+is a string literal and x is a union type. The "true" branch 
+narrows x 's types which have either an optional or required 
+property value , and the "false" branch narrows to types 
+which have an optional or missing property value .
+
+type Fish = {swim: () => void}
+type Bird = {fly: () => void}
+
+function move(animal: Fish | Bird) {
+          if("swim" in animal) {
+                    return animal.swim();
+          }
+
+          return animal.fly();
+}
+
+To reiterate, optional properties will exist in both sides 
+for narrowing, for example a human could both swim 
+and fly (with the right equipment) and thus should show 
+up in both sides of the in check:
+
+type Fish = {swim: () => void}
+type Bird = {fly: () => void}
+type Human = {swim?: () => void; fly?: () => void}
+
+function move(animal: Fish | Bird | Human) {
+          if("swim" in animal) {
+                    return animal;
+          }
+
+          return animal;
+}
+
+
+-: instanceof narrowing
+
+
+
+
+
+
+cont on page 53
 
 https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
 */
+
+type Fish = {swim: () => void}
+type Bird = {fly: () => void}
+type Human = {swim?: () => void; fly?: () => void}
+
+function move(animal: Fish | Bird | Human) {
+          if("swim" in animal) {
+                    return animal;
+          }
+
+          return animal;
+}
+
