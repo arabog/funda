@@ -1,6 +1,10 @@
+import {Product} from './Product'
+
+
+
 class OrderDetail {
           product: Product;
-          quntity: number;
+          quantity: number;
 
           getTotal(discount: number): number {
                     const priceWithoutDiscount = this.product.unitPrice * this.quantity;

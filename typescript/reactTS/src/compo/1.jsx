@@ -977,6 +977,102 @@ this is harder to avoid. Modules resolve this issue and help us
 write well organized and reusable code.
 
 
+-: Module formats
+Here is a brief description of the different module formats that 
+TypeScript can transpile to:
+
+Asynchronous Module Definition (AMD): This is commonly used 
+in code targeted for the browser and uses a define function to define 
+modules.
+
+CommonJS: This format is used in Node.js programs. It uses 
+module.exports to define modules and require to define 
+dependencies.
+
+Universal Module Definition (UMD): This can be used in both 
+browser apps and Node.js programs.
+
+ES6: This is the native JavaScript module format and uses 
+the export keyword to define modules and import to define 
+dependencies.
+
+Exporting
+Exporting code from a module allows it to be used by other 
+modules. In order to export from a module, we use the export 
+keyword. We can specify that an item is exported using
+export directly before its definition. Exports can be applied 
+to interfaces, type aliases, classes, functions, constants, and 
+so on.
+
+Let's start to adjust our example code from the previous 
+section to operate in modules rather than the global scope:
+1. Firstly, let's export the Product interface:
+
+export interface Product {
+	name: string;
+	unitPrice: number;
+}
+
+2. After we make this change, the compiler will complain about 
+the reference to the Product interface in the OrderDetail class:
+This is because Product is no longer in the global scope but 
+OrderDetail still is. Let's look at alternative ways we can export 
+the Product  interface first.
+
+3. We can use an export statement beneath the item declarations. 
+We use the export keyword followed by a comma-delimited list 
+of item names to export in curly braces:
+
+interface Product {
+	name: string;
+	unitPrice: number;
+}
+
+export { Product }
+
+4. With this approach, we can also rename exported items using 
+the as keyword:
+
+interface Product {
+	name: string;
+	unitPrice: number;
+}
+
+export { Product as Stock }
+
+-: Importing
+Importing allows us to import items from an exported module. 
+We do this using an import statement that includes the item 
+names to import in curly braces and the file path to get the
+items from (excluding the ts extension).
+
+1. Let's resolve the issue with our OrderDetail class by 
+importing the Product interface:
+
+import { Product } from "./product";
+
+class OrderDetail {
+	product: Product;
+	quantity: number;
+
+	getTotal(discount: number): number {
+		const priceWithoutDiscount = this.product.unitPrice * this.quantity;
+		const discountAmount = priceWithoutDiscount * discount;
+		return priceWithoutDiscount - discountAmount;
+	}
+}
+
+2. We can rename imported items using the as keyword in 
+an import statement. We then reference the item in our code 
+using the new name:
+
+import { Product as Stock } from "./product"
+
+
+
+
+
+
 
 
 
