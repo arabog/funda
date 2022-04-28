@@ -1097,10 +1097,29 @@ found at https:/​ / ​ www.​ typescriptlang.​ org/​ docs/handbook/​
 compiler-​ options.​ html .
 
 
+-: TypeScript linting
+The compiler does lots of useful checks against our TypeScript 
+code to help us write error-free code. We can take this a step 
+further and lint the code to help us make our code even more 
+readable and maintainable.
+
+Installing TSLint
+We'll install TSLint in this section, along with a Visual Studio 
+Code extension that will highlight linting problems right in 
+the code:
+
+1. Let's install TSLint globally via npm , as follows:
+npm install -g tslint
+
+2. We need to click the Install option to install the extension.
+3. After it has been installed, we'll need to reload Visual Studio
+Code for the extension to become enabled.
+Now that this extension is installed, along with TSLint globally, 
+linting errors will be highlighted right in our code, as we'll see 
+in the following sections.
 
 
-
-
+-;
 
 
 
