@@ -1119,11 +1119,18 @@ linting errors will be highlighted right in our code, as we'll see
 in the following sections.
 
 
--;
+-; Code formatting
+Prettier, will automatically format our code. It will help us 
+adhere to some of the TSLint rules:
+1. Let's open Visual Studio Code, go to the Extensions area, 
+and type prettier in the search box. The extension is called 
+Prettier - Code formatter
 
-
+The last step is to make sure the Format on Save option is 
+ticked in User Settings. Press Ctrl +, (comma) to open the 
+settings screen and type Format On Save in the search box 
+to find the setting. If the setting isn't ticked, then tick it:
 
 https://www.typescriptlang.org/play/
 
-conti on pg 63
 */
