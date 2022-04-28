@@ -225,7 +225,17 @@ next-js-app
                                         - mutation2.js
 
 
+-: Data fetching
+Next.js allows us to fetch data on both the client and 
+server sides. Server-side data fetching could happen 
+in two different moments: at build time (using 
+getStaticProps for static pages), and at runtime (using
+getServerSideProps for server-side rendered pages).
 
+Even if it's technically possible for Next.js to access
+a database and query for specific data, I'd personally 
+discourage that approach as Next.js should only care 
+about the frontend of our application
 
 
 
