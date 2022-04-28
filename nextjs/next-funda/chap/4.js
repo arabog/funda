@@ -283,6 +283,23 @@ yourself and your users to many attacks,
 3. Never connect to a remote database from the browser.
 
 
+-: Consuming REST APIs on the client side
+While the server-side data fetching phase in Next.js only occurs 
+when declared inside its built-in getServerSideProps and 
+getStaticProps functions, if we make a fetch request inside a 
+given component, it will be executed on the client side by default.
+We usually want our client-side requests to run in two cases:
+          • Right after the component has mounted
+          • After a particular event occurs
+
+Let's try to
+recreate the same simple Next.js application from the previous 
+section, but move all the API calls to the client side.
+\
+Every file inside the pages/api/ directory will be considered by 
+Next.js as an API route.
+
+
 
 
 
