@@ -504,6 +504,10 @@ function move(animal: Fish | Bird | Human) {
 
 
 -: instanceof narrowing
+They can be useful for most values that can be constructed 
+with new . As you might have guessed, instanceof is also a 
+type guard, and TypeScript narrows in branches guarded by
+instanceof s.
 
 
 
@@ -515,15 +519,12 @@ cont on page 53
 https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
 */
 
-type Fish = {swim: () => void}
-type Bird = {fly: () => void}
-type Human = {swim?: () => void; fly?: () => void}
 
-function move(animal: Fish | Bird | Human) {
-          if("swim" in animal) {
-                    return animal;
+function move(x: Date | string) {
+          if(x instanceof Date) {
+                    console.log(x.toUTCString())  //x: Date
+          }else {
+                    console.log(x.toUpperCase())  //x: string
           }
-
-          return animal;
 }
 
