@@ -1,3 +1,4 @@
+/*
 https://www.typescriptlang.org/play/
 
 All the code snippets in this chapter can be found online at: 
@@ -311,9 +312,9 @@ const tableOrder: OrderDetail = {
           quantity: 1,
 
           getTotal(discount: number) : number {
-              const priceWithoutDiscount = this.product.unitPrice * this.quantity;
-              const discountAmount = priceWithoutDiscount * discount;
-              return priceWithoutDiscount - discountAmount;
+		const priceWithoutDiscount = this.product.unitPrice * this.quantity;
+		const discountAmount = priceWithoutDiscount * discount;
+		return priceWithoutDiscount - discountAmount;
           }
 };
 
@@ -792,6 +793,37 @@ complains about our Food class because it doesn't implement
 the delete method:
 
 
+-: Access modifiers
+So far, all our class properties and methods have automatically 
+had the public access modifier. This means they are available 
+to interact with class instances and child classes.
+
+class OrderDetail {
+	public product: Product;
+	public quantity: number;
+
+	public getTotal(discount: number): number {
+		const priceWithoutDiscount = this.product.unitPrice * this.quantity;
+		const discountAmount = priceWithoutDiscount * discount;
+		return priceWithoutDiscount - discountAmount;
+	}
+}
+
+There is another access modifier, called private , which allows
+the member to only be available to interact with inside the class 
+and not on class instances or child classes
+
+There is a third access modifier, protected , which allows the 
+member to be available to interact with inside the class and 
+on child classes, but not on class instances.
+
+
+
+
+
+
+
 https://www.typescriptlang.org/play/
 
-conti on pg 43
+conti on pg 63
+*/
