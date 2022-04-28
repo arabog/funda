@@ -300,8 +300,122 @@ Every file inside the pages/api/ directory will be considered by
 Next.js as an API route.
 
 
+-: Consuming GraphQL APIs
+GraphQL has been a game-changer in the API world, 
+and it is increasing its popularity thanks to its ease of 
+use, modularity, and flexibility.
+
+In this section, we will be using Apollo Client 
+(https://www.apollographql. com/docs/react ), a very 
+popular GraphQL client with built-in support for both 
+React and Next.js for building a very simple online 
+signbook. Let's start by creating a new project:
+npx create-next-app signbook
+
+Now, let's add a couple of dependencies:
+yarn add @apollo/client graphql isomorphic-unfetch
+
+We will need now to create an Apollo client for our 
+Next.js application. We will do that by creating a new 
+file inside lib/apollo/index.js and then writing the
+following function:
+
+import { useMemo } from 'react';
+import {
+          ApolloClient,
+          HttpLink,
+          InMemoryCache
+} from '@apollo/client';
+
+let uri = 'https://rwnjssignbook.herokuapp.com/v1/graphql';
+let apolloClient;
+
+function createApolloClient() {
+          return new ApolloClient({
+                    ssrMode: typeof window === 'undefined',
+                    link: new HttpLink({ uri }),
+                    cache: new InMemoryCache(),
+          });
+}
+
+As you can assume, by setting ssrMode: typeof 
+window === "undefined" , we will use the same Apollo 
+instance for both client and server. Also, ApolloClient
+uses the browser fetch API to make HTTP requests, so 
+we'll need to import a polyfill to make it work on the 
+server side; in that case, we'll be using isomorphic-unfetch .
+
+Inside the same lib/apollo/index.js file, let's add a new 
+function to initialize the Apollo client:
+
+export function initApollo(initialState = null) {
+          const client = apolloClient || createApolloClient();
+
+          if (initialState) {
+                    client.cache.restore({
+                              ...client.extract(),
+                              ...initialState
+                    });
+          }
+
+          if (typeof window === "undefined") {
+                    return client;
+          }
+
+          if (!apolloClient) {
+                    apolloClient = client;
+          }
+
+          return client;
+}
+
+This function will allow us to avoid recreating a new 
+Apollo client for each page. In fact, we will store a 
+client instance on the server (inside the previously written
+apolloClient variable), where we can pass an initial state 
+as an argument. If we pass that parameter to the initApollo 
+function, it will be merged with the local cache to
+restore a full representation of the state once we move to 
+another page.
+
+To achieve that, we will first need to add another import 
+statement to the lib/apollo/index.js file. Given that 
+re-initializing the Apollo client with a complex
+initial state can be an expensive task in terms of 
+performance, we will use the React useMemo hook 
+to speed up the process:
+import { useMemo } from "react";
+
+And then, we will export one last function:
+export function useApollo(initialState) {
+          return useMemo(
+                    () => initApollo(initialState),
+                    [initialState]
+          );
+}
+
+Moving to our pages/ directory, we can now create a new _app.js file
+
+import {ApolloProvider} from '@apollo/client'
+import {useApollo} from '../lib/apollo'
 
 
+export default function App({Component, pageProps}) {
+	
+	const apolloClient = useApollo(pageProps.initialApolloState);
 
-cont on pg 99
+	return (
+		<ApolloProvider client={apolloClient}>
+			<Component {...pageProps} />
+		</ApolloProvider>
+	)
+}
+
+We can finally start to write our queries!
+We will organize our queries inside a new folder 
+called lib/apollo/queries/ . Let's start by creating 
+a new file, lib/apollo/queries/getLatestSigns.js ,
+exposing the following GraphQL query:
+
+cont on pg 102
 */ 
