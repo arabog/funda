@@ -1,7 +1,6 @@
 import {Product} from './Product'
 
 
-
 class OrderDetail {
           product: Product;
           quantity: number;

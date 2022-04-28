@@ -1069,6 +1069,19 @@ using the new name:
 import { Product as Stock } from "./product"
 
 
+-: Default exports
+We can specify a single item that can be exported by default 
+using the default keyword: 
+export default interface {
+	name: string;
+	unitPrice: number;
+}
+
+Notice that we don't need to name the interface. We can then 
+import a default exported item using an import statement 
+without the curly braces with a name of our choice:
+
+import Product from "./product";
 
 
 
