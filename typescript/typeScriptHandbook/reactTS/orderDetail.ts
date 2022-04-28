@@ -1,3 +1,7 @@
+interface Product {
+          name: string;
+          unitPrice: number;
+}
 
 class OrderDetails {
           product: Product;

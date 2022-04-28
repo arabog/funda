@@ -1084,6 +1084,11 @@ without the curly braces with a name of our choice:
 import Product from "./product";
 
 
+-: Configuring compilation
+We need to compile our TypeScript code before it can be 
+executed in a browser. We do this by running the 
+TypeScript compiler, tsc ,  on the files we want to compile.
+
 
 
 
