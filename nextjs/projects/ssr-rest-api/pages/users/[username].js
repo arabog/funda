@@ -4,10 +4,17 @@ import axios from "axios";
 export async function getServerSideProps(ctx) {
           const { username } = ctx.query;
 
-          const userReq = await axios.get(`https://api.rwnjs.com/04/users/${username}`)
+          const userReq = await axios.get(
+                    `https://api.rwnjs.com/04/users/${username}`,
 
+                    {
+                              headers: { authorization: process.env.API_TOKEN }
+                    }
+          );
+
+          
           return {
-                    props: {user: userReq}
+                    props: {user: userReq.data}
           }
 }
 
