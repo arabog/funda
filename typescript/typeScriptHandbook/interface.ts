@@ -49,16 +49,6 @@ When a variable is analyzed, control flow can split off and
 re-merge over and over again, and that variable can be
 observed to have a different type at each point.
 
-
-
-
-
-
-
-
-
-*/
-
 function example() {
           let x: string | number | boolean;
 
@@ -74,4 +64,24 @@ function example() {
           }
 
           return x; //x: string | number
+}
+
+
+-: Using type predicates
+To define a user-defined type guard, we simply need to 
+define a function whose return type is a type predicate:
+
+
+
+
+
+
+
+
+*/
+type Fish = {swim: () => void}
+type Bird = {fly: () => void}
+
+function isFish(pet: Fish | Bird): pet is Fish {
+          return (pet as Fish).swim !== undefined;
 }
