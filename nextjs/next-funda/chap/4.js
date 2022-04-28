@@ -269,6 +269,19 @@ that you'll likely encounter while developing your
 Next.js applications.
 
 
+-: Fetching data on the client side
+When making HTTP requests on browsers, some specific 
+rules are not optional:
+1. Make HTTP requests to trusted sources only. You should 
+always do some research about who is developing the APIs 
+you're using and their security standards.
+
+2. Call HTTP APIs only when secured with an SSL certificate. 
+If a remote API is not secured under HTTPS, you're exposing 
+yourself and your users to many attacks,
+
+3. Never connect to a remote database from the browser.
+
 
 
 

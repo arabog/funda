@@ -5,14 +5,21 @@ export async function getServerSideProps(ctx) {
           const { username } = ctx.query;
 
           const userReq = await axios.get(
-                    `https://api.rwnjs.com/04/users/${username}`,
+                    `${process.env.API_ENDPOINT}/04/users/${username}`,
 
                     {
                               headers: { authorization: process.env.API_TOKEN }
                     }
           );
 
-          
+          // didn't work
+          if (userReq.status === 404) {
+                    return {
+                              notFound: true
+                    };
+          }          
+
+
           return {
                     props: {user: userReq.data}
           }
