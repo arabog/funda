@@ -251,11 +251,57 @@ We immediately get compiler warnings where we reference
 the properties in scores :
 
 
+-: Type checking with a type predicate
+One way we can perform type checking in a function is 
+with another function that has a return type as a type 
+predicate. Let's explore this and eventually create a 
+new version of our logScores function:
+1. First, we'll define a new function called scoresCheck 
+to do the necessary type checking:
+
+const scoresCheck = (scores: any): scores is {name: string; scores: number[]} => {
+          return 'name' in scores && 'scores' in scores;
+}
+
+This takes in a scores parameter that has a type predicate, 
+scores is { name: string; scores: number[] } , ensuring it 
+contains the correctly typed name and scores properties. 
+The function simply returns whether the scores parameter 
+contains the name and scores properties.
+
+Let's use this function in our logScores function:
+func
 
 
+function logScore(scores: unknown) {
+          if (scoresCheck(scores)) {
+                    console.log(scores.firstName);
 
+                    console.log(scores.scores);
+          }
+}
 
+We immediately get the compilation error we want:
+Property 'firstName' does not exist on type 
+'{ name: string; scores: number[]; }'.
 
+The type predicate, scores is { name: string, scores: number[] } ,
+allows the TypeScript compiler to narrow down the type in the 
+if block that logs the properties to the console. This results in 
+scores.scores compiling fine, but scores.firstName is giving 
+an error, which is just what we want.
+
+The type predicate is the key bit. Without it, the TypeScript 
+compiler will still throw errors on the valid scores.scores 
+reference.
+
+type Scores = {name: string; score: number[]}
+
+const scoreCheck(scores: any): scores as Scores => {
+          return 'name' in scores && 'scores' in scores;
+}
+
+Using a type predicate in this way is called a type guard.
 
 
 
@@ -264,3 +310,15 @@ https:/​ / ​ www.​ typescriptlang.​ org/play/
 
 conti on pg 88
 */ 
+
+const scoresCheck = (scores: any): scores is {name: string; scores: number[]} => {
+          return 'name' in scores && 'scores' in scores;
+}
+
+function logScore(scores: unknown) {
+          if (scoresCheck(scores)) {
+                    console.log(scores.firstName);
+
+                    console.log(scores.scores);
+          }
+}
