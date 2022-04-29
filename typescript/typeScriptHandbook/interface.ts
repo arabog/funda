@@ -455,27 +455,34 @@ const n = firstElement([1, 2, 3]);
 const u = firstElement([]);
 
 
+-: Inference
+Note that we didn't have to specify Type in this sample. The 
+type was inferred - chosen automatically - by TypeScript.
 
+We can use multiple type parameters as well. For example, 
+a standalone version of map would look like this:
 
+function map<Input, Output>(arr: Input[], func: (arg: Input) => Output): Output[] {
+          return arr.map(func)
+}
 
+// Parameter 'n' is of type 'string'
+// 'parsed' is of type 'number[]'
+const parsed = map(['1', '2', '3'], (n) => parseInt(n))
 
-
+Note that in this example, TypeScript could infer both the 
+type of the Input type parameter (from the given string array), 
+as well as the Output type parameter based on the return value 
+of the function expression ( number ).
 
 
 cont on pg 65
 */
-function firstElement<Type>(arr: Type[]): Type | undefined {
-          return arr[0];
+function map<Input, Output>(arr: Input[], func: (arg: Input) => Output): Output[] {
+          return arr.map(func)
 }
 
-// s is of type 'string'
-const s = firstElement(['a', 'b', 'c']);
-// n is of type 'number'
-const n = firstElement([1, 2, 3]);
-// u is of type undefined
-const u = firstElement([]);
+// Parameter 'n' is of type 'string'
+// 'parsed' is of type 'number[]'
 
-// function firstElement(arr: any[]) {
-//           return arr[0];
-// }
-
+const parsed = map(['1', '2', '3'], (n) => parseInt(n))
