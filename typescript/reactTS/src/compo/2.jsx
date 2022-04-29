@@ -41,6 +41,45 @@ The enhancements have been largely driven by the
 popularity of JavaScript's rest and spread syntax
 
 
+-: JavaScript rest and spread syntax
+In JavaScript, a rest parameter collects multiple arguments 
+and condenses them into a single argument. It is called rest 
+because it collects the rest of the arguments into a single
+argument.
+
+We define a rest parameter with three dots preceding the 
+parameter name.
+
+1. Let's create a logScores function that takes in a scores 
+rest parameter that just outputs the parameter to the console:
+function logScores(...scores) {
+          console.log(scores)
+}
+
+2. We can call logScores as follows:
+logScores(50, 85, 75);
+
+If we run this, we'll get an array of the three elements we passed 
+in as parameters output to the console. So, our scores parameter 
+has collected all the arguments into an array.
+
+The spread syntax is the opposite of rest parameters. It allows an 
+iterable, such as array, to be expanded into function arguments
+
+Let's redefine our logScore function with specific parameters:
+function logScore(score1, score2, score3) {
+          console.log(score1, score2, score3)
+}
+
+2. Let's define a scores array:
+const scores = [75, 65, 80];
+
+3. Finally, let's use the spread syntax to pass our scores 
+variable into our logScore function:
+logScore(...scores);
+
+
+
 
 
 https:/​ / ​ www.​ typescriptlang.​ org/play/
