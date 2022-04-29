@@ -215,7 +215,8 @@ with different values for the kind property, but radius and
 sideLength are declared as required properties in their 
 respective types.
 
-Let's see what happens here when we try to access the radius of a Shape .
+Let's see what happens here when we try to access the 
+radius of a Shape .
 
 function getArea(shape: Shape) {
           return Math.PI * shape.radius ** 2;
@@ -290,10 +291,58 @@ function getArea(shape: Shape) {
           }
 }
 
-
+===============
 -: The never type:
+TypeScript will use a never type to represent a state 
+which shouldn't exist.
+
+Exhaustiveness checking
+For example, adding a default to our getArea function which tries 
+to assign the shape to never will raise when every possible case 
+has not been handled.
+
+type Shape = Circle | Square
+
+function getArea(shape: Shape) {
+          switch(shape.kind) {
+                    case 'circle':
+                              return Math.PI * shape.radius ** 2;
+
+                    case 'square:
+                              return shape.sideLength ** 2;
+
+                    default: 
+                              const _exhaustiveCheck: never = shape;
+                              return _exhaustiveCheck;
+          }
+}
+
+Adding a new member to the Shape union, will cause 
+a TypeScript error:
+
+interface Triangle {
+          kind: "triangle";
+          sideLength: number;
+}
+
+type Shape = Circle | Square | Triangle;
+
+function getArea(shape: Shape) {
+          switch(shape.kind) {
+                    case 'circle':
+                              return Math.PI * shape.radius ** 2;
+
+                    case 'square:
+                              return shape.sideLength ** 2;
+
+                    default: 
+                              const _exhaustiveCheck: never = shape;
+                              // Type 'Triangle' is not assignable to type 'never'
+                              return _exhaustiveCheck;
+          }
+}
 
 
 
-cont on pg 55
+cont on pg 65
 */
