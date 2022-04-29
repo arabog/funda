@@ -1,15 +1,14 @@
 import React from 'react';
 import './App.css';
-import Utils from './compo/Utils';
+
+import Chap2 from './compo/Chap2';
 
 function App() {
 	
 
 	return (
 		<div className="App">
-			Hello
-
-			<Utils />
+			<Chap2 text= "Fred,Jane,Bob" />
 		</div>
 	);
 }

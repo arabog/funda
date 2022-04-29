@@ -334,15 +334,6 @@ type of the unknown variable so that the TypeScript
 compiler can be sure we are accessing valid
 members within it.
 
-
-
-
-
-
-
-
-
-
 https:/​ / ​ www.​ typescriptlang.​ org/play/
 
 conti on pg 88
