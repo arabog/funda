@@ -476,13 +476,87 @@ as well as the Output type parameter based on the return value
 of the function expression ( number ).
 
 
-cont on pg 65
-*/
-function map<Input, Output>(arr: Input[], func: (arg: Input) => Output): Output[] {
-          return arr.map(func)
+-: Constraints
+We've written some generic functions that can work on any kind 
+of value. Sometimes we want to relate two values, but can only 
+operate on a certain subset of values. In this case, we can use a
+constraint to limit the kinds of types that a type parameter can 
+accept.
+
+Let's write a function that returns the longer of two values. To do 
+this, we need a length property that's a number. We constrain the 
+type parameter to that type by writing an extends clause:
+
+function longest<Type extends {length: number} > (a: Type, b: Type) {
+          if(a.length >= b.length) {
+                    return a;
+          }else {
+                    return b;
+          }
 }
 
-// Parameter 'n' is of type 'string'
-// 'parsed' is of type 'number[]'
+// longerArray is of type 'number[]'
+const longerArray = longest([1, 2], [1, 2, 3]);
 
-const parsed = map(['1', '2', '3'], (n) => parseInt(n))
+// longerString is of type 'alice' | 'bob'
+const longerString = longest('alice', 'bob');
+
+// Error! Numbers don't have a 'length' property
+const notOk = longest(10, 100)
+
+Argument of type 'number' is not assignable to parameter of 
+type '{ length: number; }'
+
+
+Because we constrained Type to { length: number } , we were 
+allowed to access the .length property of the a and b parameters. 
+Without the type constraint, we wouldn't be able to access
+those properties because the values might have been some other 
+type without a length property.
+
+The types of longerArray and longerString were inferred 
+based on the arguments. Remember, generics are all about 
+relating two or more values with the same type!
+
+
+function minimumLength<Type extends {length: number}>(obj: Type, minimum: length): Type {
+          if (obj.length >= minimum) {
+                    return obj;
+          }else {
+                    return {length: minimum}
+
+                    Type '{ length: length; }' is not assignable to type 'Type'.
+                    '{ length: length; }' is assignable to the constraint of type 
+                    'Type', but 'Type' could be instantiated with a different subtype 
+                    of constraint '{ length: number; }'.
+
+          }
+} 
+
+It might look like this function is OK - Type is constrained to 
+{ length: number } , and the function either returns Type or a 
+value matching that constraint. The problem is that the function
+promises to return the same kind of object as was passed in, not 
+just some object matching the constraint. If this code were legal, 
+you could write code that definitely wouldn't work:
+
+// 'arr' gets value { length: 6 }
+const arr = minimumLength([1, 2, 3], 6);
+
+// and crashes here because arrays have
+// a 'slice' method, but not the returned object!
+console.log(arr.slice(0));
+
+
+cont on pg 65
+*/
+
+
+function minimumLength<Type extends {length: number}>(obj: Type, minimum: length): Type {
+          if (obj.length >= minimum) {
+                    return obj;
+          }else {
+                    return {length: minimum}
+
+          }
+} 
