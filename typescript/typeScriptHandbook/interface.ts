@@ -423,7 +423,36 @@ interface CallOrConstruct  {
 }
 
 
+-: Generic Functions
+It's common to write a function where the types of the input 
+relate to the type of the output, or where the types of two 
+inputs are related in some way. Let's consider for a moment 
+a function that returns the first element of an array:
 
+function firstElement(arr: any[]) {
+          return arr[0];
+}
+
+This function does its job, but unfortunately has the return 
+type any. It'd be better if the function returned the type of 
+the array element.
+
+In TypeScript, generics are used when we want to describe 
+a correspondence between two values.
+
+We do this by declaring a type parameter in the function 
+signature:
+
+function firstElement<Type>(arr: Type[]): Type | undefined {
+          return arr[0];
+}
+
+// s is of type 'string'
+const s = firstElement(['a', 'b', 'c']);
+// n is of type 'number'
+const n = firstElement([1, 2, 3]);
+// u is of type undefined
+const u = firstElement([]);
 
 
 
@@ -435,14 +464,18 @@ interface CallOrConstruct  {
 
 cont on pg 65
 */
-function greeter(fn: (a: string) => void) {
-          fn('Hello, World')
+function firstElement<Type>(arr: Type[]): Type | undefined {
+          return arr[0];
 }
 
-function printToConsole(s: string) {
-          console.log(s)
-}
+// s is of type 'string'
+const s = firstElement(['a', 'b', 'c']);
+// n is of type 'number'
+const n = firstElement([1, 2, 3]);
+// u is of type undefined
+const u = firstElement([]);
 
-greeter(printToConsole);
-
+// function firstElement(arr: any[]) {
+//           return arr[0];
+// }
 
