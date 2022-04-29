@@ -174,6 +174,90 @@ Type '[string]' is not assignable to type '[]'.
 Source has 1 element(s) but target allows only 0
 
 
+-: Optional tuple elements
+Optional elements are specified using a ? at the end of 
+the element type.
+
+type Scores = [number, number?, number?];
+
+So, we should be able to create variables to hold 
+between one and three scores:
+
+When defining optional elements in a tuple, they are 
+restricted to the end of the tuple. Let's try to define a 
+required element after an optional element:
+
+type ProblematicScores = [number?, number?, number];
+We get a compilation error, as expected:
+
+Optional elements also work in a function rest parameter. 
+type Scores = [number, number?, number?];
+
+function logScores(...scores: Scores) {
+          console.log(scores);
+}
+
+When we have optional parameters, it is likely our function's 
+implementation will need to know which arguments have been 
+passed. We can use the tuple's length property to do this:
+
+type Scores = [number, number?, number?];
+
+function logScoresEnhanced(...scores: Scores) {
+          if (scores.length === 3) {
+                    console.log(scores, "Thank you for logging all 3 scores");
+          }else {
+                    console.log(scores)
+          }
+}
+
+
+-: The unknown type
+Before TypeScript 3, we may
+have used the any type when we weren't sure of all the properties 
+and methods in an object from a third-party library. However, 
+when we declare a variable with the any type, the TypeScript 
+compiler won't do any type checking on it. The unknown type 
+can be used in these situations to make our code more type-safe. 
+This is because unknown types are type-checked. So, unknown 
+can often be used as an alternative to any .
+
+1. First, let's create a logScores function that takes in a parameter 
+of type any . It logs out the name and scores properties from the 
+argument to the console:
+
+function logScores(scores: any) {
+          console.log(scores.firstName);
+          console.log(scores.scores);
+}
+
+2. Let's call this function with the following:
+logScores({
+          name: "Billy",
+          scores: [60, 70, 75]
+});
+
+If we run the program, we get undefined(for firstName) 
+followed by [60, 70, 75]  in the console.
+
+3. Let's start to create a better version of this function 
+with the unknown type:
+function logScoresBetter(scores: unknown) {
+          console.log(scores.firstName);
+          console.log(scores.scores);
+}
+
+We immediately get compiler warnings where we reference 
+the properties in scores :
+
+
+
+
+
+
+
+
+
 
 
 https:/​ / ​ www.​ typescriptlang.​ org/play/
