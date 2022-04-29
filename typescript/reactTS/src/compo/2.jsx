@@ -79,6 +79,29 @@ variable into our logScore function:
 logScore(...scores);
 
 
+-: Open-ended tuples
+rest elements are similar to rest parameters, described in 
+the last section, but they work with tuple element types. 
+A rest element allows us to define an open-ended tuple.
+
+let's create a tuple with the first element being a
+string and subsequent elements being numbers:
+
+type Scores = [string, ...number[]]
+
+2. We should be able to use this structure to store someone's 
+name with an infinite amount of scores. Let's give this a go 
+for Billy and three scores:
+
+const billyScores: Scores = ["Billy", 60, 70, 75];
+
+3. Let's move on to try Sally and four scores:
+const sallyScores: Scores = ["Sally", 60, 70, 75, 70];
+
+Both these variables compile fine, as we would expect, 
+because we have defined the numbers as open-ended.
+
+-: Tuple function parameters
 
 
 
