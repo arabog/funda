@@ -126,7 +126,54 @@ function logNameAndScores(...scores: Scores) {
 logNameAndScores("Sally", 60, 70, 75, 70);
 
 
--: 
+-: Spread expressions
+function logScore(score1, score2, score3) {
+          console.log(score1 + ", " + score2 + ", " + score3);
+}
+const scores = [75, 65, 80];
+logScore(...scores);
+
+2. Let's resolve this now with enhanced tuples in 
+TypeScript 3. We'll start by adding types to the 
+function parameters:
+
+function logScore(score1: number, score2: number, score3: number) {
+
+}
+
+Let's change the scores variable into a fixed tuple:
+const scores: [number, number, number] = [75, 65, 80];
+
+function logScore(score1: number, score2: number, score3: number) {
+          console.log(score1 + ", " + score2 + ", " + score3);
+}
+const scores: [number, number, number] = [75, 65, 80];
+logScore(...scores);
+
+What about open-ended tuples?
+const scoresUnlimited: [...number[]] = [75, 65, 80];
+logScore(...scoresUnlimited);
+
+Unfortunately, the compiler is not yet quite clever enough to 
+let us do this. We get the compilation error
+
+
+-: Empty tuples
+1. Let's create the following type alias for an empty tuple:
+type Empty = [];
+
+2. Let's declare a variable of this type and assign it to an 
+empty array:
+const empty: Empty = []
+
+3. Now, let's try to declare a variable of this type and assign 
+it to a non-empty array:
+
+const notEmpty: Empty = ['Billy']
+Type '[string]' is not assignable to type '[]'.
+Source has 1 element(s) but target allows only 0
+
+
 
 
 https:/​ / ​ www.​ typescriptlang.​ org/play/
