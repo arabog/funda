@@ -5,7 +5,7 @@ import {
           InMemoryCache
 } from '@apollo/client';
 
-let uri = 'https://rwnjssignbook.herokuapp.com/v1/graphql';
+let url = 'https://rwnjssignbook.herokuapp.com/v1/graphql';
 let apolloClient;
 
 function createApolloClient() {

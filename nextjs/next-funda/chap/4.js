@@ -417,5 +417,15 @@ called lib/apollo/queries/ . Let's start by creating
 a new file, lib/apollo/queries/getLatestSigns.js ,
 exposing the following GraphQL query:
 
-cont on pg 102
+
+
+
+
+
+
+
+
+
+
+cont on pg 123
 */ 
