@@ -548,15 +548,40 @@ const arr = minimumLength([1, 2, 3], 6);
 console.log(arr.slice(0));
 
 
+-: Specifying Type Arguments
+TypeScript can usually infer the intended type arguments in a 
+generic call, but not always. For example, let's say you wrote 
+a function to combine two arrays:
+
+function combine<Type>(arr1: Type[], arr2: Type[]): Type[] {
+          return arr1.concat(arr2)
+}
+
+Normally it would be an error to call this function with 
+mismatched arrays:
+const arr = combine([1, 2, 3], ["hello"]);
+Type 'number' is not assignable to type 'string'.
+
+If you intended to do this, however, you could manually specify Type :
+
+const arr = combine<string | number>([1, 2, 3], ["hello"])
+
+
+-: Guidelines for Writing Good Generic Functions
+
+
+
+
+
+
+
+
+
+
+
+
+
 cont on pg 65
 */
 
 
-function minimumLength<Type extends {length: number}>(obj: Type, minimum: length): Type {
-          if (obj.length >= minimum) {
-                    return obj;
-          }else {
-                    return {length: minimum}
-
-          }
-} 
