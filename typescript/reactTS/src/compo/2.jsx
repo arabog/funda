@@ -102,7 +102,31 @@ Both these variables compile fine, as we would expect,
 because we have defined the numbers as open-ended.
 
 -: Tuple function parameters
+function logScores(...scores) {
+          console.log(scores);
+}
 
+We can now make this example strongly-typed with a 
+tuple rest parameter.
+function logScores(...scores: [...number[]]) {
+          console.log(scores);
+}
+
+logScores(50, 85, 75);
+
+We can create an enhanced version of our function that 
+uses the Scores type from the Open-ended tuples section.
+
+type Scores = {string, ...number[]}
+
+function logNameAndScores(...scores: Scores) {
+          console.log(scores)
+}
+
+logNameAndScores("Sally", 60, 70, 75, 70);
+
+
+-: 
 
 
 https:/​ / ​ www.​ typescriptlang.​ org/play/
