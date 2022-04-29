@@ -304,6 +304,43 @@ const scoreCheck(scores: any): scores as Scores => {
 Using a type predicate in this way is called a type guard.
 
 
+-: Type narrowing with a type assertion
+Type assertion lets us tell the compiler what the type is 
+with the as keyword.
+Let's create yet another version of our logScores function 
+as an example:
+1. First, let's create a type alias for the structure we want 
+the function parameter to be:
+
+type Scores = {
+          name: string;
+          scores: number[];
+}
+
+2. In our logScores function, we can now use the as keyword 
+to tell the compiler what type to expect:
+
+function logScores(scores: unknown) {
+          console.log((scores as Scores).firstName);
+          console.log((scores as Scores).scores);
+}
+
+The unknown type allows us to reduce our use of the 
+any type and create more strongly-typed and robust 
+TypeScript programs. We do have to write more code, 
+though, when referencing unknown types. The 
+additional code we need to write needs to check the 
+type of the unknown variable so that the TypeScript 
+compiler can be sure we are accessing valid
+members within it.
+
+
+
+
+
+
+
+
 
 
 https:/​ / ​ www.​ typescriptlang.​ org/play/
@@ -311,14 +348,16 @@ https:/​ / ​ www.​ typescriptlang.​ org/play/
 conti on pg 88
 */ 
 
-const scoresCheck = (scores: any): scores is {name: string; scores: number[]} => {
-          return 'name' in scores && 'scores' in scores;
-}
 
-function logScore(scores: unknown) {
-          if (scoresCheck(scores)) {
-                    console.log(scores.firstName);
 
-                    console.log(scores.scores);
-          }
-}
+// const scoresCheck = (scores: any): scores is {name: string; scores: number[]} => {
+//           return 'name' in scores && 'scores' in scores;
+// }
+
+// function logScore(scores: unknown) {
+//           if (scoresCheck(scores)) {
+//                     console.log(scores.firstName);
+
+//                     console.log(scores.scores);
+//           }
+// }
