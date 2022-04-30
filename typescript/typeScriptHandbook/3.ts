@@ -334,11 +334,76 @@ f(10);
 f(undefined);
 
 -: Optional Parameters in Callbacks
+function myForEach(arr: any[], callback: (arg: any, index?: number) => void ) {
+	for (let i = 0; i < arr.length; i++) {
+		callback(arr[i], i)
+		
+	}
+}
+
+myForEach([1, 2, 3], (a) => console.log(a));
+myForEach([1, 2, 3], (a, i) => console.log(i.toFixed()));
+
+function myForEach(arr: any[], callback: (arg: any, index: number) => void ) {
+	for (let i = 0; i < arr.length; i++) {
+		callback(arr[i], i)
+		
+	}
+}
+
+When writing a function type for a callback, never write 
+an optional parameter unless you intend to call the
+function without passing that argument
+
+
+-: Function Overloads
+In TypeScript, we can specify a function that can be called 
+in different ways by writing overload signatures.
+
+function fn(x: boolean): void;
+
+// Argument type isn't right
+function fn(x: string): void; 
+//This overload signature is not compatible with its 
+// implementation signature.(2394)
+
+function fn(x: boolean) {}
+
+function fn(x: string): string;
+// Return type isn't right
+function fn(x: number): boolean;
+
+function fn(x: string | number) {
+	return "oops";
+}
+
+
+function fn(x: string): number;
+// Return type isn't right
+function fn(arr: any[]): number;
+
+function fn(x: any) {
+	return x.length;
+}
+
+fn(""); // OK
+fn([0]); // OK
+
+Error
+fn(Math.random() > 0.5 ? 'Hello' : [0]);
+
+Always prefer parameters with union types instead 
+of overloads when possible
+
+function len(x: any[] | string) {
+          return x.length;
+}
 
 
 
 
 
 
-cont on pg 66
+
+cont on pg 76
 */ 
