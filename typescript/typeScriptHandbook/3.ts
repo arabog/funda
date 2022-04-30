@@ -540,9 +540,47 @@ function sum({ a, b, c }: ABC) {
 
 
 -: Assignability of Functions
+Return type void
+The void return type for functions can produce some unusual, 
+but expected behavior.
+
+A contextual function type with a void return type ( 
+type vf = () => void ), when implemented, can return any 
+other value, but it will be ignored.
+
+Thus, the following implementations of the type () => void 
+are valid:
+type voidFunc = () => void;
+
+const f1: voidFunc = () => {
+          return true;
+};
+
+const f2: voidFunc = () => true;
+
+const f3: voidFunc = function () {
+          return true;
+};
+
+And when the return value of one of these functions is assigned 
+to another variable, it will retain the type of void :
+const v1 = f1();
+const v2 = f2();
+const v3 = f3();
+
+There is one other special case to be aware of, when a literal 
+function definition has a void return type, that function must 
+not return anything.
+
+function f2(): void {
+	// Type 'boolean' is not assignable to type 'void'.
+	return true
+}
+
+const f3 = function ():void {
+	// Type 'boolean' is not assignable to type 'void'.
+          return true;
+}
 
 
-
-
-cont on pg 76
 */ 
