@@ -5,7 +5,7 @@ import cartContext from './context/cartContext'
 
 function Navbar() {
           const { items } = useContext(cartContext);
-          const totalItemsAmount = Object.values(items).reduce((x, y) => x + y, 0)
+          const totalItemsAmount = Object.values(items).reduce((x, y) => x + y, 0);
 
 
           return(
