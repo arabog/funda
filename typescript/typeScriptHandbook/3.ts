@@ -400,6 +400,104 @@ function len(x: any[] | string) {
 }
 
 
+-: Declaring this in a Function
+const user = {
+          id: 123,
+          admin: false,
+
+          becomeAdmin: function () {
+                    this.admin = true;
+          },
+};
+
+TypeScript understands that the function 
+user.becomeAdmin has a corresponding this which is
+the outer object user
+
+interface DB {
+          filterUsers(filter: (this: User) => boolean): User[];
+}
+
+const db = getDB();
+
+const admins = db.filterUsers(function (this: User) {
+          return this.admin;
+});
+
+Note that you need to use function and not arrow functions 
+to get this behavior:
+interface DB {
+          filterUsers(filter: (this: User) => boolean): User[];
+}
+
+const db = getDB();
+
+const admins = db.filterUsers(() => this.admin);
+
+
+-: Other Types to Know About
+void
+It's the inferred type any time a function doesn't have 
+any return statements, or doesn't return any explicit 
+value from those return statements:
+
+// The inferred return type is void
+function noop() {
+          return;
+}
+
+object
+Function types are considered to be object s in TypeScript.
+
+unknown
+The unknown type represents any value. This is similar to 
+the any type, but is safer because it's not legal to do 
+anything with an unknown value:
+
+function f1(a: any) {
+	a.b() //OK
+}
+
+function f2(a: unknown) {
+	a.b() //Object is of type 'unknown'.
+}
+
+function safeParse(s: string): unknown {
+          return JSON.parse(s);
+}
+// Need to be careful with 'obj'!
+const obj = safeParse(someRandomString);
+
+never
+Some functions never return a value:
+function fail(msg: string): never {
+          throw new Error(msg);
+}
+
+never also appears when TypeScript determines 
+there's nothing left in a union.
+
+function fn(x: string | number) {
+          if (typeof x === "string") {
+                    // do something
+          } else if (typeof x === "number") {
+                    // do something else
+          } else {
+                    x; // has type 'never'!
+          }
+}
+
+-: Rest Parameters and Arguments
+A rest parameter appears after all other parameters, 
+and uses the ... syntax:
+
+function multiply(n: number, ...m: number[]) {
+          return m.map((x) => n * x);
+}
+
+// 'a' gets value [10, 20, 30, 40]
+const a = multiply(10, 1, 2, 3, 4);
+
 
 
 
