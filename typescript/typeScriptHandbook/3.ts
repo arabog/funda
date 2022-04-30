@@ -498,7 +498,48 @@ function multiply(n: number, ...m: number[]) {
 // 'a' gets value [10, 20, 30, 40]
 const a = multiply(10, 1, 2, 3, 4);
 
+// Inferred type is number[] -- "an array with zero or more numbers",
+// not specifically two numbers
+const args = [8, 5];
+const angle = Math.atan2(...args);
 
+A spread argument must either have tuple 
+type or be passed to rest parameter.
+
+The best fix for this situation depends a bit on your code, but in 
+general a const context is the most straightforward solution:
+
+// Inferred as 2-length tuple
+const args = [8, 5] as const;
+
+// OK
+const angle = Math.atan2(...args);
+
+
+-: Parameter Destructuring
+In JavaScript, it looks like this:
+function sum({ a, b, c }) {
+          console.log(a + b + c);
+}
+
+sum({ a: 10, b: 3, c: 9 });
+
+The type annotation for the object goes after the 
+destructuring syntax:
+
+function sum({ a, b, c }: {a: number, b: number, c: number}) {
+          console.log(a + b + c);
+}
+
+This can look a bit verbose, but you can use a named type here as well:
+type ABC = {a: number, b: number, c: number}
+
+function sum({ a, b, c }: ABC) {
+          console.log(a + b + c);
+}
+
+
+-: Assignability of Functions
 
 
 
