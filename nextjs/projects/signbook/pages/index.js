@@ -15,8 +15,8 @@ function HomePage() {
 	if (loading) {
 		return <Loading />
 	}
-	console.log(data)
 
+	
 	return (
 		<div className="flex justify-center items-center flex-col mt-20">
 			<h1 className="text-3xl mb-5">Real-World Next.js signbook</h1>

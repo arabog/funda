@@ -8,7 +8,7 @@ import {useApollo} from '../lib/apollo'
 
 export default function App({Component, pageProps}) {
 	
-	const apolloClient = useApollo(pageProps.initialApolloState);
+	const apolloClient = useApollo(pageProps.initialApolloState || {});
 
 	return (
 		<ApolloProvider client={apolloClient}>
