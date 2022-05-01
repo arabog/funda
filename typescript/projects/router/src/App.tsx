@@ -8,12 +8,15 @@ import {
 import AdminPage from "./compo/AdminPage";
 import ProductsPage from './compo/ProductsPage';
 import Home from './compo/Home';
+import Navbar from './compo/Navbar';
 
 
 function App() {
 
 	return (
 		<div className="App">
+			<Navbar />
+			
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/products" element={<ProductsPage products={[]} />} />
