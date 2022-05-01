@@ -145,6 +145,46 @@ interface ReadonlyStringArray {
 }
 
 
+-: Extending Types
+It's pretty common to have types that might be more specific 
+versions of other types. For example, we might have a 
+BasicAddress type that describes the fields necessary for 
+sending letters and packages in the U.S.
+
+interface BasicAddress {
+          name?: string;
+          street: string;
+          city: string;
+          country: string;
+          postalCode: string;
+}
+
+In some situations that's enough, but addresses often have 
+a unit number associated with them if the building at an 
+address has multiple units. We can then describe an 
+AddressWithUnit .
+
+interface AddressWithUnit {
+          name?: string;
+          unit: string;
+          street: string;
+          city: string;
+          country: string;
+          postalCode: string;
+}
+
+AddressWithUnit can be rewritten as:
+interface AddressWithUnit extends BasidAddress {
+          unit: string
+}
+
+The extends keyword on an interface allows us to effectively 
+copy members from other named types, and add whatever 
+new members we want.
+
+interface s can also extend from multiple types.
+interface ColorfulCircle extends Colorful, Circle {}
+
 
 
 
