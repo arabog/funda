@@ -1,5 +1,6 @@
 import '../styles/globals.css'
-import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { Box, ChakraProvider, extendTheme } from '@chakra-ui/react'
+import TopBar from '../compon/TopBar'
 
 const customTheme = extendTheme({
 	colors: {
@@ -12,10 +13,18 @@ const customTheme = extendTheme({
 	},
 })
 
+
 function MyApp({ Component, pageProps }) {
+
+
 	return (
+		// <ChakraProvider theme={customTheme}>
 		<ChakraProvider theme={customTheme}>
-			<Component {...pageProps} />
+			<TopBar />
+
+			<Box maxWidth= 'container.xl' margin= 'auto' >
+				<Component {...pageProps} />
+			</Box>
 		</ChakraProvider>
 	)
 }
