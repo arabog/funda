@@ -280,9 +280,13 @@ type OneOrMany<Type> = Type | Type[];
 type OneOrManyOrNull<Type> = OrNull<OneOrMany<Type>>
 
 
+-: The Array Type
+Whenever we write out types like number[] or string[] , that's really 
+just a shorthand for Array<number> and Array<string>
 
 
-cont on pg 89
+
+cont on pg 94
 */ 
 
 interface Box<Type> {
