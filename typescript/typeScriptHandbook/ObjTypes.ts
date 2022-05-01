@@ -87,6 +87,7 @@ function visitForBirthday(home: Home) {
 
           home.resident.age++;
 }
+
 function evict(home: Home) {
           // But we can't write to the 'resident' property itself on a 'Home'.
           home.resident = {
@@ -98,8 +99,50 @@ function evict(home: Home) {
 }
 
 
+-: Index Signatures
+Sometimes you don't know all the names of a type's properties 
+ahead of time, but you do know the shape of the values.
+In those cases you can use an index signature to describe the 
+types of possible values, for example:
 
+interface StringArr {
+          [index: number]: string
+}
 
+Above, we have a StringArray interface which has an index 
+signature. This index signature states that when a 
+StringArray is indexed with a number , it will return a string .
+
+An index signature property type must be either 'string' or 'number'.
+
+In the following example, name 's type does not match the string 
+index's type, and the type checker gives an error:
+
+interface NumberDictionary {
+          [index: string]: number;
+
+          length: number; // ok
+          
+          name: string;
+          Property 'name' of type 'string' is not assignable to 'string' 
+          index type 'number'.
+}
+
+However, properties of different types are acceptable if the index 
+signature is a union of the property types:
+
+interface NumberOrStringDictionary {
+          [index: string]: number | string;
+          length: number; // ok, length is a number
+          name: string; // ok, name is a string
+}
+
+Finally, you can make index signatures readonly in order to 
+prevent assignment to their indices:
+
+interface ReadonlyStringArray {
+          readonly [index: number]: string;
+}
 
 
 
