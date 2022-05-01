@@ -9,6 +9,7 @@ import AdminPage from "./compo/AdminPage";
 import ProductsPage from './compo/ProductsPage';
 import Home from './compo/Home';
 import Navbar from './compo/Navbar';
+import ProductPage from './compo/ProductPage';
 
 
 function App() {
@@ -16,10 +17,14 @@ function App() {
 	return (
 		<div className="App">
 			<Navbar />
-			
+
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/products" element={<ProductsPage products={[]} />} />
+
+				<Route path="/pros" element={<ProductsPage products={[]} />} />
+
+				<Route path='/pros/:id' element={<ProductPage product={[]} />} />
+
 				<Route path="/admin" element={<AdminPage />} />
 			</Routes>
 		</div>
