@@ -284,14 +284,32 @@ type OneOrManyOrNull<Type> = OrNull<OneOrMany<Type>>
 Whenever we write out types like number[] or string[] , that's really 
 just a shorthand for Array<number> and Array<string>
 
+Much like the Box type above, Array itself is a generic type.
+
+interface Array<Type> {
+          * Gets or sets the length of the array.
+          length: number;
+
+          * Removes the last element from an array and returns it.
+          pop(): Type | undefined;
+          
+          * Appends new elements to an array, and returns the new length of the a
+          push(...items: Type[]): number;
+}
+
+Modern JavaScript also provides other data structures which are generic, 
+like Map<K, V> , Set<T> , and Promise<T> .
 
 
-cont on pg 94
+-: The ReadonlyArray Type
+
+
+cont on pg 95
 */ 
 
 interface Box<Type> {
           content: Type 
 }
 
-let box: Box<number> = {content: 25}
+let box: Box<number | string> = {content: 25}
 
