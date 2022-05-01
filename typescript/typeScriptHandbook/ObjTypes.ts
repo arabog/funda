@@ -186,17 +186,108 @@ interface s can also extend from multiple types.
 interface ColorfulCircle extends Colorful, Circle {}
 
 
+-: Intersection Types
+intersection types is mainly used to combine existing object
+types.
+
+An intersection type is defined using the & operator.
 
 
+interface Colorful {
+          color: string;
+}
 
+interface Circle {
+          radius: number;
+}
 
+type ColorfulCircle = Colorful & Circle
 
+Here, we've intersected Colorful and Circle to produce a new 
+type that has all the members of Colorful and Circle .
 
+function draw(circle: Colorful & Circle) {
+          console.log(`Color was ${circle.color}`);
+          console.log(`Radius was ${circle.radius}`);
+}
 
+// okay
+draw({ color: "blue", radius: 42 });
 
+// oops
+draw({ color: "red", raidus: 42 });
+
+generic type
+interface Box<Type> {
+          contents: Type;
+}
+
+Later on, when we refer to Box , we have to give a type 
+argument in place of Type .
+let box: Box<string>;
+
+Think of Box as a template for a real type, where Type is 
+a placeholder that will get replaced with some other type. 
+When TypeScript sees Box<string> , it will replace every 
+instance of Type in Box<Type> with string , and end up 
+working with something like { contents: string } . In
+other words, Box<string>
+
+interface Box<Type> {
+          contents: Type;
+}
+interface StringBox {
+          contents: string;
+}
+let boxA: Box<string> = { contents: "hello" };
+boxA.contents;
+
+Box is reusable in that Type can be substituted with anything. 
+That means that when we need a box for a new type, we don't 
+need to declare a new Box type at all (though we certainly 
+could if we wanted to).
+
+This also means that we can avoid overloads entirely by instead 
+using generic functions.
+
+interface Box<Type> {
+          contents: Type;
+}
+
+function setContents<Type>(box: Box<Type>, newContent: Type) {
+          box.content = newContent
+}
+
+It is worth noting that type aliases can also be generic. We could 
+have defined our new Box<Type> interface, which was:
+
+interface Box<Type> {
+          contents: Type;
+}
+
+by using a type alias instead:
+
+type Box<Type> = {
+          contents: Type;
+};
+
+Since type aliases, unlike interfaces, can describe more than just 
+object types, we can also use them to write other kinds of generic 
+helper types.
+
+type OrNull<Type> = Type | null;
+type OneOrMany<Type> = Type | Type[];
+type OneOrManyOrNull<Type> = OrNull<OneOrMany<Type>>
 
 
 
 
 cont on pg 89
 */ 
+
+interface Box<Type> {
+          content: Type 
+}
+
+let box: Box<number> = {content: 25}
+
