@@ -25,5 +25,4 @@ export default function HomeStyle() {
           );
 }
 
-
 // cont on pg 165
