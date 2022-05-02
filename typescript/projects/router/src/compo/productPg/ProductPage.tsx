@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import {Products, prods} from './ProductsData';
+import {Products, prods} from '../data/ProductsData';
 
 
 interface Display {

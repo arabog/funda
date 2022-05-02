@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './ProductsPage.css'
 
-import { prods, Products } from './ProductsData'
+import { prods, Products } from '../data/ProductsData'
 
 interface ProductState {
           products: Products[]
