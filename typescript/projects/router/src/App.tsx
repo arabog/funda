@@ -23,7 +23,7 @@ function App() {
 
 				<Route path="/pros" element={<ProductsPage products={[]} />} />
 
-				<Route path='/pros/:id' element={<ProductPage product={[]} />} />
+				<Route path='/pros/:id' element={<ProductPage product={[]} added = {false}  />} />
 
 				<Route path="/admin" element={<AdminPage />} />
 			</Routes>

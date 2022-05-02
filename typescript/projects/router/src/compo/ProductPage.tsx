@@ -1,29 +1,33 @@
 // import React, { useState } from 'react'
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {Products, prods} from './ProductsData';
 
-// type Props = {id: string };
 
 interface Display {
           product: Products[];
-          // added: boolean;
+          added: boolean;
 }
 
 const ProductPage: React.FC<Display> = () => {
+          const [added, setAdded] = useState<Boolean>(false);
+
           let params: any = useParams();
           let id = parseInt(params.id);
-          let product;
 
+          let product;
           
           const selectedProduct:any[] = prods.filter((prod) =>  (
                     prod.id === id ? prod : null
           ))
 
-          console.log(selectedProduct)
-
           for (const key in selectedProduct) {
                     product = (selectedProduct[key]);
+          }
+
+          const handleAddClick = () => {
+                    setAdded(true) 
           }
 
 
@@ -38,6 +42,14 @@ const ProductPage: React.FC<Display> = () => {
                                                             <p className="product-price">
                                                                       ${product.price}
                                                             </p>
+
+                                                            {
+                                                                      !added && (
+                                                                                <button onClick={handleAddClick}>
+                                                                                          Add to basket
+                                                                                </button>
+                                                                      )
+                                                            }
                                                   </>
                                         ) : (
                                                   <p>Product not found!</p>
