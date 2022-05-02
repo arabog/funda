@@ -302,9 +302,73 @@ like Map<K, V> , Set<T> , and Promise<T> .
 
 
 -: The ReadonlyArray Type
+function doStuff(values: ReadonlyArray<string>) {
+          // We can read from 'values'...
+          const copy = values.slice();
+          console.log(`The first value is ${values[0]}`);
+
+          // ...but we can't mutate 'values'.
+          values.push("hello!");
+          // Property 'push' does nt exist on type 'readonly string[]'
+}
+
+When we see a function that returns ReadonlyArrays, it tells us 
+we're not meant to change the contents at all, and when we see 
+a function that consumes ReadonlyArrays, it tells us that we can 
+pass any array into that function without worrying that it will 
+change its contents.
+
+Unlike Array , there isn't a ReadonlyArray constructor that we can use.
+new ReadonlyArray("red", "green", "blue");
+
+'ReadonlyArray' only refers to type, but is being used as value here
+
+Instead, we can assign regular Array s to ReadonlyArray s.
+const roArray: ReadonlyArray<string> = ["red", "green", "blue"];
+
+Just as TypeScript provides a shorthand syntax for Array<Type> with 
+Type[] , it also provides a shorthand syntax for ReadonlyArray<Type> 
+with readonly Type[]
+
+function doStuff(values: readonly string[]) {
+          // We can read from 'values'...
+          const copy = values.slice();
+          console.log(`The first value is ${values[0]}`);
+
+          // ...but we can't mutate 'values'.
+          values.push("hello!");
+          // Property 'push' does nt exist on type 'readonly string[]'
+}
+
+One last thing to note is that unlike the readonly property modifier, 
+assignability isn't bidirectional between regular Array s and ReadonlyArrays.
+
+let x: readonly string[] = [];
+let y: string[] = [];
+
+x = y;
+y = x;
+
+The type 'readonly string[]' is 'readonly' and cannot be assigned to 
+the mutable type type 'string[]
 
 
-cont on pg 95
+-: Tuple Types
+A tuple type is another sort of Array type that knows exactly how 
+many elements it contains, and exactly which types it contains at 
+specific positions.
+
+
+
+
+
+
+
+cont on pg 105
+
+ReactTS pg 174
+
+NextJS pg 169
 */ 
 
 interface Box<Type> {
