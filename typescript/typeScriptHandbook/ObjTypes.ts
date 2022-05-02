@@ -401,6 +401,23 @@ type StringNumberBooleans = [string, number, ...boolean[]];
 type StringBooleansNumber = [string, ...boolean[], number];
 type BooleansStringNumber = [...boolean[], string, number];
 
+Tuples types can be used in rest parameters and arguments, so 
+that the following:
+function readButtonInput(...args: [string, number, ...boolean[]]) {
+          const [name, version, ...input] = args;
+          // ...
+}
+
+readonly Tuple Types
+One final note about tuple types - tuples types have readonly variants, 
+and can be specified by sticking a readonly modifier in front of them - 
+just like with array shorthand syntax.
+
+function doSomething(pair: readonly [string, number]) {
+          // ...
+}
+
+
 
 
 
