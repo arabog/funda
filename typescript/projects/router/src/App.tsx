@@ -16,15 +16,21 @@ import PgNotFound from './compo/PgNotFound/PgNotFound';
 import Login from './compo/login/Login';
 
 
-type handleLogin = () => void
+type handleLogin = () => void;
+type handleLogout = () => void;
 
-function App() {
+
+const App = () => {
 	const [logIn, setLogIn] = useState<Boolean>(false);
 
 	const handleLogin:handleLogin = () => {
-		setLogIn(!logIn);
+		setLogIn(true);
 
 	}
+
+	const handleLogout:handleLogout = () => {
+		setLogIn(false)
+	} 
 
 	console.log(logIn);
 
@@ -36,16 +42,16 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/pros" element={<ProductsPage products={[]} />} />
 				<Route path='/pros/:id' element={<ProductPage product={[]} added = {false}  />} />
-				<Route path='/admin' element={<AdminPage />} />
-				<Route path='/login' element={<Login login={handleLogin} />} />
-				<Route path='*' element={<PgNotFound />} />
 
 				{
 					!logIn 
-						?  <Route path='/admin' element={<Navigate replace to='/login' />} /> 
-						: <Route path="/login" element= {<Navigate replace to='/admin' />} />
+					?  <Route path='/admin' element={<Navigate replace to='/login' />} /> 
+					: <Route path="/login" element= {<Navigate replace to='/admin' />} />
 				}
 
+				<Route path='/admin' element={<AdminPage signout={handleLogout} />} />
+				<Route path='/login' element={<Login login={handleLogin} />} />
+				<Route path='*' element={<PgNotFound />} />
 
 			</Routes>
 		</div>
