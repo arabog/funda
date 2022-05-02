@@ -417,15 +417,12 @@ function doSomething(pair: readonly [string, number]) {
           // ...
 }
 
+array literals with const assertions will be inferred with readonly 
+tuple types.
+
+let point = [3, 4] as const;
 
 
-
-
-cont on pg 105
-
-ReactTS pg 174
-
-NextJS pg 169
 */ 
 
 interface Box<Type> {
