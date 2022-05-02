@@ -13,22 +13,30 @@ interface Display {
 const ProductPage: React.FC<Display> = () => {
           let params: any = useParams();
           let id = parseInt(params.id);
+          let product;
 
-          const selectedProduct = prods.filter((prod) => prod.id === id)
+          
+          const selectedProduct:any[] = prods.filter((prod) =>  (
+                    prod.id === id ? prod : null
+          ))
 
-          const itemPro = selectedProduct ? prods[id] : null;
+          console.log(selectedProduct)
+
+          for (const key in selectedProduct) {
+                    product = (selectedProduct[key]);
+          }
 
 
           return (
                     <div className="page-container">
                               {
-                                        selectedProduct ? (
+                                        product ? (
                                                   <>
-                                                            <h1>{itemPro?.name}</h1>
-                                                            <p>{itemPro?.description}</p>
+                                                            <h1>{product.name}</h1>
+                                                            <p>{product.description}</p>
 
                                                             <p className="product-price">
-                                                                      ${itemPro?.price}
+                                                                      ${product.price}
                                                             </p>
                                                   </>
                                         ) : (
