@@ -358,8 +358,48 @@ A tuple type is another sort of Array type that knows exactly how
 many elements it contains, and exactly which types it contains at 
 specific positions.
 
+type StringNumberPair = [string, number]
 
+To the type system, StringNumberPair describes arrays whose 
+0 index contains a string and whose 1 index contains a number .
 
+function doSmth(pair: [string, number]) {
+          const  a = pair[0]  // const a: string
+
+          const b = pair[1] // const b: number
+}
+
+doSmth(['hello', 42])
+
+If we try to index past the number of elements, we'll get an error.
+function doSomething(pair: [string, number]) {
+          // ...
+          const c = pair[2];
+}
+
+We can also destructure tuples using JavaScript's array destructuring.
+
+function doSmth(stringHash: [string, number]) {
+          const [inputStr, hash] = stringHash
+
+          console.log(inputStr)         // const inputStr: string
+
+          console.log(hash)             //const hash: number
+}
+
+Tuple types are useful in heavily convention-based APIs, where 
+each element's meaning is "obvious".
+
+Tuples can have optional properties by writing out a question 
+mark ( ? after an element's type). Optional tuple elements can 
+only come at the end
+
+type Either2dOr3d = [number, number, number?];
+
+Tuples can also have rest elements, which have to be an array/tuple type.
+type StringNumberBooleans = [string, number, ...boolean[]];
+type StringBooleansNumber = [string, ...boolean[], number];
+type BooleansStringNumber = [...boolean[], string, number];
 
 
 
