@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams,  useNavigate } from 'react-router-dom';
 
-import  UserInfo from './UserInfo';
 
 
 function randomUser() {
@@ -13,9 +12,9 @@ function randomUser() {
 // https://stackblitz.com/github/remix-run/react-router/tree/main/examples/search-params?file=src%2FApp.tsx
 
 const Home = () => {
+          const navigate = useNavigate()
           const [searchParams, setSearchParams] = useSearchParams ()
           let user = searchParams.get('user');
-          // let user = searchParams.get('user');
 
           const [userData, setUserData] = useState<any>(null);
 
@@ -67,11 +66,16 @@ const Home = () => {
                     }
           }
 
+          const handleHome = () => {
+                    navigate('/')
+                    window.location.reload()
+          }
+
           
           return (
                     <div>
                               {
-                                        user ? (
+                                        userData ? (
                                                   <>
                                                             <h1>Search Params Example</h1>
                               
@@ -101,7 +105,32 @@ const Home = () => {
                                                                       </form>      
                                                             </div>   
                               
-                                                            <UserInfo data={userData} />
+                                                            <div
+                                                                      style={{
+                                                                                padding: "24px",
+                                                                                margin: "24px 0",
+                                                                                borderTop: "1px solid #eaeaea",
+                                                                                display: "flex",
+                                                                                flexDirection: 'column',
+                                                                                alignItems: "center",
+                                                                                gap: "16px",
+                                                                      }}
+                                                            >
+                                                                      <img
+                                                                                style={{ borderRadius: "50%" }}
+                                                                                width={200}
+                                                                                height={200}
+                                                                                src={userData.avatar_url}
+                                                                                alt={userData.login}
+                                                                      />
+
+                                                                      <div>
+                                                                                <h2>{userData.name}</h2>
+                                                                                <p>{userData.bio}</p>
+                                                                      </div>
+
+                                                                      <button onClick={() =>handleHome()}> Home </button>
+                                                            </div>  
                                                   </>
                                         ) : (
                                                   <>
