@@ -10,9 +10,12 @@ function randomUser() {
           return users[Math.floor(Math.random() * users.length)];
 }
 
+// https://stackblitz.com/github/remix-run/react-router/tree/main/examples/search-params?file=src%2FApp.tsx
+
 const Home = () => {
           const [searchParams, setSearchParams] = useSearchParams ()
           let user = searchParams.get('user');
+          // let user = searchParams.get('user');
 
           const [userData, setUserData] = useState<any>(null);
 

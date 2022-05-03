@@ -13,7 +13,7 @@ function App() {
 		<div>
 			<Routes>
 				<Route path='/' element={<Home />} />
-				<Route path='/info' element={<UserInfo />} />
+				<Route path='/?user' element={<UserInfo />} />
 				<Route path='*' element = {<NoMatch />} />
 			</Routes>
 		</div>

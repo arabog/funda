@@ -20,6 +20,7 @@ const Home = (props: any) => {
                                                                       margin: "24px 0",
                                                                       borderTop: "1px solid #eaeaea",
                                                                       display: "flex",
+                                                                      flexDirection: 'column',
                                                                       alignItems: "center",
                                                                       gap: "16px",
                                                             }}
