@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams  } from 'react-router-dom'
 import './ProductsPage.css'
 
 import { prods, Products } from '../data/ProductsData'
 
 interface ProductState {
-          products: Products[]
+          products: Products[];
+          search: string;
 }
 
 
 const ProductsPage: React.FC<ProductState> = () => {
-          const [pros, setProducts] = useState<any[]>([])
+          const [searchParams]: any = useSearchParams()
+
+
+          const [pros, setProducts] = useState<any[]>([]);
+          // const [search, setSearch] = useState<any[]>('');
 
           useEffect(() => {
                     setProducts(prods)

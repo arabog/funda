@@ -33,7 +33,6 @@ const App = () => {
 		setLogIn(false)
 	} 
 
-	console.log(logIn);
 
 	return (
 		<div className="App">
@@ -41,7 +40,7 @@ const App = () => {
 
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/pros" element={<ProductsPage products={[]} />} />
+				<Route path="/pros" element={<ProductsPage products={[]} search='' />} />
 				<Route path='/pros/:id' element={<ProductPage product={[]} added = {false}  />} />
 
 				{
