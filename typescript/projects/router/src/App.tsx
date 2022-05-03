@@ -19,7 +19,6 @@ import Login from './compo/login/Login';
 type handleLogin = () => void;
 type handleLogout = () => void;
 
-// cont on pg 174
 
 
 const App = () => {

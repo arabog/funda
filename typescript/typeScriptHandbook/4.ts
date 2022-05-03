@@ -104,7 +104,7 @@ funtion loggingId<Type>(arg: Type[]): Type[] {
 
 cont on pg 105
 
-ReactTS pg 174
+ReactTS pg 194
 
 NextJS pg 169
 */ 
