@@ -106,5 +106,5 @@ cont on pg 105
 
 ReactTS pg 194
 
-NextJS pg 169
+NextJS pg 184
 */ 
