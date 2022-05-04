@@ -42,7 +42,7 @@ const App = () => {
 				<Route path="/" element={<Home />} />
 				<Route path="/pros" element={<ProductsPage products={[]} search='' />} />
 				<Route path='/pros/:id' element={<ProductPage product={[]} added = {false}  />} />
-
+				
 				{
 					!logIn 
 					?  <Route path='/admin' element={<Navigate replace to='/login' />} /> 

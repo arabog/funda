@@ -29,7 +29,7 @@ const ProductPage: React.FC<Display> = () => {
           const handleAddClick = () => {
                     setAdded(true) 
           }
-
+          
 
           return (
                     <div className="page-container">
