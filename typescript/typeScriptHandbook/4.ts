@@ -108,6 +108,63 @@ function loggingIdentity<Type>(arg: Array<Type>): Array<Type> {
 }
 
 -: Generic Types
+function identity<Type>(arg: Type): Type {
+          return arg;
+}
+
+let myIdentity:<Type> (arg: Type) => Type = identity
+
+We could also have used a different name for the generic 
+type parameter in the type, so long as the number of type
+ variables and how the type variables are used line up.
+
+ function identity<Type>(arg: Type): Type {
+          return arg;
+ }
+ 
+ let myIdentity: <Input>(arg: Input) => Input = identity;
+
+We can also write the generic type as a call signature of 
+an object literal type:
+
+function identity<Type>(arg: Type): Type {
+          return arg;
+}
+
+let myIdentity: { <Type>(arg: Type): Type } = identity;
+
+Let's take the object literal from the previous
+example and move it to an interface:
+
+interface GenericIdentityFn {
+          <Tyoe>(arg: Type): Type;
+}
+
+function identity<Type>(arg: Type): Type {
+          return arg;
+}
+
+let myIdentity: GenericIdentity = identity
+
+
+-: Generic Classes
+A generic class has a similar shape to a generic interface. 
+Generic classes have a generic type parameter list in angle 
+brackets ( <> ) following the name of the class.
+
+class GenericNumber<NumType> {
+          zeroValue: NumType;
+          add: (x: NumType, y: NumType) => NumType;
+}
+
+let myGenericNumber = new GenericNumber<number>();
+myGenericNumber.zeroValue = 0;
+
+myGenericNumber.add = function (x, y) {
+          return x + y;
+};
+
+
 
 
 
