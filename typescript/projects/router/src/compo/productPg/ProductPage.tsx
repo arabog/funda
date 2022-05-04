@@ -33,6 +33,7 @@ const ProductPage: React.FC<Display> = () => {
 
           return (
                     <div className="page-container">
+                              
                               {
                                         product ? (
                                                   <>

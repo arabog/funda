@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import './App.css';
+
+import logo from './logo.svg'
 
 import {
 	Routes,
@@ -7,13 +9,17 @@ import {
 	Navigate,
 } from "react-router-dom";
 
-import AdminPage from "./compo/admin/AdminPage";
 import ProductsPage from './compo/ProductsPage/ProductsPage';
 import Home from './compo/home/Home';
 import Navbar from './compo/navbar/Navbar';
 import ProductPage from './compo/productPg/ProductPage';
 import PgNotFound from './compo/PgNotFound/PgNotFound';
 import Login from './compo/login/Login';
+import AdminUsers from './compo/admin/AdminUsers';
+import AdminProducts from './compo/admin/AdminProducts';
+import AdminUser from './compo/admin/AdminUser';
+
+const AdminPage = React.lazy(() => import("./compo/admin/AdminPage"));
 
 
 type handleLogin = () => void;
@@ -45,11 +51,22 @@ const App = () => {
 				
 				{
 					!logIn 
-					?  <Route path='/admin' element={<Navigate replace to='/login' />} /> 
-					: <Route path="/login" element= {<Navigate replace to='/admin' />} />
+						? <Route path='/admin' element={ <Navigate replace to='/login' /> } /> 
+						: <Route path="/login" element= { <Navigate replace to='/admin' /> } />
 				}
 
-				<Route path='/admin' element={<AdminPage signout={handleLogout} />} />
+				<Route path='/admin' element={
+					<Suspense fallback={<div>Loading.... <img src={logo} className="header-logo" alt="logo" /> </div>}>
+						<AdminPage signout={handleLogout} />
+					</Suspense>
+				}>
+					<Route path='users' element={<AdminUsers />}>
+						<Route path='/admin/users/:id' element={<AdminUser user={[]} />} />
+					</Route>
+
+					<Route path='products' element={<AdminProducts />} />
+				</Route>
+
 				<Route path='/login' element={<Login login={handleLogin} />} />
 				<Route path='*' element={<PgNotFound />} />
 

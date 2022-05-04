@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import './ProductsPage.css'
-
 import { prods, Products } from '../data/ProductsData'
+
+// const params = useLocation().search
+// const queryParams = new URLSearchParams(params)
+// const signle = queryParams.get('item')
+// console.log(signle);
+
+// const [searchParams, setSearchParams] = useSearchParams()
+// let item = searchParams.get('item') || '';
+
 
 interface ProductState {
           products: Products[];
@@ -19,16 +27,6 @@ const ProductsPage: React.FC<ProductState> = () => {
           useEffect(() => {
                     setProducts(prods)
           }, [])
-
-          // const params = useLocation().search
-          // const queryParams = new URLSearchParams(params)
-          // const signle = queryParams.get('item')
-          // console.log(signle);
-
-          // const [searchParams, setSearchParams] = useSearchParams()
-          // let item = searchParams.get('item') || '';
-
-
 
           const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
                     e.preventDefault()

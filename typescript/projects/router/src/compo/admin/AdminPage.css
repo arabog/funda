@@ -1,0 +1,15 @@
+.admin-sections {
+          list-style: none;
+          margin: 0px 0px 20px 0px;
+          padding: 0;
+}
+
+.admin-sections li {
+          display: inline-block;
+          margin-right: 10px;
+}
+
+.admin-sections li a {
+          color: #222;
+          text-decoration: none;
+}
