@@ -101,6 +101,16 @@ funtion loggingId<Type>(arg: Type[]): Type[] {
           return arg;
 }
 
+We can alternatively write the sample example this way:
+function loggingIdentity<Type>(arg: Array<Type>): Array<Type> {
+          console.log(arg.length); // Array has a .length, so no more error
+          return arg;
+}
+
+-: Generic Types
+
+
+
 
 cont on pg 116
 
