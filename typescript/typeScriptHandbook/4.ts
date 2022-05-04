@@ -202,6 +202,14 @@ loggingIdentity(3);
 Argument of type 'number' is nt assignable to parameter of type 'Lengthwise'
 
 
+-: Using Type Parameters in Generic Constraints
+You can declare a type parameter that is constrained by 
+another type parameter. For example, here
+we'd like to get a property from an object given its name. 
+We'd like to ensure that we're not accidentally grabbing a 
+property that does not exist on the obj , so we'll place a 
+constraint between the two types:
+
 
 
 
