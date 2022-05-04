@@ -210,6 +210,23 @@ We'd like to ensure that we're not accidentally grabbing a
 property that does not exist on the obj , so we'll place a 
 constraint between the two types:
 
+function getProperty<Type, Key extends keyof Type>(obj: Type, key: Key) {
+          return obj[key];
+}
+
+let x = { a: 1, b: 2, c: 3, d: 4 };
+
+getProperty(x, 'a');
+getProperty(x, 'm');
+Argument of type '"m"' is not assignable to parameter of type '"a" | "b" | "c" | "d"'.
+
+-: Using Class Types in Generics
+When creating factories in TypeScript using generics, it is necessary 
+to refer to class types by their constructor functions. For example,
+
+function create<Type>(c: { new (): Type }): Type {
+          return new c();
+}
 
 
 
