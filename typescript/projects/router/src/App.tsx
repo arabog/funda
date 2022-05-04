@@ -25,7 +25,8 @@ const AdminPage = React.lazy(() => import("./compo/admin/AdminPage"));
 type handleLogin = () => void;
 type handleLogout = () => void;
 
-
+// https://reactrouter.com/docs/en/v6/getting-started/tutorial
+// https://reactcommunity.org/react-transition-group/
 
 const App = () => {
 	const [logIn, setLogIn] = useState<Boolean>(false);
