@@ -164,6 +164,44 @@ myGenericNumber.add = function (x, y) {
           return x + y;
 };
 
+-: Generic Constraints
+In our loggingIdentity example, we wanted to be able to 
+access the .length property of arg , but the compiler could 
+not prove that every type had a .length property, so it
+warns us that we can't make this assumption.
+
+function loggingIdentity<Type>(arg: Type): Type {
+          console.log(arg.length);
+          // Property 'length' does nt exist on type 'Type'
+
+          return arg
+}
+
+Instead of working with any and all types, we'd like to 
+constrain this function to work with any and all types 
+that have the .length property
+
+To do so, we'll create an interface that describes our constraint. 
+Here, we'll create an interface that has a single .length property 
+and then we'll use this interface and the extends keyword to
+denote our constraint:
+
+interface Lengthwise {
+          length: number;
+}
+
+function loggingIdentity<Type extends Lengthwise>(arg: Type): Type {
+          console.log(arg.length) // // Now we know it has a .length property
+          return arg;
+}
+
+Because the generic function is now constrained, it will no longer 
+work over any and all types:
+
+loggingIdentity(3);
+Argument of type 'number' is nt assignable to parameter of type 'Lengthwise'
+
+
 
 
 
