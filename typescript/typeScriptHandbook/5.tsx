@@ -117,7 +117,7 @@ type key = "age";
 type Age = Person[key];
 
 
-cont on pg 119
+cont on pg 130
 
 ReactTS pg 214
 
