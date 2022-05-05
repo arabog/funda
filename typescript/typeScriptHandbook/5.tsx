@@ -119,7 +119,7 @@ type Age = Person[key];
 
 cont on pg 119
 
-ReactTS pg 194
+ReactTS pg 214
 
 NextJS pg 207
 
