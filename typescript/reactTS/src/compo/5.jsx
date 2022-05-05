@@ -94,17 +94,52 @@ class Company {
 We also have a union type combining both of these classes:
 type PersonOrCompany = Person | Company;
 
+We now need to write a function that takes in a Person or 
+Company and outputs their name to the console:
+function logName(personOrCompany: PersonOrCompany) {
+          if (personOrCompany instanceof Person) {
+                    console.log(`${personOrCompany.firstName} ${personOrCompany.surname}`);
+          } else {
+                    console.log(personOrCompany.name);
+          }
+}
 
+When using instanceof , we have the variable we are 
+checking before it and the constructor name (the class 
+name) after it.
 
+-: Using the in keyword
+The in keyword is another JavaScript keyword that can be 
+used to check whether a property is in an object.
 
+interface IPerson {
+          id: number;
+          firstName: string;
+          surname: string;
+}
 
+interface ICompany {
+          id: number;
+          name: string;
+}
 
+We again create a union type from the Person and Company structures:
 
+type PersonOrCompany = IPerson | ICompany;
 
+function logName(personOrCompany: PersonOrCompany) {
+          if ("firstName" in personOrCompany){
+                    console.log(`${personOrCompany.firstName} ${personOrCompany.surname}`);
+          } else {
+                    console.log(personOrCompany.name);
+          }
+}
 
+We put the property name in double quotes before the in keyword, 
+followed by the object to check.
 
-
-
+The in keyword is pretty flexible. It can be used with any object to 
+narrow down its type by checking if a property exists.
 
 
 
