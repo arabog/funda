@@ -76,6 +76,32 @@ function firstEnhanced(stringOrArray: StringOrStringArray): string {
 
 The TypeScript compiler is now happy again.
 
+-: Using the instanceof keyword
+The instanceof keyword is another JavaScript keyword. It checks whether an object has a
+particular constructor function. It is typically used to determine whether an object is an
+instance of a class.
+
+class Person {
+          id: number;
+          firstName: string;
+          surname: string;
+}
+class Company {
+          id: number;
+          name: string;
+}
+
+We also have a union type combining both of these classes:
+type PersonOrCompany = Person | Company;
+
+
+
+
+
+
+
+
+
 
 
 
