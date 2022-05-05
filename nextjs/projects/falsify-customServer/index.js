@@ -16,6 +16,6 @@ fastify
           })
 
 
-fastify.listen(3003, () => {
-          console.log('Server listening on http://localhost:3003')
+fastify.listen(3001, () => {
+          console.log('Server listening on http://localhost:3001')
 })
