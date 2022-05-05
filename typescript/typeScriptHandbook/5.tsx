@@ -117,5 +117,10 @@ type key = "age";
 type Age = Person[key];
 
 
+cont on pg 119
+
+ReactTS pg 194
+
+NextJS pg 204
 
 */ 

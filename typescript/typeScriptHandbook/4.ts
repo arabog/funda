@@ -228,13 +228,4 @@ function create<Type>(c: { new (): Type }): Type {
           return new c();
 }
 
-
-
-
-
-cont on pg 119
-
-ReactTS pg 194
-
-NextJS pg 184
 */ 
