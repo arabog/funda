@@ -247,9 +247,37 @@ public add(item: T) {
           this.data.push(item);
 }
 
-We reference the data item being passed in with the generic type T
+We reference the data item being passed in with the generic 
+type T
 
+-: Overload signatures
+Overload signatures allow a function to be called with different 
+signatures. This feature can be used nicely to streamline a set 
+of functions that a library offers to consumers.
 
+We have a function that removes spaces from a string:
+function condenseString(string: string): string {
+          return string.split(" ").join("");
+}
+
+We have another function that removes spaces from array items:
+function condenseArray(array: string[]): string[] {
+          return array.map(item => item.split(" ").join(""));
+}
+
+We now want to combine these two functions into a single function. 
+We can do this as follows using union types:
+
+function condense(stringOrArray: string | string[]): string | string[] {
+          return typeof stringOrArray === "string"
+                    ? stringOrArray.split(" ").join("")
+                    : stringOrArray.map(item => item.split(" ").join(""));
+
+Let's consume our unified function:
+const condensedText = condense("the cat sat on the mat");
+
+As we enter the function parameter, IntelliSense reminds us 
+that we need to enter a string or an array of strings:
 
 
 
