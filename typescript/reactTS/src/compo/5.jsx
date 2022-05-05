@@ -174,11 +174,49 @@ TypeScript compiler narrow down the type. To confirm this,
 hovering over personOrCompany in the first branch should 
 give the IPerson type.
 
+-: Generics
+Generics can be applied to a function or a whole class.
 
+-: Generic functions
+Let's go through an example of a generic function. We are going 
+to create a wrapper function around the fetch JavaScript function 
+for getting data from a web service:
 
+function getData<T>(url: string): Promise<T> {}
 
+We place a T in angled brackets after the function name to denote 
+that it is a generic function. We can actually use any letter, but T is 
+commonly used. We then use T in the signature where the type is 
+generic. In our example, the generic bit is the return type, so we 
+are returning Promise<T> .
 
+If we wanted to use an arrow function, this would be:
+const getData = <T>(url: string): Promise<T> => {};
 
+Let's now implement our function:
+
+function getData<T>(url: string): Promise<T> {
+          return (
+                    fetch(url)
+                              .then(response => {
+                              if (!response.ok) {
+                                        throw new Error(response.statusText);
+                              }
+
+                              return response.json();
+                    });
+          )
+}
+
+Finally, let's consume the function:
+
+interface IPerson {
+          id: number;
+          name: string;
+}
+
+getData<IPerson>("/people/1")
+          .then(person => console.log(person));
 
 
 
