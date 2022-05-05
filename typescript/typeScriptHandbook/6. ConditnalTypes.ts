@@ -85,7 +85,42 @@ const conforms: OnlyBoolsAndHorses = {
           rodney: false,
 };
 
+-: Mapping Modifiers
+You can remove or add these modifiers by prefixing with - 
+or + . If you don't add a prefix, then + is assumed.
 
+// Removes 'readonly' attributes from a type's properties
+type CreateMutable<Type> = {
+          -readonly [Property in keyof Type]: Type[Property];
+};
+
+type LockedAccount = {
+          readonly id: string;
+          readonly name: string;
+};
+
+type UnlockedAccount = CreateMutable<LockedAccount>;
+
+// Removes 'optional' attributes from a type's properties
+type Concrete<Type> = {
+          [Property in keyof Type]-?: Type[Property];
+};
+
+type MaybeUser = {
+          id: string;
+          name?: string;
+          age?: number;
+};
+
+type User = Concrete<MaybeUser>;
+
+Key Remapping via as
+In TypeScript 4.1 and onwards, you can re-map keys in mapped 
+types with an as clause in a mapped type:
+
+type MappedTypeWithNewProperties<Type> = {
+          [Properties in keyof Type as NewKeyType]: Type[Properties]
+}
 
 
 
