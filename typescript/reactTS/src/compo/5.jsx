@@ -218,11 +218,36 @@ interface IPerson {
 getData<IPerson>("/people/1")
           .then(person => console.log(person));
 
+We pass the type we want to use in the function in angle 
+brackets after the function name. In our case, it is IPerson .
 
 
+-:Generic classes
+We can make a whole class generic.
 
+class List<T> {}
 
+We mark the class as generic by putting <T> after the class name.
 
+Inside the class, let's create a private property for the data in the list:
+private data: T[] = [];
+
+We refer to the generic type using T . In our example, our data 
+property is an array of whatever type the class has been declared with.
+
+Let's now add a public method to get all the data in the list:
+public getList(): T[] {
+          return this.data;
+}
+
+We reference the generic array as the return type with T[] .
+
+Let's implement a method for adding an item to the list:
+public add(item: T) {
+          this.data.push(item);
+}
+
+We reference the data item being passed in with the generic type T
 
 
 
