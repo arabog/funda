@@ -141,7 +141,38 @@ followed by the object to check.
 The in keyword is pretty flexible. It can be used with any object to 
 narrow down its type by checking if a property exists.
 
+-: Using a user-defined type guard
+In situations where we can't use the other type guards, we can 
+create our own. We can do this by creating a function with the 
+return type as type predicate
 
+Let's implement the example from the last two sections using our 
+own type guard function:
+
+interface IPerson {
+          id: number;
+          firstName: string;
+          surname: string;
+}
+
+interface ICompany {
+          id: number;
+          name: string;
+}
+
+type PersonOrCompany = IPerson | ICompany;
+
+So, let's implement the type guard function that returns 
+whether the object is of type IPerson :
+
+function isPerson(personOrCompany: PersonOrCompany): personOrCompany is IPerson {
+          return "firstName" in personOrCompany;
+}
+
+The type predicate personOrCompany is IPerson helps the 
+TypeScript compiler narrow down the type. To confirm this, 
+hovering over personOrCompany in the first branch should 
+give the IPerson type.
 
 
 
