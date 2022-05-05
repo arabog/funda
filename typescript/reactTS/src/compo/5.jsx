@@ -279,6 +279,45 @@ const condensedText = condense("the cat sat on the mat");
 As we enter the function parameter, IntelliSense reminds us 
 that we need to enter a string or an array of strings:
 
+-: Lookup and mapped types
+The keyof is a keyword in TypeScript that creates a union type 
+of all the properties in an object. The type that is created is 
+called a lookup type. This allows us to create types
+dynamically, based on the properties of an existing type.
+
+We have the following IPerson interface:
+interface IPerson {
+          id: number;
+          name: string;
+}
+
+Let's create a lookup type on this interface using keyof :
+type PersonProps = keyof IPerson;
+
+If we hover over the PersonProps type, we see that a union 
+type containing "id" and "name" has been created:
+
+Let's add a new property to IPerson :
+interface IPerson {
+          id: number;
+          name: string;
+          age: number
+}
+
+If we hover over the PersonProps type again, we see that the 
+type has been automatically extended to include "age"
+
+So, the PersonProps type is a lookup type because it looks up 
+the literals it needs to contain.
+Let's create something useful now with a lookup type
+
+
+
+
+
+
+
+
 
 
 
