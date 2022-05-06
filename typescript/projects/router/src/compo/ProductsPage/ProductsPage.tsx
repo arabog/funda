@@ -15,6 +15,7 @@ import { prods, Products } from '../data/ProductsData'
 interface ProductState {
           products: Products[];
           search: string;
+          handleSearch: () => void;
 }
 
 

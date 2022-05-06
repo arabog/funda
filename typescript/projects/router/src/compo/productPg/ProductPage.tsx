@@ -3,15 +3,18 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {Products, prods} from '../data/ProductsData';
+import Product from '../product/Product';
 
 
 interface Display {
           product: Products[];
-          added: boolean;
+          inBasket: boolean;
+          addToBasket: () => void;
 }
 
 const ProductPage: React.FC<Display> = () => {
-          const [added, setAdded] = useState<Boolean>(false);
+          const [inBasket, setInBasket] = useState<boolean>(false);
+
 
           let params: any = useParams();
           let id = parseInt(params.id);
@@ -26,8 +29,8 @@ const ProductPage: React.FC<Display> = () => {
                     product = (selectedProduct[key]);
           }
 
-          const handleAddClick = () => {
-                    setAdded(true) 
+          const addToBasket = () => {
+                    setInBasket(true) 
           }
           
 
@@ -36,26 +39,16 @@ const ProductPage: React.FC<Display> = () => {
                               
                               {
                                         product ? (
-                                                  <>
-                                                            <h1>{product.name}</h1>
-                                                            <p>{product.description}</p>
-
-                                                            <p className="product-price">
-                                                                      ${product.price}
-                                                            </p>
-
-                                                            {
-                                                                      !added && (
-                                                                                <button onClick={handleAddClick}>
-                                                                                          Add to basket
-                                                                                </button>
-                                                                      )
-                                                            }
-                                                  </>
+                                                  <Product 
+                                                            product={product}
+                                                            inBasket={inBasket}
+                                                            addToBasket={addToBasket}
+                                                  />
                                         ) : (
                                                   <p>Product not found!</p>
                                         )
-                              }                             
+
+                              }
                     </div>
           )
 }
@@ -63,21 +56,3 @@ const ProductPage: React.FC<Display> = () => {
 
 export default ProductPage
 
-                                        // produc ? (
-                                        //           <>
-                                        //                     <h1>{produc.name}</h1>
-                                        //                     <p>{produc.description}</p>
-
-                                        //                     <p className="product-price">
-                                        //                               {
-                                        //                                         new Intl.NumberFormat("en-US", { currency: "USD", style: "currency" }).format(produc.price)
-                                        //                               }
-                                        //                     </p>
-
-                                        //                     {
-                                        //                               add && (
-                                        //                                         <button onClick={handleAddClick}>Add to basket</button>
-                                        //                               )
-                                        //                     }
-                                        //           </>
-                                        // ) : <p>Product not found!</p>

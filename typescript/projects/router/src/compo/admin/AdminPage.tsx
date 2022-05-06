@@ -9,7 +9,8 @@ type Signout = {
 
 
 const AdminPage:React.FC<Signout> = (props) => {
-          const params = useLocation()
+          const params = useLocation();
+          
 
           return (
                     <div className="page-container">
