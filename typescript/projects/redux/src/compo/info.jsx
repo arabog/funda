@@ -155,9 +155,62 @@ array instead of mutating the original array:
 
 Redux expects that all state updates are done immutably
 
+Redux Terminology
+There's some important Redux terms that you'll need to be familiar 
+with before we continue:
+
+Actions
+An action is a plain JavaScript object that has a type field. You 
+can think of an action as an event that describes something that 
+happened in the application.
+
+The type field should be a string that gives this action a descriptive 
+name, like "todos/todoAdded". We usually write that type string like 
+"domain/eventName", where the first part is the feature or category 
+that this action belongs to, and the second part is the specific thing 
+that happened.
+
+An action object can have other fields with additional information 
+about what happened. By convention, we put that information in a 
+field called payload.
+
+A typical action object might look like this:
+const addTodoAction = {
+          type: 'todos/todoAdded',
+          payload: 'Buy milk'
+}
 
 
+Reducers
+A reducer is a function that receives the current state and an action object, 
+decides how to update the state if necessary, and returns the new state: 
+(state, action) => newState. You can think of a reducer as an event listener 
+which handles events based on the received action (event) type.
 
+The logic inside reducer functions typically follows the same series of steps:
+
+Check to see if the reducer cares about this action
+If so, make a copy of the state, update the copy with new values, and return it
+Otherwise, return the existing state unchanged
+Here's a small example of a reducer, showing the steps that each reducer should follow:
+
+const initialState = { value: 0 }
+
+function counterReducer(state = initialState, action) {
+          // Check to see if the reducer cares about this action
+          if (action.type === 'counter/incremented') {
+                    // If so, make a copy of `state`
+                    return {
+                              ...state,
+
+                              // and update the copy with the new value
+                              value: state.value + 1
+                    }
+          }
+          
+          // otherwise return the existing state unchanged
+          return state
+}
 
 
 
