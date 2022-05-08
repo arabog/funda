@@ -1,4 +1,6 @@
 /*
+-: Part 1: Redux Overview
+
 -: What is Redux?
 Redux is a pattern and library for managing and updating application 
 state, using events called "actions". It serves as a centralized store for 
@@ -127,6 +129,36 @@ subtract 1 from the current counter value.
 We can also write code that only dispatches an action if a certain 
 condition is true, or write some async code that dispatches an action 
 after a delay.
+
+
+
+-: Part 2: Concepts and Data Flow
+-: Background Concepts
+Before we dive into some actual code, let's talk about some of the terms 
+and concepts you'll need to know to use Redux.
+
+-: State Management
+Immutability
+"Mutable" means "changeable". If something is "immutable", it can 
+never be changed.
+
+JavaScript objects and arrays are all mutable by default. If I create 
+an object, I can change the contents of its fields. If I create an array, 
+I can change the contents as well
+
+In order to update values immutably, your code must make copies of 
+existing objects/arrays, and then modify the copies.
+
+We can do this by hand using JavaScript's array / object spread 
+operators, as well as array methods that return new copies of the 
+array instead of mutating the original array:
+
+Redux expects that all state updates are done immutably
+
+
+
+
+
 
 
 
