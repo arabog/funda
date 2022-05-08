@@ -10,10 +10,10 @@ interface Display {
           product: Products[];
           inBasket: boolean;
           addToBasket: () => void;
-          children: React.ReactNode | any[];
+          children: React.ReactNode;
 }
 
-const ProductPage: React.FC<Display> = () => {
+const ProductPage: React.FC<Display> = (props) => {
           const [inBasket, setInBasket] = useState<boolean>(false);
 
 
@@ -44,7 +44,7 @@ const ProductPage: React.FC<Display> = () => {
                                                             product={product}
                                                             inBasket={inBasket}
                                                             addToBasket={addToBasket}
-                                                            children
+                                                            children = {props.children}
                                                   />
                                         ) : (
                                                   <p>Product not found!</p>

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Products } from '../data/ProductsData'
 import Tabs from './tabs/Tabs';
-// import { ChildrenProps } from './tabs/Tabs'
+import { ChildrenProps } from './tabs/Tabs'
 
 
 
@@ -11,9 +11,8 @@ interface ProductsProps {
           product: Products;
           inBasket: boolean;
           addToBasket(): void;
-          children?: React.ReactNode ;
 
-          // Tabs: React.FC<ChildrenProps>;
+          children: React.ReactNode | ChildrenProps ;
 }
 
 
@@ -42,11 +41,11 @@ const Product:React.FC<ProductsProps> = (props) => {
                                                   }}
                                         >
                                                   <Tabs.Tab label="Description">
-                                                            <b>Description</b>
+                                                            Description
                                                   </Tabs.Tab>
 
                                                   <Tabs.Tab label="Reviews">
-                                                            <b>Reviews</b>
+                                                            Reviews
                                                   </Tabs.Tab>
                                         </div>
 
