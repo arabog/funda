@@ -34,7 +34,7 @@ it what happened.
 State, Actions, and Reducers
 We start by defining an initial state value to describe the application:
 
-// Define an initial state value for the app
+// Define an initial state value for the app:
 const initialState = {
           value: 0
 }
@@ -47,6 +47,7 @@ value for this reducer:
 
 // Create a "reducer" function that determines what the new state
 // should be when something happens in the app
+
 function counterReducer(state = initialState, action) {
           // Reducers usually look at the type of action that happened
           // to decide how to update the state
@@ -71,6 +72,41 @@ name so that anyone who looks at this code understands what it means. I
 
 Note that we update the state immutably by copying the existing state and 
 updating the copy, instead of modifying the original object directly.
+
+-: Store
+Now that we have a reducer function, we can create a store instance by 
+calling the Redux library createStore API.
+
+// Create a new Redux store with the `createStore` function,
+// and use the `counterReducer` for the update logic
+const store = Redux.createStore(counterReducer)
+
+We pass the reducer function to createStore, which uses the reducer 
+function to generate the initial state, and to calculate any future updates.
+
+we write a function that knows how to get the latest state from the Redux 
+store using the store.getState() method, then takes that value and updates 
+the UI to show it.
+
+function render() {
+          const state = store.getState();
+          valueEl.innerHTML = state.value.toString();
+}
+
+
+The Redux store lets us call store.subscribe() and pass a subscriber callback 
+function that will be called every time the store is updated. So, we can pass 
+our render function as the subscriber, and know that each time the store 
+updates, we can update the UI with the latest value.
+
+// Update the UI with the initial data
+render();
+
+// And subscribe to redraw whenever the data changes in the future
+store.subscribe(render);
+
+
+
 
 
 
