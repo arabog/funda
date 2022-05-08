@@ -105,6 +105,31 @@ render();
 // And subscribe to redraw whenever the data changes in the future
 store.subscribe(render);
 
+-: Dispatching Actions
+Finally, we need to respond to user input by creating action objects that 
+describe what happened, and dispatching them to the store. When we 
+call store.dispatch(action), the store runs the reducer, calculates the 
+updated state, and runs the subscribers to update the UI.
+
+// Handle user inputs by "dispatching" action objects,
+// which should describe "what happened" in the app
+document.getElementById('increment').addEventListener('click', function () {
+          store.dispatch({ type: 'counter/incremented' })
+})
+
+document.getElementById('decrement').addEventListener('click', function () {
+          store.dispatch({ type: 'counter/decremented' })
+})
+
+Here, we'll dispatch the actions that will make the reducer add 1 or 
+subtract 1 from the current counter value.
+
+We can also write code that only dispatches an action if a certain 
+condition is true, or write some async code that dispatches an action 
+after a delay.
+
+
+
 
 
 
