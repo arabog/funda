@@ -1,0 +1,79 @@
+/*
+-: What is Redux?
+Redux is a pattern and library for managing and updating application 
+state, using events called "actions". It serves as a centralized store for 
+state that needs to be used across your entire application,
+
+-: Redux Libraries and Tools
+Redux is a small standalone JS library. However, it is commonly used 
+with several other packages:
+
+React-Redux
+React-Redux is our official package that lets your React components 
+interact with a Redux store by reading pieces of state and dispatching 
+actions to update the store
+
+Redux Toolkit
+Redux Toolkit is our recommended approach for writing Redux logic. 
+It contains packages and functions that we think are essential for 
+building a Redux app.
+
+-: Redux Basics
+
+The Redux Store
+The center of every Redux application is the store. A "store" is a 
+container that holds your application's global state.
+A store is a JavaScript object with a few special functions and 
+abilities that make it different than a plain global object:
+
+the only way to cause an update to the state is to create a plain 
+action object that describes "something that happened in the 
+application", and then dispatch the action to the store to tell 
+it what happened.
+
+State, Actions, and Reducers
+We start by defining an initial state value to describe the application:
+
+// Define an initial state value for the app
+const initialState = {
+          value: 0
+}
+
+The reducer receives two arguments, the current state and an action 
+object describing what happened. When the Redux app starts up, we 
+don't have any state yet, so we provide the initialState as the default 
+value for this reducer:
+
+
+// Create a "reducer" function that determines what the new state
+// should be when something happens in the app
+function counterReducer(state = initialState, action) {
+          // Reducers usually look at the type of action that happened
+          // to decide how to update the state
+
+          switch (action.type) {
+                    case 'counter/incremented':
+                              return { ...state, value: state.value + 1 }
+
+                    case 'counter/decremented':
+                              return { ...state, value: state.value - 1 }
+                              
+                    default:
+                              // If the reducer doesn't care about this action type,
+                              // return the existing state unchanged
+                              return state
+          }
+}
+
+Action objects always have a type field, which is a string you provide 
+that acts as a unique name for the action. The type should be a readable 
+name so that anyone who looks at this code understands what it means. I
+
+Note that we update the state immutably by copying the existing state and 
+updating the copy, instead of modifying the original object directly.
+
+
+
+
+
+*/ 
