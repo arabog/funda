@@ -244,6 +244,15 @@ application. Something happened, and we want the store to know
 about it. Reducers act like event listeners, and when they hear an 
 action they are interested in, they update the state in response.
 
+-: Selectors
+Selectors are functions that know how to extract specific pieces of 
+information from a store state value
+
+const selectCounterValue = state => state.value
+
+const currentValue = selectCounterValue(store.getState())
+console.log(currentValue)               // 2
+
 
 
 
