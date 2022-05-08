@@ -3,11 +3,11 @@ import { useTabs } from '../../context/context';
 
 export interface IPanelProps{
           label: string;
-          children: React.ReactNode;
+          children?: React.ReactNode;
 }
 
 
-export const Panel: React.FC<IPanelProps> = ({...props}) => {
+export const Panel: React.FC<IPanelProps> = props => {
           const { activeTab } = useTabs();
           
           return activeTab === props.label ? <div>{props.children}</div> : null;

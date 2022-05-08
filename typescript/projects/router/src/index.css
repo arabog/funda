@@ -42,3 +42,7 @@ code {
 .tabs li.active {
   border-bottom: #222 solid 2px;
 }
+
+.active {
+  border-bottom: #222 solid 2px;
+}

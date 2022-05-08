@@ -13,7 +13,7 @@ import { prods, Products } from '../data/ProductsData'
 
 
 interface ProductState {
-          products: Products[];
+          products: Products[] | Products;
           search: string;
           handleSearch: () => void;
 }

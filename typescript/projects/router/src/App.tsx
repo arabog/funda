@@ -48,7 +48,7 @@ const App = () => {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/pros" element={<ProductsPage products={[]} search='' handleSearch={() => {}} />} />
-				<Route path='/pros/:id' element={<ProductPage product={[]} inBasket = {false} addToBasket={() =>{}}  />} />
+				<Route path='/pros/:id' element={<ProductPage product={[]} inBasket = {false} addToBasket={() =>{}} children />} />
 				
 				{
 					!logIn 

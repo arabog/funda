@@ -2,6 +2,9 @@ import React from 'react'
 
 import { Products } from '../data/ProductsData'
 import Tabs from './tabs/Tabs';
+// import { ChildrenProps } from './tabs/Tabs'
+
+
 
 
 interface ProductsProps {
@@ -9,7 +12,11 @@ interface ProductsProps {
           inBasket: boolean;
           addToBasket(): void;
           children?: React.ReactNode ;
+
+          // Tabs: React.FC<ChildrenProps>;
 }
+
+
 
 
 const Product:React.FC<ProductsProps> = (props) => {

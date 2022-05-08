@@ -5,8 +5,6 @@ interface ITabsContext {
           activeTab: string;
           
           setActiveTab: (label: string) => void;
-
-          // toggleActive: () => boolean;
 }
 
 

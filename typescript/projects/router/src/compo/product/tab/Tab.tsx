@@ -5,21 +5,15 @@ import { useTabs } from '../../context/context'
 export interface ITabProps {
           label: string;
           children?: React.ReactNode;
-          // active?: boolean
 }
 
 
-export const Tab:React.FC<ITabProps> = ({...props}) => {
-          const {setActiveTab} = useTabs();
-          // const [active, setActive] = useState(false);
-
-          // const handleClick = () = {
-          //           setActive(!active);
-          // }
+export const Tab:React.FC<ITabProps> = props => {
+          const {activeTab, setActiveTab} = useTabs();
 
           
           return (
-                    <div className= 'active' >
+                    <div className={props.label === activeTab ? 'active' : '' }>
                               <b onClick={() => setActiveTab(props.label)} >
                                         {props.children}
                               </b>

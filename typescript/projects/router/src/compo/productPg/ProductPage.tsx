@@ -10,6 +10,7 @@ interface Display {
           product: Products[];
           inBasket: boolean;
           addToBasket: () => void;
+          children: React.ReactNode | any[];
 }
 
 const ProductPage: React.FC<Display> = () => {
@@ -43,6 +44,7 @@ const ProductPage: React.FC<Display> = () => {
                                                             product={product}
                                                             inBasket={inBasket}
                                                             addToBasket={addToBasket}
+                                                            children
                                                   />
                                         ) : (
                                                   <p>Product not found!</p>
