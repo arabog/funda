@@ -81,6 +81,7 @@ calling the Redux library createStore API.
 
 // Create a new Redux store with the `createStore` function,
 // and use the `counterReducer` for the update logic
+
 const store = Redux.createStore(counterReducer)
 
 We pass the reducer function to createStore, which uses the reducer 
@@ -207,10 +208,25 @@ function counterReducer(state = initialState, action) {
                               value: state.value + 1
                     }
           }
-          
+
           // otherwise return the existing state unchanged
           return state
 }
+
+Reducers can use any kind of logic inside to decide what the new state 
+should be: if/else, switch, loops, and so on.
+
+
+-: Store
+The current Redux application state lives in an object called the store .
+The store is created by passing in a reducer, and has a method called 
+getState that returns the current state value:
+
+import { configureStore } from '@reduxjs/toolkit'
+
+const store = configureStore({ reducer: counterReducer })
+
+console.log(store.getState())           // {value: 0}
 
 
 
