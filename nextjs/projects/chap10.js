@@ -62,6 +62,8 @@ do we want to deploy our application and how do we want to do it?
 In fact, most of the time, choosing a deployment platform also means 
 selecting a slightly different deployment method.
 
+https://www.howtoforge.com/tutorial/how-to-create-docker-images-with-dockerfile/
+
 
 
 
