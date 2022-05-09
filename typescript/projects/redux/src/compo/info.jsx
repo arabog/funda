@@ -275,6 +275,15 @@ reducer function is responsible for handling all of the actions that
 are dispatched, and calculating what the entire new state result 
 should be every time.
 
+-: Splitting Reducers
+As part of this, Redux reducers are typically split apart based on the 
+section of the Redux state that they update. Our todo app state 
+currently has two top-level sections: state.todos and state.filters. 
+So, we can split the large root reducer function into two smaller 
+reducers - a todosReducer and a filtersReducer
+
+the reducer for a specific section of the Redux app state is called a 
+"slice reducer"
 
 
 
