@@ -254,8 +254,14 @@ const currentValue = selectCounterValue(store.getState())
 console.log(currentValue)               // 2
 
 
+-: Part 3: State, Actions, and Reducers
+We can also say that the todos are "app state" (the core data that the 
+application works with), while the filtering values are "UI state" 
+(state that describes what the app is doing right now)
 
-
+-: Designing the State Structure
+With Redux, our application state is always kept in plain JavaScript 
+objects and arrays
 
 
 
