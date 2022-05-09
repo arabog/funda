@@ -1,3 +1,4 @@
+
 export interface Reviews {
           comment: string;
           reviewer: string;
@@ -12,6 +13,18 @@ export interface Products {
           reviews: Reviews[];
 }
 
+
+const wait = (ms: number): Promise<void> => {
+          return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+export const getProduct = async (id: number): Promise<Products | null> => {
+          await wait(1000);
+
+          const foundProducts = prods.filter(customer => customer.id === id);
+
+          return foundProducts.length === 0 ? null : foundProducts[0];
+};
 
 
 export const prods: Products[]= [
