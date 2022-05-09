@@ -263,6 +263,19 @@ application works with), while the filtering values are "UI state"
 With Redux, our application state is always kept in plain JavaScript 
 objects and arrays
 
+-: Writing Reducers
+Reducers are functions that take the current state and an action as 
+arguments, and return a new state result. 
+In other words, (state, action) => newState.
+
+-: Creating the Root Reducer
+A Redux app really only has one reducer function: the "root reducer" 
+function that you will pass to createStore later on. That one root 
+reducer function is responsible for handling all of the actions that 
+are dispatched, and calculating what the entire new state result 
+should be every time.
+
+
 
 
 
