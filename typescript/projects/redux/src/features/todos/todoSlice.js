@@ -54,9 +54,9 @@ export default function todosReducer (state = initialState, action ) {
                                         }
 
                                         return {
-                                                  ...state,
+                                                  ...todo,
 
-                                                  completed: !state.completed
+                                                  completed: !todo.completed
                                         }
                               })
 
