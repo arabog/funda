@@ -372,6 +372,74 @@ if (persistedTodoString) {
 const store = createStore(rootReducer, preloadedState)
 
 
+Dispatching Actions
+Now that we have created a store, let's verify our program works! Even 
+without any UI, we can already test the update logic.
+
+TIP
+Before you run this code, try going back to src/features/todos/todosSlice.js, 
+and remove all the example todo objects from the initialState so that it's an 
+empty array. That will make the output from this example a bit easier to read.
+
+src/index.js
+// Omit existing React imports
+
+import store from './store'
+
+// Log the initial state
+console.log('Initial state: ', store.getState())
+// {todos: [....], filters: {status, colors}}
+
+// Every time the state changes, log it
+// Note that subscribe() returns a function for unregistering the listener
+const unsubscribe = store.subscribe(() =>
+          console.log('State after dispatch: ', store.getState())
+)
+
+// Now, dispatch some actions
+
+store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' })
+store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about reducers' })
+store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about stores' })
+
+store.dispatch({ type: 'todos/todoToggled', payload: 0 })
+store.dispatch({ type: 'todos/todoToggled', payload: 1 })
+
+store.dispatch({ type: 'filters/statusFilterChanged', payload: 'Active' })
+
+store.dispatch({
+          type: 'filters/colorFilterChanged', payload: { color: 'red', changeType: 'added' }
+})
+
+// Stop listening to state updates
+unsubscribe()
+
+// Dispatch one more action to see what happens
+
+store.dispatch({ type: 'todos/todoAdded', payload: 'Try creating a store' })
+
+// Omit existing React rendering logic
+
+
+Remember, every time we call store.dispatch(action):
+
+The store calls rootReducer(state, action)
+That root reducer may call other slice reducers inside of itself, 
+like todosReducer(state.todos, action)
+The store saves the new state value inside
+The store calls all the listener subscription callbacks
+If a listener has access to the store, it can now call store.getState() to 
+read the latest state value
+
+Notice that our app did not log anything from the last action. That's because we 
+removed the listener callback when we called unsubscribe(), so nothing else ran 
+after the action was dispatched.
+
+We specified the behavior of our app before we even started writing the UI. That 
+helps give us confidence that the app will work as intended.
+
+
+
 
 
 
