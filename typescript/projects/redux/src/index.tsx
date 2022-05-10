@@ -18,6 +18,28 @@
 // // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 // reportWebVitals();
 
+import store from './store'
+
+// Log the initial state
+console.log('Initial state: ', store.getState())
+// {todos: [....], filters: {status, colors}}
+
+store.dispatch({
+	type: 'filters/colorFilterChanged', payload: { color: 'red', changeType: 'added' }
+});
+
+store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' })
+
+// Every time the state changes, log it
+// Note that subscribe() returns a function for unregistering the listener
+const unsubscribe = store.subscribe(() =>
+      console.log('State after dispatch: ', store.getState())
+)
+
+unsubscribe();
+
+/*
+
 import store from "./store";
 
 console.log('Dispatching');
@@ -25,6 +47,8 @@ store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' })
 console.log('Dispatch complete');
 
 console.log('State after dispatch: ', store.getState());
+
+*/
 
 /*
 // Omit existing React imports

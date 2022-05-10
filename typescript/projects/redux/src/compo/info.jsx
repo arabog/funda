@@ -578,8 +578,60 @@ new state is
 We finish by returning whatever result value came 
 from the next middleware
 
+In particular, middleware are intended to contain logic 
+with side effects. In addition, middleware can modify 
+dispatch to accept things that are not plain action objects. 
 
+-: Redux DevTools
+Redux was built to enable the use of the Redux DevTools - an addon 
+that shows you a history of what actions were dispatched, what those 
+actions contained, and how the state changed after each dispatched action.
 
+The Redux DevTools UI is available as a browser extension for Chrome and Firefox.
+
+-: Adding the DevTools to the Store
+Once the extension is installed, we need to configure the store so that 
+the DevTools can see what's happening inside. The DevTools require 
+a specific store enhancer to be added to make that possible.
+
+The Redux DevTools Extension docs have some instructions on 
+how to set up the store, but the steps listed are a bit complicated. 
+However, there's an NPM package called redux-devtools-extension 
+that takes care of the complicated part. That package exports a 
+specialized composeWithDevTools function that we can use 
+instead of the original Redux compose function.
+
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import rootReducer from './reducer'
+import { print1, print2, print3 } from './exampleAddons/middleware'
+
+const composedEnhancer = composeWithDevTools(
+          // EXAMPLE: Add whatever middleware you actually want to use here
+          applyMiddleware(print1, print2, print3)
+          // other store enhancers if any
+)
+
+const store = createStore(rootReducer, composedEnhancer)
+export default store
+
+What You've Learned
+As you've seen, the store is the central piece of every Redux application. 
+Stores contain state and handle actions by running reducers, and can 
+be customized to add additional behaviors.
+
+subscribe takes a listener callback that runs each time an action is dispatched
+
+Middleware are the main way to customize the store
+Middleware are added using the applyMiddleware enhancer
+Middleware are written as three nested functions inside each other
+Middleware run each time an action is dispatched
+Middleware can have side effects inside
+
+The Redux DevTools let you see what's changed in your app over time
+The DevTools Extension can be installed in your browser
+The store needs the DevTools enhancer added, using composeWithDevTools
+The DevTools show dispatched actions and changes in state over time
 
 
 
