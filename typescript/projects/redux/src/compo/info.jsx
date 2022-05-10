@@ -259,6 +259,16 @@ We can also say that the todos are "app state" (the core data that the
 application works with), while the filtering values are "UI state" 
 (state that describes what the app is doing right now)
 
+we can create a list of actions that our application will use:
+{type: 'todos/todoAdded', payload: todoText}
+{type: 'todos/todoToggled', payload: todoId}
+{type: 'todos/colorSelected, payload: {todoId, color}}
+{type: 'todos/todoDeleted', payload: todoId}
+{type: 'todos/allCompleted'}
+{type: 'todos/completedCleared'}
+{type: 'filters/statusFilterChanged', payload: filterValue}
+{type: 'filters/colorFilterChanged', payload: {color, changeType}}
+
 -: Designing the State Structure
 With Redux, our application state is always kept in plain JavaScript 
 objects and arrays
@@ -301,9 +311,77 @@ Actions may contain other values, which are typically stored in the action.paylo
 Reducer:
 https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/checkpoint-1-combinedReducers/?from-embed=&file=/src/features/todos/todosSlice.js
 
+https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/tutorial-steps
+
 Store:
 https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/checkpoint-2-storeSetup/?from-embed=&file=/src/reducer.js
 
 -: Part 4: Store
+The central piece of a Redux app: the store.
+
+Redux Store
+The Redux store brings together the state, actions, and reducers that make up your app. 
+
+The store has several responsibilities:
+1. Holds the current application state inside
+2. Allows access to the current state via store.getState();
+3. Allows state to be updated via store.dispatch(action);
+4. Registers listener callbacks via store.subscribe(listener);
+5. Handles unregistering of listeners via the unsubscribe function returned 
+by store.subscribe(listener).
+
+It's important to note that you'll only have a single store in a Redux application. 
+
+Creating a Store
+Every Redux store has a single root reducer function. In the previous section, 
+we created a root reducer function using combineReducers
+
+deprecated
+import { createStore } from 'redux'
+const store = createStore(rootReducer);
+
+
+import { configureStore } from '@reduxjs/toolkit';
+import { rootReducer } from './rootReducer'
+
+
+const store = configureStore(rootReducer);
+
+export default store;
+
+
+-: Loading Initial State
+createStore can also accept a preloadedState value as its second argument. 
+You could use this to add initial data when the store is created, such as 
+values that were included in an HTML page sent from the server, or 
+persisted in localStorage and read back when the user visits the page 
+again, like this:
+
+import { createStore } from 'redux'
+import { rootReducer } from './rootReducer'
+
+let preloadedState;
+const persistedTodoString = localStorage.getItem('todos')
+
+if (persistedTodoString) {
+          preloadedState = {
+                    todos: JSON.parse(persistedTodoString)
+          }
+}
+
+const store = createStore(rootReducer, preloadedState)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 */ 

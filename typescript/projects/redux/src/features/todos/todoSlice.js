@@ -83,6 +83,7 @@ export default function todosReducer (state = initialState, action ) {
                               return state.map(todo => {
                                         return {
                                                   ...todo,
+                                                  
                                                   completed: true
                                         }
                               })

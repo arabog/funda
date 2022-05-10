@@ -40,7 +40,7 @@ export default function filterReducer(state = initialState, action) {
                                                   return {
                                                             ...state,
 
-                                                            colors: state.colors.map(existingColor => existingColor !== color)
+                                                            colors: state.colors.filter(existingColor => existingColor !== color)
                                                   }
 
                                         default:
