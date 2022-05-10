@@ -18,6 +18,15 @@
 // // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 // reportWebVitals();
 
+import store from "./store";
+
+console.log('Dispatching');
+store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' })
+console.log('Dispatch complete');
+
+console.log('State after dispatch: ', store.getState());
+
+/*
 // Omit existing React imports
 
 import store from './store'
@@ -56,3 +65,4 @@ unsubscribe()
 store.dispatch({ type: 'todos/todoAdded', payload: 'Try creating a store' })
 
 // Omit existing React rendering logic
+*/

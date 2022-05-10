@@ -517,6 +517,16 @@ getState, and subscribe functions instead of the originals.
 For this tutorial, we won't go into details about how store enhancers actually 
 work - we'll focus on how to use them.
 
+Store enhancers are a very powerful way to modify the store, and almost 
+all Redux apps will include at least one enhancer when setting up the store.
+
+TIP
+If you don't have any preloadedState to pass in, you can pass the enhancer 
+as the second argument instead:
+
+const store = createStore(rootReducer, storeEnhancer)
+
+
 
 
 
