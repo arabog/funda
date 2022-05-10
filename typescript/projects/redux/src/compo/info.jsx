@@ -438,9 +438,70 @@ after the action was dispatched.
 We specified the behavior of our app before we even started writing the UI. That 
 helps give us confidence that the app will work as intended.
 
+INFO
+If you want, you can now try writing tests for your reducers. Because they're 
+pure functions, it should be straightforward to test them. Call them with an 
+example state and action, take the result, and check to see if it matches what 
+you expect:
 
+// todosSlice.spec.js
+import todosReducer from './todosSlice'
 
+test('Toggles a todo based on id', () => {
+          const initialState = [{ id: 0, text: 'Test text', completed: false }]
 
+          const action = { type: 'todos/todoToggled', payload: 0 }
+          const result = todosReducer(initialState, action)
+          expect(result[0].completed).toBe(true)
+})
+
+-: Inside a Redux Store
+It might be helpful to take a peek inside a Redux store to see how it works. 
+Here's a miniature example of a working Redux store, in about 25 lines of code:
+
+function createStore(reducer, preloadedState) {
+          let state = preloadedState
+          const listeners = []
+
+          function getState() {
+                    return state
+          }
+
+          function subscribe(listener) {
+                    listeners.push(listener)
+
+                    return function unsubscribe() {
+                              const index = listeners.indexOf(listener)
+
+                              listeners.splice(index, 1)
+                    }
+          }
+
+          function dispatch(action) {
+                    state = reducer(state, action)
+
+                    listeners.forEach(listener => listener())
+          }
+
+          dispatch({ type: '@@redux/INIT' })
+
+          return { dispatch, subscribe, getState }
+}
+
+The store has the current state value and reducer function inside of itself:
+getState returns the current state value
+
+subscribe keeps an array of listener callbacks and returns a function to 
+remove the new callback
+
+dispatch calls the reducer, saves the state, and runs the listeners
+
+The store dispatches one action on startup to initialize the reducers with their state
+
+The store API is an object with {dispatch, subscribe, getState} inside
+
+To emphasize one of those in particular: notice that getState just returns 
+whatever the current state value is.
 
 
 
