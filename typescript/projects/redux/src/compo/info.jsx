@@ -503,6 +503,20 @@ The store API is an object with {dispatch, subscribe, getState} inside
 To emphasize one of those in particular: notice that getState just returns 
 whatever the current state value is.
 
+-: Configuring the Store
+We've already seen that we can pass rootReducer and preloadedState arguments 
+to createStore. However, createStore can also take one more argument, which is 
+used to customize the store's abilities and give it new powers.
+
+Redux stores are customized using something called a store enhancer. A store 
+enhancer is like a special version of createStore that adds another layer 
+wrapping around the original Redux store. An enhanced store can then change 
+how the store behaves, by supplying its own versions of the store's dispatch, 
+getState, and subscribe functions instead of the originals.
+
+For this tutorial, we won't go into details about how store enhancers actually 
+work - we'll focus on how to use them.
+
 
 
 
