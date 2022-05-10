@@ -527,10 +527,56 @@ as the second argument instead:
 const store = createStore(rootReducer, storeEnhancer)
 
 
+-: Middleware
+Enhancers are powerful because they can override or replace any of 
+the store's methods: dispatch, getState, and subscribe.
+
+Redux uses a special kind of addon called middleware to let 
+us customize the dispatch function.
+
+Redux middleware provides a third-party extension point between 
+dispatching an action, and the moment it reaches the reducer. 
+People use Redux middleware for logging, crash reporting, talking 
+to an asynchronous API, routing, and more.
 
 
+Using Middleware
+We already saw that you can customize a Redux store using store 
+enhancers. Redux middleware are actually implemented on top of 
+a very special store enhancer that comes built in with Redux, 
+called applyMiddleware.
 
+-: Your First Custom Middleware
+Let's say we want to add some logging to our application. We'd 
+like to see the contents of each action in the console when it's 
+dispatched, and we'd like to see what the state is after the action 
+has been handled by the reducers.
 
+const loggerMiddleware = storeAPI => next => action => {
+          console.log('dispatching ', action);
+
+          let result = next(action);
+          console.log('next state', storeAPI.getState());
+          
+          return result;
+}
+
+Whenever an action is dispatched:
+
+The first part of the handleAction function runs, and we 
+print 'dispatching'
+
+We pass the action to the next section, which may be 
+another middleware or the real store.dispatch
+
+Eventually the reducers run and the state is updated, 
+and the next function returns
+
+We can now call storeAPI.getState() and see what the 
+new state is
+
+We finish by returning whatever result value came 
+from the next middleware
 
 
 
