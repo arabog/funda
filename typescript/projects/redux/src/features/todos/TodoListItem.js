@@ -23,36 +23,67 @@ const TodoListItem = ({ todo, onColorChange, onCompletedChange, onDelete }) => {
 
           return (
                     <li>
-                              <div className='segment label'>
-                                        <input 
-                                                  className='toggle'
-                                                  type='checkbox'
-                                                  checked={completed}
-                                                  onChange={handleCompletedChanged}
-                                        />
-                                        
-                                        <div className='todo-text' >{text}</div>
-
-                                        <div className='segment buttons'>
-                                                  <select 
-                                                            className='colorPicker'
-                                                            value={color}
-                                                            style={{color}} //style={{color: color}}
-                                                            onChange={handleColorChange}
-                                                  >
-                                                            <option value=""></option>
-                                                            {colorOptions}
-                                                  </select>
+                              <idv className='view'>
+                                        <div className='segment label'>
+                                                  <input 
+                                                            className='toggle'
+                                                            type='checkbox'
+                                                            checked={completed}
+                                                            onChange={handleCompletedChanged}
+                                                  />
                                                   
-                                                  {/* <button className='destroy' onClick={onDelete}><TimesSolid /></button> */}
+                                                  <div className='todo-text' >{text}</div>
 
-                                                  <button className='destroy' onClick={onDelete}>
-                                                            <i data-fa-symbol="delete" class="fas fa-trash fa-fw"></i>
-                                                  </button>
-                                        </div>
-                              </div>          
+                                                  <div className='segment buttons'>
+                                                            <select 
+                                                                      className='colorPicker'
+                                                                      value={color}
+                                                                      style={{color}} //style={{color: color}}
+                                                                      onChange={handleColorChange}
+                                                            >
+                                                                      <option value=""></option>
+                                                                      {colorOptions}
+                                                            </select>
+                                                            
+                                                            {/* <button className='destroy' onClick={onDelete}><TimesSolid /></button> */}
+
+                                                            <button className='destroy' onClick={onDelete}>
+                                                                      <i data-fa-symbol="delete" class="fas fa-trash fa-fw"></i>
+                                                            </button>
+                                                  </div>
+                                        </div>  
+                              </idv>
                     </li>
           )
 }
 
 export default TodoListItem
+
+/*
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { availableColors, capitalize } from '../filters/colors'
+
+const selectTodoById = (state, todoId) => {
+          return state.todos.find(todo => todo.id === todoId)
+}
+
+// Destructure `props.id`, since we only need the ID value
+const TodoListItem = ({ id }) => {
+          // Call our `selectTodoById` with the state _and_ the ID value
+          const todo = useSelector(state => selectTodoById(state, id))
+          const { text, completed, color } = todo
+
+          const dispatch = useDispatch()
+
+          const handleCompletedChanged = () => {
+                    dispatch({ type: 'todos/todoToggled', payload: todo.id })
+          }
+
+          // omit other change handlers
+   
+
+export default TodoListItem
+
+*/

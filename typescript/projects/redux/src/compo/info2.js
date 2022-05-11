@@ -105,6 +105,24 @@ so that other components can talk to the store
 Global state that is needed across the app should go in the Redux store. 
 State that's only needed in one place should be kept in component state.
 
+We can call useSelector multiple times within one component. In fact, 
+this is actually a good idea - each call to useSelector should always 
+return the smallest amount of state possible.
+
+React-Redux has a shallowEqual comparison function we can use to 
+check if the items inside the array are still the same
+
+
+
+Todo: 
+Try implementing the rest of the missing UI features on your own! 
+Here's a list of the things you'll need to add:
+
+In <TodoListItem> component, use the useDispatch hook to dispatch 
+actions for changing the color category and deleting the todo
+In <Footer>, use the useDispatch hook to dispatch actions for 
+marking all todos as completed, clearing completed todos, and 
+changing the filter values.
 
 
 
@@ -114,11 +132,12 @@ State that's only needed in one place should be kept in component state.
 
 
 
-
-https://redux.js.org/tutorials/fundamentals/part-5-ui-react
 
 https://redux.js.org/tutorials/fundamentals/part-6-async-logic
 
+https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns
+
+https://redux.js.org/tutorials/fundamentals/part-8-modern-redux
 
 https://nfgrn.csb.app/
 */

@@ -3,14 +3,37 @@ import { useRouter } from 'next/router';
 import styles from '../styles/app.module.css';
 
 
-export default function Login() {
+async function handleLogin(email, password) {
+          
+          const resp = await fetch('/api/login', {
+                    method: 'POST',
+
+                    headers: { 'Content-Type': 'application/json', },
+
+                    body: JSON.stringify({
+                              email,
+                              password,
+                    })
+          })
+
+          const data = await resp.json();
+
+          if (data.success) {
+                    return;
+          }
+
+          throw new Error('Wrong email or password');
+
+}
+
+export default function Home() {
           const router = useRouter();
           const [loginError, setLoginError] = useState(null);
 
           const handleSubmit = (event) => {
                     event.preventDefault();
 
-                    const {email, password } = event.target.elemnts;
+                    const {email, password } = event.target.elements;
 
                     setLoginError(null);
 
@@ -43,25 +66,3 @@ export default function Login() {
 }
 
 
-async function handleLogin(email, password) {
-          
-          const resp = await fetch('/api/login', {
-                    method: 'POST',
-
-                    headers: { 'Content-Type': 'application/json', },
-
-                    body: JSON.stringify({
-                              email,
-                              password,
-                    })
-          })
-
-          const data = await resp.json();
-
-          if (data.success) {
-                    return;
-          }
-
-          throw new Error('Wrong email or password');
-
-}
