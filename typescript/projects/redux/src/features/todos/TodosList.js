@@ -4,34 +4,34 @@ import TodoListItem from './TodoListItem';
 
 // const selectedTodos = state => state.todos
 
-const allTodos = state => state.todos;
-// const selectedTodosId = state => state.todos.map(todo => todo.id)
+// const allTodos = state => state.todos;
+const selectedTodosId = state => state.todos.map(todo => todo.id)
 
 const TodosList = () => {
-          let todos = useSelector(allTodos);
+          // let todos = useSelector(allTodos);
           
-          function sortTodo(a, b) {
-                    return (b.id - a.id)
-          }
-
-          todos = todos.sort(sortTodo);
-
-          // let todosIds = useSelector(selectedTodosId, shallowEqual);
-
           // function sortTodo(a, b) {
-          //           return (b - a)
+          //           return (b.id - a.id)
           // }
 
-          // todosIds = todosIds.sort(sortTodo);
+          // todos = todos.sort(sortTodo);
+
+          let todosIds = useSelector(selectedTodosId, shallowEqual);
+
+          function sortTodo(a, b) {
+                    return (b - a)
+          }
+
+          todosIds = todosIds.sort(sortTodo);
           
            // since `todos` is an array, we can loop over it
-          const renderedListItems = todos.map((todo) => {
-          // const renderedListItems = todosIds.map((todo) => {
+          // const renderedListItems = todos.map((todo) => {
+          const renderedListItems = todosIds.map((todoId) => {
                     return (
                               <TodoListItem
-                                        key={todo.id}
-                                        todo={todo}
-                                        // id={todosIds}
+                                        key={todoId}
+                                        // todo={todo}
+                                        id={todoId}
                               />
                     )
           })
