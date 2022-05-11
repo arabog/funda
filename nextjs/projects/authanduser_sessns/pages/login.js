@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import styles from '../styles/app.module.css';
 
 
-export default function Home() {
+export default function Login() {
           const router = useRouter();
           const [loginError, setLoginError] = useState(null);
 

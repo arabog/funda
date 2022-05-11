@@ -6,7 +6,7 @@ import Product from '../product/Product';
 
 
 interface Display {
-	product: Products[];
+	product?: Products[] | any[];
 	inBasket: boolean;
 	addToBasket: () => void;
 	children: React.ReactNode;
@@ -18,7 +18,7 @@ interface Display {
 const ProductPage: React.FC<Display> = (props) => {
 	const [inBasket, setInBasket] = useState<boolean>(false);
 	const [loading, setLoading] = useState(true)
-	const [product, setProduct] = useState()
+	const [product, setProduct] = useState<Products | null>();
 
 
 	let params: any = useParams();

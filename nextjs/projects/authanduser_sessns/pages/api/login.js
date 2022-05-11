@@ -21,9 +21,7 @@ export default (req, res) => {
           const user = authenticateUser(email, password);
 
           if (user) {
-                    res.setHeader('Set-Cookie',
-                    serialize('my_auth', user, { path: '/', httpOnly: true })
-                    );                    
+                    res.setHeader('Set-Cookie', serialize('my_auth', user, { path: '/', httpOnly: true }) );                    
                     
                     return res.status(200).json({success: true});
           } else {

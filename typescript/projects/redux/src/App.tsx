@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Header from './features/header/Header'
-// import TodoList from './features/todos/TodoList'
+import TodoList from './features/todos/TodosList'
 import Footer from './features/footer/Footer'
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
 
 					<div className="todoapp">
 						<Header />
-						{/* <TodoList /> */}
+						<TodoList />
 						<Footer />
 					</div>
 				</section>

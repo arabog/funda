@@ -1,3 +1,12 @@
+/*
+const [state, setState] = useState({});
+
+setState(prevState => {
+          // Object.assign would also work
+          return {...prevState, ...updatedValues};
+});
+
+*/
 
 export interface Reviews {
           comment: string;
