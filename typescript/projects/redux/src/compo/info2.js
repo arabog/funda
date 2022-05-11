@@ -96,6 +96,15 @@ component around our entire <App>, and passing the Redux store
 as a prop to <Provider>. After we do this once, every component 
 in the application will be able to access the Redux store if needs to.
 
+The key parts of using React-Redux with React:
+1. Call the useSelector hook to read data in React components
+2. Call the useDispatch hook to dispatch actions in React components
+3. Put <Provider store={store}> around your entire <App> component 
+so that other components can talk to the store
+
+Global state that is needed across the app should go in the Redux store. 
+State that's only needed in one place should be kept in component state.
+
 
 
 
