@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+
+import { useAuth } from '../lib/hooks/auth';
+
 import styles from '../styles/app.module.css';
 
 
@@ -29,6 +32,16 @@ async function handleLogin(email, password) {
 export default function Home() {
           const router = useRouter();
           const [loginError, setLoginError] = useState(null);
+          const {loading, loggedIn } = useAuth();
+
+          if (loading) {
+                    return <p>Loading ...</p>
+          }
+
+          if (!loading && loggedIn) {
+                    router.push('/protected-route');
+                    return null;
+          }
 
           const handleSubmit = (event) => {
                     event.preventDefault();
