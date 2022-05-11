@@ -48,6 +48,44 @@ No matter what UI layer you're using, Redux works this same way with every UI.
 
 
 -: Reading State from the Store with useSelector
+The React-Redux hooks give your React component the ability to 
+talk to the Redux store by reading state and dispatching actions.
+
+useSelector hook lets your React components read data from the 
+Redux store.
+
+useSelector accepts a single function, which we call a selector 
+function. A selector is a function that takes the entire Redux 
+store state as its argument, reads some value from the state, 
+and returns that result.
+
+We can write a small selector function that returns that todos array:
+const selectTodo = state => state.todos
+
+Or, maybe we want to find out how many todos are currently 
+marked as "completed":
+
+const selectTotalCompletedTodos = state => {
+          const completedTodos = state.todos.filter(todo => todo.completed);
+          return completedTodos.length;
+} 
+
+We know that we can call store.subscribe() to listen for changes to the store
+
+useSelector automatically subscribes to the Redux store for us! That way, 
+any time an action is dispatched, it will call its selector function again 
+right away. If the value returned by the selector changes from the last 
+time it ran, useSelector will force our component to re-render with the new data.
+
+const todos = useSelector(state => state.todos)
+
+
+
+
+
+
+
+
 
 
 

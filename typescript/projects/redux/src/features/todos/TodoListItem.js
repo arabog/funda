@@ -37,7 +37,7 @@ const TodoListItem = ({ todo, onColorChange, onCompletedChange, onDelete }) => {
                                                   <select 
                                                             className='colorPicker'
                                                             value={color}
-                                                            style={{color}}
+                                                            style={{color}} //style={{color: color}}
                                                             onChange={handleColorChange}
                                                   >
                                                             <option value=""></option>
