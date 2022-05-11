@@ -6,8 +6,13 @@ const selectedTodos = state => state.todos
 
 
 const TodosList = () => {
-          const todos = useSelector(selectedTodos);
-          console.log(todos)
+          let todos = useSelector(selectedTodos);
+
+          function sortTodo(a, b) {
+                    return (b.id - a.id)
+          }
+
+          todos = todos.sort(sortTodo);
           
            // since `todos` is an array, we can loop over it
           const renderedListItems = todos.map((todo) => {

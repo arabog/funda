@@ -89,6 +89,13 @@ let the user type in some text for a new todo item, and then dispatch
 a {type: 'todos/todoAdded'} action containing that text.
 
 
+-: Passing the Store with Provider
+We have to specifically tell React-Redux what store we want to use 
+in our components. We do this by rendering a <Provider> 
+component around our entire <App>, and passing the Redux store 
+as a prop to <Provider>. After we do this once, every component 
+in the application will be able to access the Redux store if needs to.
+
 
 
 

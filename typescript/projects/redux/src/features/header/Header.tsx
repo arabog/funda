@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { capitalize } from '../filters/colors';
 
 
 const Header = () => {
@@ -19,7 +20,7 @@ const Header = () => {
 			dispatch(
 				{
 					type: 'todos/todoAdded', 
-					payload: trimmedText
+					payload: capitalize(trimmedText)
 				}
 			);
 
