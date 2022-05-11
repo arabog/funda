@@ -79,7 +79,14 @@ time it ran, useSelector will force our component to re-render with the new data
 
 const todos = useSelector(state => state.todos)
 
+-: Dispatching Actions with useDispatch
+We can call const dispatch = useDispatch() in any component that 
+needs to dispatch actions, and then call dispatch(someAction) as 
+needed.
 
+Let's try that in our <Header> component. We know that we need to 
+let the user type in some text for a new todo item, and then dispatch 
+a {type: 'todos/todoAdded'} action containing that text.
 
 
 
