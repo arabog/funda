@@ -1,25 +1,12 @@
+
 import React from 'react'
-
-const Footer = () => {
-  return (
-    <div>Footer</div>
-  )
-}
-
-export default Footer
-
-
-
-
-/*
-import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { availableColors, capitalize } from '../filters/colors';
 import { StatusFilters } from '../filters/filterSlice';
 
 
 
-const RemainingTodos = ({count}) => {
+const RemainingTodos = ({count}: {count: any}) => {
 	// console.log(typeof count)
 	const suffix = count === 1 ? '' : 's';
 
@@ -36,7 +23,9 @@ const RemainingTodos = ({count}) => {
 const StatusFiltersFunc = ({ value: status, onChange }) => {
 	const renderedFilters = Object.keys(StatusFilters).map(key => {
 		const value = StatusFilters[key];
+
 		const handleClick = () => onChange(value);
+		
 		const className = value === status ? 'selected' : '';
 
 		return (
@@ -63,6 +52,7 @@ const ColorFilters = ({value: colors, onChange}) => {
 
 		const handleChange = () => {
 			const changeType = checked ? 'removed' : 'added';
+
 			onChange(color, changeType);
 		}
 
@@ -98,41 +88,44 @@ const ColorFilters = ({value: colors, onChange}) => {
 
 
 const Footer = () => {
-	const colors = []
-	const status = StatusFilters.All
-	const todosRemaining = 1
+	const dispatch = useDispatch()
 	
-	const onColorChange = (color, changeType) => console.log('Color change: ', { color, changeType })
+	const todosRemaining = useSelector(state => {
+		const uncompletedTodos = state.todos.filter(todo => !todo.completed);
 
-	const onStatusChange = (status) => console.log('Status change: ', status)
+		return uncompletedTodos.length;
+	});
 
-	// const todosRemaining = useSelector(state => {
-	// 	const uncompletedTodos = state.todos.filter(todo => !todo.completed);
-	// 	return uncompletedTodos.length;
-	// });
+	const { status, colors } = useSelector(state => state.filters);
 
-	// const { status, colors } = useSelector(state => state.filters);
+	const onMarkCompletedClicked = () => dispatch({ type: 'todos/allCompleted' })
+	const onClearCompletedClicked = () => dispatch({ type: 'todos/completedCleared' })
 
-	// omit placeholder change handlers
+	const onColorChange = (color, changeType) => dispatch({
+		type: 'filters/colorFilterChanged',
+		payload: { color, changeType },
+	})
+
+	const onStatusChange = (status) => dispatch({ type: 'filters/statusFilterChanged', payload: status })
+
 
 	return (
 		<footer className='footer'>
 			<div className='actions'>
 				<h5>Actions</h5>
 
-				<button className='button'>Mark All Completed</button>
-				<button className='button'>Clear Completed</button>
+				<button className='button' onClick={onMarkCompletedClicked} >Mark All Completed</button>
+				<button className='button'  onClick={onClearCompletedClicked}>Clear Completed</button>
 			</div>
 
 			<RemainingTodos count={todosRemaining} />
 
 			<StatusFiltersFunc value={status} onChange={onStatusChange} />
-			<ColorFilters value={status} onChange={onColorChange} />
+
+			<ColorFilters value={colors} onChange={onColorChange} />
 		</footer>
 	)
 }
 
 
 export default Footer
-
-*/
