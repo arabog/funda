@@ -21,13 +21,15 @@ const RemainingTodos = ({count}: {count: any}) => {
 
 
 const StatusFiltersFunc = ({ value: status, onChange }) => {
+
 	const renderedFilters = Object.keys(StatusFilters).map(key => {
+		
 		const value = StatusFilters[key];
 
+		const className = value === status ? 'selected' : '';
+		
 		const handleClick = () => onChange(value);
 		
-		const className = value === status ? 'selected' : '';
-
 		return (
 			<li key={value}>
 				<button className={className} onClick={handleClick}>
@@ -49,6 +51,7 @@ const StatusFiltersFunc = ({ value: status, onChange }) => {
 const ColorFilters = ({value: colors, onChange}) => {
 	const renderedColors = availableColors.map(color => {
 		const checked = colors.includes(color);
+		
 
 		const handleChange = () => {
 			const changeType = checked ? 'removed' : 'added';
@@ -81,6 +84,7 @@ const ColorFilters = ({value: colors, onChange}) => {
 	return (
 		<div className="filters colorFilters">
 			<h5>Filter by Color</h5>
+			
 			<form className="colorSelection">{renderedColors}</form>
 		</div>
 	)
