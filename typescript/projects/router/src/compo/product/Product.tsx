@@ -4,7 +4,7 @@ import { Products } from '../data/ProductsData'
 import Tabs from './tabs/Tabs';
 import { ChildrenProps } from './tabs/Tabs'
 
-
+import {WithLoader} from '../Loader/WithLoader';
 
 
 interface ProductsProps {
@@ -84,6 +84,6 @@ const Product:React.FC<ProductsProps> = (props) => {
           )
 }
 
+// export default Product;
 
-
-export default Product;
+export default WithLoader(Product);

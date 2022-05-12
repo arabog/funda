@@ -6,7 +6,7 @@ import Product from '../product/Product';
 
 
 interface Display {
-	product?: Products[] | any[];
+	product?: Products;
 	inBasket: boolean;
 	addToBasket: () => void;
 	children: React.ReactNode;
@@ -61,7 +61,8 @@ const ProductPage: React.FC<Display> = (props) => {
 		getProp()
 	}, [id])
 	
-	console.log(product) 
+	// console.log({...product}) 
+	// console.log('1s delay');
 
 
 	return (
@@ -69,9 +70,10 @@ const ProductPage: React.FC<Display> = (props) => {
 			
 			{
 				// todo: start from here tomorrow
-				(product || (loading && <div>Loading</div>))
+				product || loading
 					?  (
 							<Product 
+								loading = {loading}
 								product={product}
 								inBasket={inBasket}
 								addToBasket={addToBasket}
