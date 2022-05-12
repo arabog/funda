@@ -7,13 +7,13 @@ import { StatusFilters } from '../filters/filterSlice';
 
 
 const RemainingTodos = ({count}: {count: any}) => {
-	// console.log(typeof count)
 	const suffix = count === 1 ? '' : 's';
 
 
 	return (
 		<div className='todo-count'>
 			<h5>Remaining Todos</h5>
+			
 			<strong>{count}</strong> item{suffix} left
 		</div>
 	)
@@ -88,23 +88,24 @@ const ColorFilters = ({value: colors, onChange}) => {
 
 
 const Footer = () => {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	
 	const todosRemaining = useSelector(state => {
-		const uncompletedTodos = state.todos.filter(todo => !todo.completed);
+		const uncompletedTodos = state.todos.filter((todo: { completed: any; }) => !todo.completed);
 
 		return uncompletedTodos.length;
 	});
 
 	const { status, colors } = useSelector(state => state.filters);
 
-	const onMarkCompletedClicked = () => dispatch({ type: 'todos/allCompleted' })
-	const onClearCompletedClicked = () => dispatch({ type: 'todos/completedCleared' })
+	const onMarkCompletedClicked = () => dispatch({ type: 'todos/allCompleted' });
+
+	const onClearCompletedClicked = () => dispatch({ type: 'todos/completedCleared' });
 
 	const onColorChange = (color, changeType) => dispatch({
 		type: 'filters/colorFilterChanged',
 		payload: { color, changeType },
-	})
+	});
 
 	const onStatusChange = (status) => dispatch({ type: 'filters/statusFilterChanged', payload: status })
 
