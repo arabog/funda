@@ -49,17 +49,25 @@ export default store;
 */
 
 import { configureStore, applyMiddleware} from '@reduxjs/toolkit';
+import { thunkMiddleware } from 'redux-thunk';
+
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import rootReducer from './rootReducer'
-import { print1, print2, print3 } from './exampleAddons/middleware'
+
+// import { print1, print2, print3 } from './exampleAddons/middleware'
 
 
-const composedEnhancer = composeWithDevTools(
+// const composedEnhancer = composeWithDevTools(
           // EXAMPLE: Add whatever middleware you actually want to use here
-          applyMiddleware(print1, print2, print3)
+          // applyMiddleware(print1, print2, print3)
           // other store enhancers if any
-)
+// )
 
-const store = configureStore({reducer: rootReducer}, composedEnhancer)
+          
+
+const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
+
+const store = configureStore({reducer: rootReducer}, composedEnhancer);
+
 export default store
