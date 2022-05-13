@@ -150,8 +150,86 @@ Middleware also have access to dispatch and getState. That means
 you could write some async logic in a middleware, and still have 
 the ability to interact with the Redux store by dispatching actions.
 
+Using Middleware to Enable Async Logic
+One possibility is writing a middleware that looks for specific action 
+types, and runs async logic when it sees those actions, like these 
+examples:
+
+import {client} from '../api/client';
 
 
+const delayedActionMiddleware = storeAPI => next => action => {
+          if (action.type === 'todos/todoAdded') {
+                    setTimeout(() => {
+                               // Delay this action by one second
+                              next(action)
+                    }, 1000);
+
+                    return
+          }
+
+          return next(action);
+}
+
+const fetchTodosMiddleware = storeAPI => next => action => {
+          if (action.type === 'todos/fetchTodos') {
+                    // Make an API call to fetch todos from the server
+                    client.get('todos')
+                              .then(todos => {
+                                        //  Dispatch an action with the todos we received
+                                        storeAPI.dispatch({
+                                                  type: 'todos/todosLoaded', 
+                                                  payload: todos;
+                                        })
+                              })
+          }
+
+          return next(action);
+}
+
+Writing an Async Function Middleware
+What if we wrote a middleware that let us pass a function to 
+dispatch, instead of an action object? We could have our 
+middleware check to see if the "action" is actually a function 
+instead, and if it's a function, call the function right away. 
+That would let us write async logic in separate functions, 
+outside of the middleware definition.
+
+Here's what that middleware might look like:
+import { client } from "./api/client";
+
+const asyncFunctionMiddleware = storeAPI => next => action => {
+          // If the "action" is actually a function instead...
+          if (typeof action === 'function') {
+                     // then call the function and pass `dispatch` and `getState` as arguments
+                    return action(storeAPI.dispatch, storeAPI.getState)
+          }
+
+            // Otherwise, it's a normal action - send it onwards
+          return next(action);
+}
+
+And then we could use that middleware like this:
+
+const middlewareEnhancer = applyMiddleware(asyncFunctionMiddleware)
+const store = createStore(rootReducer, middlewareEnhancer)
+
+// Write a function that has `dispatch` and `getState` as arguments
+const fetchSomeData = (dispatch, getState) => {
+          // Make an async HTTP request
+          client.get('todos')
+                    .then(todos => {
+                              // Dispatch an action with the todos we received
+                              dispatch({
+                                        type: 'todos/todosLoaded',
+                                        payload: todos,
+                              })
+
+                              const allTodos  = getState().todos;
+
+                              console.log('Number of todos after loading: ', allTodos.length);
+                    })
+}
 
 
 
@@ -169,3 +247,4 @@ https://redux.js.org/tutorials/fundamentals/part-8-modern-redux
 https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/checkpoint-8-normalizedState/?from-embed=&file=/src/features/todos/TodoList.js
 https://nfgrn.csb.app/
 */
+
