@@ -232,6 +232,35 @@ const fetchSomeData = (dispatch, getState) => {
 }
 
 
+-: Redux Async Data Flow
+So how do middleware and async logic affect the overall data 
+flow of a Redux app?
+
+Just like with a normal action, we first need to handle a user 
+event in the application, such as a click on a button. Then, 
+we call dispatch(), and pass in something, whether it be a 
+plain action object, a function, or some other value that a 
+middleware can look for.
+
+Once that dispatched value reaches a middleware, it can make 
+an async call, and then dispatch a real action object when the 
+async call completes.
+
+Using the Redux Thunk Middleware
+As it turns out, Redux already has an official version of that 
+"async function middleware", called the Redux "Thunk" 
+middleware. The thunk middleware allows us to write 
+functions that get dispatch and getState as arguments. 
+The thunk functions can have any async logic we want 
+inside, and that logic can dispatch actions and read 
+the store state as needed
+
+INFO
+The word "thunk" is a programming term that means "a 
+piece of code that does some delayed work". 
+
+https://redux.js.org/usage/writing-logic-thunks
+
 
 
 
