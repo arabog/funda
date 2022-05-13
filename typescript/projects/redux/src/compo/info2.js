@@ -125,6 +125,8 @@ marking all todos as completed, clearing completed todos, and
 changing the filter values.
 
 
+Part 6: Async Logic and Data Fetching
+
 
 
 
@@ -141,5 +143,6 @@ https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/chec
 
 https://redux.js.org/tutorials/fundamentals/part-8-modern-redux
 
+https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/checkpoint-8-normalizedState/?from-embed=&file=/src/features/todos/TodoList.js
 https://nfgrn.csb.app/
 */

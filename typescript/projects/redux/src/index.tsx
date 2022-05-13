@@ -7,6 +7,11 @@ import reportWebVitals from './reportWebVitals';
 import store from './store'
 import { Provider } from 'react-redux';
 
+// import { fetchTodos } from './features/todos/todoSlice'
+
+// store.dispatch(fetchTodos())
+
+
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
