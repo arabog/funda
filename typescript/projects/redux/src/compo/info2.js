@@ -127,6 +127,15 @@ changing the filter values.
 
 Part 6: Async Logic and Data Fetching
 
+Redux Middleware and Side Effects
+By itself, a Redux store doesn't know anything about async logic. 
+It only knows how to synchronously dispatch actions, update the 
+state by calling the root reducer function, and notify the UI that 
+something has changed. Any asynchronicity has to happen 
+outside the store.
+
+Earlier, we said that Redux reducers must never contain "side
+effects". A "side effect" is any change to state or behavior that can be seen outside of returning a value from a function
 
 
 
