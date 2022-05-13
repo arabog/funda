@@ -135,7 +135,20 @@ something has changed. Any asynchronicity has to happen
 outside the store.
 
 Earlier, we said that Redux reducers must never contain "side
-effects". A "side effect" is any change to state or behavior that can be seen outside of returning a value from a function
+effects". A "side effect" is any change to state or behavior that 
+can be seen outside of returning a value from a function.
+
+Redux middleware were designed to enable writing logic that 
+has side effects.'
+
+Since middleware form a pipeline around the real store.dispatch 
+function, this also means that we could actually pass something 
+that isn't a plain action object to dispatch, as long as a middleware 
+intercepts that value and doesn't let it reach the reducers.
+
+Middleware also have access to dispatch and getState. That means 
+you could write some async logic in a middleware, and still have 
+the ability to interact with the Redux store by dispatching actions.
 
 
 

@@ -1,3 +1,4 @@
+import { client } from "../../compo/api/client";
 
 
 const initialState = [
@@ -90,8 +91,36 @@ export default function todosReducer (state = initialState, action ) {
                     case 'todos/completedCleared':
                               return state.filter(todo => !todo.completed)
 
+                    case 'todos/todosLoaded': {
+                              return action.payload
+                    }
+
                     default: 
                               return state
           }
 }
 
+
+// Thunk function
+export async function fetchTodos(dispatch, getState) {
+          const res = await client.get('/fakeApi/todos');
+
+          dispatch({
+                    type: 'todos/todosLoaded',
+                    payload: res.todos
+          })
+}
+
+export function saveNewTodo(text) {
+          return async function saveNewTodoThunk(dispatch, getState) {
+                    const initialTodo = { text };
+
+                    const res = await client.post('/fakeApi/todos', { todo: initialTodo });
+
+                    dispatch({
+                              type: 'todos/todoAdded',
+
+                              payload: res.todo
+                    })
+          }
+}
