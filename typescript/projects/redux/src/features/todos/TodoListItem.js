@@ -137,7 +137,7 @@ const TodoListItem = ({ id }) => {
                                         </div>
 
                                         <button className='destroy' onClick={onDelete} >
-                                                  <i class="fa-solid fa-trash"></i>
+                                                  <i className="fa-solid fa-trash"></i>
                                         </button>
                               </div>
                     </li>

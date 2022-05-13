@@ -7,9 +7,9 @@ import reportWebVitals from './reportWebVitals';
 import store from './store'
 import { Provider } from 'react-redux';
 
-// import { fetchTodos } from './features/todos/todoSlice'
+import { fetchTodos } from './features/todos/todoSlice'
 
-// store.dispatch(fetchTodos())
+store.dispatch(fetchTodos);
 
 
 

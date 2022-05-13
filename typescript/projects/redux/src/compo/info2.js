@@ -262,8 +262,48 @@ piece of code that does some delayed work".
 https://redux.js.org/usage/writing-logic-thunks
 
 
+Fetching Todos from a Server
+Right now our todo entries can only exist in the client's browser. 
+We need a way to load a list of todos from the server when the app 
+starts up.
 
+We'll start by writing a thunk function that makes an AJAX call 
+to our /fakeApi/todos endpoint to request an array of todo objects, 
+and then dispatch an action containing that array as the payload. 
+Since this is related to the todos feature in general, we'll write 
+the thunk function in the todosSlice.js file:
 
+Saving Todo Items
+We also need to update the server whenever we try to create a 
+new todo item. Instead of dispatching the 'todos/todoAdded' 
+action right away, we should make an API call to the server 
+with the initial data, wait for the server to send back a copy 
+of the newly saved todo item, and then dispatch an action 
+with that todo item.
+
+TIP
+Thunk functions can be used for both asynchronous and synchronous 
+logic. Thunks provide a way to write any reusable logic that needs 
+access to dispatch and getState.
+
+SUMMARY
+Redux middleware were designed to enable writing logic that 
+has side effects
+          "Side effects" are code that changes state/behavior outside 
+          a function, like AJAX calls, modifying function arguments, 
+          or generating random values
+
+Middleware add an extra step to the standard Redux data flow
+          Middleware can intercept other values passed to dispatch
+          Middleware have access to dispatch and getState, so they 
+          can dispatch more actions as part of async logic
+
+The Redux "Thunk" middleware lets us pass functions to dispatch
+          "Thunk" functions let us write async logic ahead of time, 
+          without knowing what Redux store is being used
+          A Redux thunk function receives dispatch and getState 
+          as arguments, and can dispatch actions like "this data 
+          was received from an API response"
 
 
 
@@ -274,6 +314,7 @@ https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/chec
 https://redux.js.org/tutorials/fundamentals/part-8-modern-redux
 
 https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/checkpoint-8-normalizedState/?from-embed=&file=/src/features/todos/TodoList.js
+
 https://nfgrn.csb.app/
 */
 

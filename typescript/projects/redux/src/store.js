@@ -49,7 +49,7 @@ export default store;
 */
 
 import { configureStore, applyMiddleware} from '@reduxjs/toolkit';
-import { thunkMiddleware } from 'redux-thunk';
+import  thunkMiddleware from 'redux-thunk';
 
 import { composeWithDevTools } from 'redux-devtools-extension'
 
