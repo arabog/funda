@@ -137,6 +137,7 @@ Part 6: Async Logic and Data Fetching
 
 
 
+
 https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns
 
 https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/checkpoint-6-asyncThunks/?from-embed
