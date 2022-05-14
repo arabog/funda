@@ -59,11 +59,37 @@ will return the same result value. If you call them with different inputs
 than last time, they will recalculate a new result value, cache it, and 
 return the new result.
 
+-: Memoizing Selectors with createSelector
+The Reselect library provides a createSelector API that will generate 
+memoized selector functions. createSelector accepts one or more 
+"input selector" functions as arguments, plus an "output selector", 
+and returns the new selector function. Every time you call the 
+selector
+
+npm install reselect
+
+Our original selectTodoIds function was defined over in TodoList.js, 
+but it's more common for selector functions to be written in the 
+relevant slice file. So, let's add this to the todos slice:
+
+-: Selectors with Multiple Arguments
+Our todo app is supposed to have the ability to filter the visible todos 
+based on their completed status. Let's write a memoized selector that 
+returns that filtered list of todos.
+
+We know we need the entire todos array as one argument to our output 
+selector. We also need to pass in the current completion status filter 
+value as well. We'll add a separate "input selector" to extract each 
+value, and pass the results to the "output selector".
+
+CAUTION
+Note that we've now added an import dependency between two slices - 
+the todosSlice is importing a value from the filtersSlice. This is legal, 
+but be careful. If two slices both try to import something from each 
+other, you can end up with a "cyclic import dependency" problem 
+that can cause your code to crash. If that happens, try moving some 
+common code to its own file and import from that file instead.
 
 
 
-
-
-
--: 
 */
