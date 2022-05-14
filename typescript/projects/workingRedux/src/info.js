@@ -93,4 +93,11 @@ common code to its own file and import from that file instead.
 -: Async Request Status
 
 
+https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns
+
+https://redux.js.org/tutorials/fundamentals/part-8-modern-redux
+
+https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/checkpoint-10-finalCode/?from-embed
+
+
 */
