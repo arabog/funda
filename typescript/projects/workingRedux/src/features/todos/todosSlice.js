@@ -1,12 +1,72 @@
 import { createSelector } from "reselect";
 import { StatusFilters } from '../filters/filtersSlice'
 
-export const todosLoaded = todos => {
-          return {
-                    type: 'todos/todosAdded',
-                    payload: todos
+const initilState = {
+          status: 'idle',     // or: 'loading', 'succeeded', 'failed'
+
+          entities: [],
+}
+
+
+switch(action.type) {
+          case 'todos/todoAdded': {
+                    ...state,
+
+                    entities: [...state.entities, action.payload]
           }
 }
+
+export const todosLoaded = todos => {
+          case 'todos/todoAdded': {
+                    return {
+                              type: 'todos/todosAdded',
+                              payload: todos
+                    }
+          }
+
+          case 'todos/todoToggled': {
+                    return {
+                              ...state,
+
+                              entities: state.entities.map(todo => {
+                                        if (todo.id !== action.payload) {
+                                                  return todo
+                                        }
+                              
+                                        return {
+                                                  ...todo,
+                                                  completed: !todo.completed
+                                        }
+                              })
+                    }
+          }
+
+          case 'todos/todosLoading': {
+                    return {
+                              ...state,
+
+                              status: 'loading'
+                    }
+          }
+          case 'todos/todosLoaded': {
+                    return {
+                              ...state,
+                              status: 'idle',
+                              entities: action.payload
+                    }
+          }
+}
+
+export const selectTodos = state => state.todos.entities;
+
+// Thunk function
+export const fetchTodos = () => async dispatch => {
+          dispatch(todosLoading())
+          
+          const response = await client.get('/fakeApi/todos')
+          dispatch(todosLoaded(response.todos))
+}
+
 
 // Similarly, we could shorten the plain action creators if we wanted to:
 
@@ -29,6 +89,12 @@ export async function fetchTodos() {
 //           const response = await client.get('/fakeApi/todos')
 //           dispatch(todosLoaded(response.todos))
 // }
+
+export const selectTodos = state => state.todos;
+
+export const selectTodoById = (state, todoId) => {
+          return selectTodos(state).find(todo => todo.id === todoId)
+}
 
 async function saveNewTodo(text) {
           return async function saveNewTodoThunk(dispatch, getState) {
@@ -92,7 +158,7 @@ export const selectFilteredTodos = createSelector(
                               const statusMatches = showAllCompletions || todo.completed === completedStatus
                               
                               const colorMatches = colors.length === 0 || colors.includes(todo.color)
-                              
+
                               return statusMatches && colorMatches
                     })
           }
