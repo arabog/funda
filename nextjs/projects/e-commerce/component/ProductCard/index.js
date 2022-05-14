@@ -2,8 +2,6 @@ import { Box, Divider, Image, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 
 
-
-
 export default function ProductCard(props) {
 
 

@@ -20,6 +20,8 @@ export const getStaticProps = async () => {
 
 
 export default function Home(props) {
+
+	
 	return (
 		<Grid gridTemplateColumns="repeat(4, 1fr)" gap="5">
 			{

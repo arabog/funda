@@ -7,6 +7,8 @@ import CartContext from '../lib/context/Cart';
 import graphql from '../lib/graphql';
 import getProductsByIds from '../lib/graphql/queries/getProductsByIds';
 
+// import loadStripe from '../lib/stripe';
+
 
 export default function Cart() {
           const { items } = useContext(CartContext);
@@ -36,6 +38,30 @@ export default function Cart() {
                                         .toFixed(2)
                     )
           }
+
+          // async function handlePayment() {
+          //           const stripe = await loadStripe();
+
+          //           const res = await fetch('/api/checkout', {
+          //                     method: 'POST',
+
+          //                     headers: { 'Content-Type': 'application/json' },
+
+          //                     body: JSON.stringify({
+          //                               items,
+
+          //                               success_url: `${window.location.origin}/success`,
+          //                     }),
+
+          //           });
+                    
+          //           const { session } = await res.json();
+
+          //           await stripe.redirectToCheckout({
+          //                     sessionId: session.id,
+          //           });
+          // }
+
 
           return (
                     <Box
@@ -97,8 +123,9 @@ export default function Cart() {
                                                                                           <Text fontSize="xl" fontWeight="bold">
                                                                                                     Total: €{getTotal()}
                                                                                           </Text>
-
-                                                                                          <Button colorScheme="blue"> Pay now </Button>
+                                                                                          
+                                                                                          {/* onClick={handlePayment} */}
+                                                                                          <Button colorScheme="blue" > Pay now </Button>
                                                                                 </Flex>
                                                                       </>
                                                             )
