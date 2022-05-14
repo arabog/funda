@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import { Box, Button, Divider, Flex, Link, Text, Image } from '@chakra-ui/react';
 
-import CartContext from '../lib/graphql/context/Cart';
+import CartContext from '../lib/context/Cart';
 
 import graphql from '../lib/graphql';
 import getProductsByIds from '../lib/graphql/queries/getProductsByIds';
@@ -66,7 +66,7 @@ export default function Cart() {
                                                                                                               <Box>
                                                                                                                         <Image height="10" width="10" src={ product.images[0].url } />
                                                                                                               </Box>
-                                                                                                              
+
                                                                                                               <Box>
                                                                                                                         <Link href={`/product/${product.slug}`} passHref>
                                                                                                                                   <Text
