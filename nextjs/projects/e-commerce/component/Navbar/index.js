@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import CartContext from '../../lib/graphql/context/Cart/index';
+import CartContext from '../../lib/context/Cart/index';
 
 import Link from 'next/link';
 import { Flex, Box, Button, Text } from '@chakra-ui/react';

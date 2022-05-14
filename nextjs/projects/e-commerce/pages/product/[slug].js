@@ -1,11 +1,12 @@
-import graphql from "../../lib/graphql";
+import graphql from "../../lib/graphql/";
+
 import getAllProducts from "../../lib/graphql/queries/getAllProducts";
 import getProductDetail from "../../lib/graphql/queries/getProductDetail";
 
 import { Box, Flex, Grid, Text, Image, Divider, Button, Select } from '@chakra-ui/react';
 
 import { useContext, useState } from 'react';
-import CartContext from '../../lib/graphql/context/Cart';
+import CartContext from '../../lib/context/Cart';
 
 
 export async function getStaticPaths() {

@@ -2,7 +2,7 @@ import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
 import { useState } from 'react';
 import NavBar from '../component/Navbar';
 
-import CartContext from '../lib/graphql/context/Cart/index';
+import CartContext from '../lib/context/Cart';
 
 import '../styles/globals.css'
 
