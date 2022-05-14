@@ -20,6 +20,6 @@ As for the home page, we will use SSG + ISR to build all the product
 pages, which will help us maintain great performance and improve 
 SEO and user experience.
 
-
+https://dashboard.stripe.com/apikeys
 
 */ 
