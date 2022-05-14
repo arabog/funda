@@ -1,3 +1,5 @@
+import loadStripe from '../lib/stripe';
+
 import { useContext, useEffect, useState } from 'react';
 
 import { Box, Button, Divider, Flex, Link, Text, Image } from '@chakra-ui/react';
@@ -6,8 +8,6 @@ import CartContext from '../lib/context/Cart';
 
 import graphql from '../lib/graphql';
 import getProductsByIds from '../lib/graphql/queries/getProductsByIds';
-
-// import loadStripe from '../lib/stripe';
 
 
 export default function Cart() {
@@ -28,8 +28,6 @@ export default function Cart() {
           function getTotal() {
                     if (!products.length) return 0;
 
-                    // items = [1, 2, 3]
-                    // product = [{}, {}, {}]
                     
                     return (
                               Object.keys(items)
@@ -39,28 +37,35 @@ export default function Cart() {
                     )
           }
 
-          // async function handlePayment() {
-          //           const stripe = await loadStripe();
+          async function handlePayment() {
+                    const stripe = await loadStripe();
 
-          //           const res = await fetch('/api/checkout', {
-          //                     method: 'POST',
 
-          //                     headers: { 'Content-Type': 'application/json' },
+                    const res = await fetch('/api/checkout', {
+                              method: 'POST',
 
-          //                     body: JSON.stringify({
-          //                               items,
+                              headers: { 
+                                        'Content-Type': 'application/json',  
+                                        'Accept': 'application/json'
+                              },
 
-          //                               success_url: `${window.location.origin}/success`,
-          //                     }),
+                              body: JSON.stringify({
+                                        items,
 
-          //           });
+                                        success_url: `${window.location.origin}/success`,
+                              })
+                    })
+  
                     
-          //           const { session } = await res.json();
+                    // const { session } = await JSON.stringify(res);
+                    const { session } = await res.json();
 
-          //           await stripe.redirectToCheckout({
-          //                     sessionId: session.id,
-          //           });
-          // }
+                    console.log(session)
+
+                    await stripe.redirectToCheckout({
+                              sessionId: session.id,
+                    });
+          }
 
 
           return (
@@ -124,8 +129,8 @@ export default function Cart() {
                                                                                                     Total: €{getTotal()}
                                                                                           </Text>
                                                                                           
-                                                                                          {/* onClick={handlePayment} */}
-                                                                                          <Button colorScheme="blue" > Pay now </Button>
+                                                                                          
+                                                                                          <Button colorScheme="blue" onClick={() => handlePayment()}> Pay now </Button>
                                                                                 </Flex>
                                                                       </>
                                                             )
