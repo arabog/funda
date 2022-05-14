@@ -25,6 +25,7 @@ export default function NavBar() {
                                                   <Link href="/cart" passHref>
                                                             <Button as="a">
                                                                       <MdShoppingCart />
+                                                                      
                                                                       <Text ml="3">{itemsCount}</Text>
                                                             </Button>
                                                   </Link>
