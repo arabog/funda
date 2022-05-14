@@ -8,6 +8,7 @@ export default gql `
                               name
                               slug
                               price
+                              
                               images {
                                         id
                                         url
