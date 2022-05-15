@@ -93,6 +93,61 @@ common code to its own file and import from that file instead.
 -: Async Request Status
 
 
+-: Part 8: Modern Redux with Redux Toolkit
+TIP
+Redux Toolkit only covers the Redux logic - we still use React-Redux 
+to let our React components talk to the Redux store, including 
+useSelector and useDispatch.
+
+Using createSlice
+createSlice takes an object with three main options fields:
+
+name: a string that will be used as the prefix for generated action types
+initialState: the initial state of the reducer
+reducers: an object where the keys are strings, and the values are "case reducer" functions that will handle specific actions
+Let's look at a small standalone example first.
+
+import { createSlice } from '@reduxjs/toolkit'
+
+const initialState = []
+
+const todosSlice = createSlice({
+  name: 'todos',
+  initialState,
+  reducers: {
+    todoAdded(state, action) {
+      // ✅ This "mutating" code is okay inside of createSlice!
+      state.push(action.payload)
+    },
+    todoToggled(state, action) {
+      const todo = state.find(todo => todo.id === action.payload)
+      todo.completed = !todo.completed
+    },
+    todosLoading(state, action) {
+      return {
+        ...state,
+        status: 'loading'
+      }
+    }
+  }
+})
+
+export const { todoAdded, todoToggled, todosLoading } = todosSlice.actions
+
+export default todosSlice.reducer
+
+Redux Toolkit (RTK) is the standard way to write Redux logic
+
+createSlice simplifies writing Redux actions and reducers
+Automatically generates action creators based on slice/reducer names
+Reducers can "mutate" state inside createSlice using Immer
+
+createAsyncThunk generates thunks for async calls
+
+https://github.com/florinpop17/app-ideas
+
+
+
 https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns
 
 https://redux.js.org/tutorials/fundamentals/part-8-modern-redux
@@ -100,4 +155,5 @@ https://redux.js.org/tutorials/fundamentals/part-8-modern-redux
 https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/checkpoint-10-finalCode/?from-embed
 
 
+http://bookszlibb74ugqojhzhg2a63w5i2atv5bqarulgczawnbmsb6s6qead.onion
 */
