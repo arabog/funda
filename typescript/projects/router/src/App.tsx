@@ -51,7 +51,7 @@ const App = () => {
 				<Route path='/pros/:id' 
 					element={
 						<ProductPage 
-							product={[]} 
+							// product = {[]} 
 							inBasket = {false} 
 							addToBasket={() =>{}} 
 							// children= {props.children} 

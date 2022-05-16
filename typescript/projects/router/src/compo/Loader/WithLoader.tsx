@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+// import React from 'react'
 
 
 interface IProps {
@@ -6,7 +6,7 @@ interface IProps {
 }
 
 
-export const WithLoader: React.FC<IProps> = <P extends object> (loading, ...props) => 
+export const WithLoader: React.FC<IProps> = Component =>  (loading: boolean, ...props: any[]) =>  {
 
           loading ? (
                     <div className='loader-overlay'>
@@ -17,6 +17,6 @@ export const WithLoader: React.FC<IProps> = <P extends object> (loading, ...prop
           ) : (
                     <Component {...props} />
           )
-
+}
 
 
