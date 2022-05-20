@@ -8,6 +8,7 @@ its value synchronized with state in React.
 
 
 
+https://www.smashingmagazine.com/2021/08/compound-components-react/
 
 cont on pg 270
 
