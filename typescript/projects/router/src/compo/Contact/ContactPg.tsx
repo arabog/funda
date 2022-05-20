@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ContactUs from './CcontactUs'
+import ContactUs from './ContactUs'
 
 
 interface IState {
