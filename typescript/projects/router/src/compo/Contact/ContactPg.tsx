@@ -16,6 +16,8 @@ const ContactPg: React.FC<IState> = () => {
           const [notes, setNotes] = useState();
           const [reason, setReason] = useState();
 
+          console.log(name);
+
 
           return (
                     <div className='page-container'>

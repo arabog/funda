@@ -3,7 +3,6 @@ import React from 'react'
 
 interface IProps {
           name: string,
-          // handleName: () => void,
           handleName: React.Dispatch<React.SetStateAction<any>>
 
           email: string,
@@ -18,13 +17,12 @@ interface IProps {
 
 
 const ContactUs: React.FC<IProps> = (props) => {
-          console.log(props);
 
-          // const handleChange = () => {
-          //           // const name = e.target.value;
+          const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+                    const name = e.target.value;
 
-          //           props.handleName();
-          // }
+                    props.handleName(name);
+          }
 
           return (
                     <form className='form' noValidate={true}>
@@ -33,9 +31,9 @@ const ContactUs: React.FC<IProps> = (props) => {
                                         <input 
                                                   type='text' 
                                                   id='name' 
+                                                  
                                                   value={props.name} 
-
-                                                  // onChange={handleChange}
+                                                  onChange={handleNameChange}
                                         />
                               </div>
                     </form>
