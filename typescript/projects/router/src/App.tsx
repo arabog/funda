@@ -18,6 +18,7 @@ import Login from './compo/login/Login';
 import AdminUsers from './compo/admin/AdminUsers';
 import AdminProducts from './compo/admin/AdminProducts';
 import AdminUser from './compo/admin/AdminUser';
+import Contact from './compo/Contact/Contact';
 
 const AdminPage = React.lazy(() => import("./compo/admin/AdminPage"));
 
@@ -60,6 +61,8 @@ const App = () => {
 						/>
 					} 
 				/>
+
+				<Route path="/contact" element={<Contact /> } />
 				
 				{
 					!logIn 
