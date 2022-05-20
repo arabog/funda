@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
                                         <Link to= "/" className="header-link">Home</Link>
                                         <Link to= "/pros" className="header-link">Products</Link>
                                         <Link to= "/admin" className="header-link">Admin</Link>
-                                        <Link to='/contact'className='header-link'>Contact</Link>
+                                        <Link to='/contactpg'className='header-link'>Contact</Link>
                               </nav>
 
                     </header>

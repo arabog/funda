@@ -86,4 +86,5 @@ const Product:React.FC<ProductsProps> = (props) => {
 
 // export default Product;
 
-export default WithLoader(Product);
+// export default WithLoader(Product);
+export default Product;

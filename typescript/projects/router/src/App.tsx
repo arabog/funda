@@ -18,7 +18,7 @@ import Login from './compo/login/Login';
 import AdminUsers from './compo/admin/AdminUsers';
 import AdminProducts from './compo/admin/AdminProducts';
 import AdminUser from './compo/admin/AdminUser';
-import Contact from './compo/Contact/Contact';
+import ContactPg from './compo/Contact/ContactPg';
 
 const AdminPage = React.lazy(() => import("./compo/admin/AdminPage"));
 
@@ -49,6 +49,9 @@ const App = () => {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/pros" element={<ProductsPage products={[]} search='' handleSearch={() => {}} />} />
+
+				<Route path="/contactpg" element={<ContactPg /> } />
+				
 				<Route path='/pros/:id' 
 					element={
 						<ProductPage 
@@ -61,8 +64,6 @@ const App = () => {
 						/>
 					} 
 				/>
-
-				<Route path="/contact" element={<Contact /> } />
 				
 				{
 					!logIn 

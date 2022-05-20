@@ -6,7 +6,7 @@ interface IProps {
 }
 
 
-export const WithLoader: React.FC<IProps> = Component =>  (loading: boolean, ...props: any[]) =>  {
+export const WithLoader = Component =>  (loading: boolean, ...props: any[]) =>  {
 
           loading ? (
                     <div className='loader-overlay'>
